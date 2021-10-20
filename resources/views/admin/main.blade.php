@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -30,7 +30,7 @@
                         <div class="col-12">
 
                             @yield('content')
-                            
+
                         </div>
                     </div>
                 </div>
