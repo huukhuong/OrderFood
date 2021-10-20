@@ -26,9 +26,13 @@
             <!-- Main content -->
             <div class="content py-5">
                 <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
 
-                    @yield('content')
-                    
+                            @yield('content')
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
