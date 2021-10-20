@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
-        return 'admin';
+        return view('admin.home');
     });
 });
 
 Route::prefix('/')->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('client.welcome');
     });
 });
