@@ -1,10 +1,10 @@
 <?php $__env->startSection('title'); ?>
-    <title>Admin | Trang chủ</title>
+    <title>Admin | Danh sách món</title>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
     <?php if(session('xoathanhcong')): ?>
-        <script >
+        <script>
             Swal.fire(
                 'Đã xoá!',
                 'Bạn đã xoá thành công',
@@ -15,41 +15,47 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách thể loại món ăn</h3>
+            <h3 class="card-title">Danh sách món ăn</h3>
         </div>
-        <a href="admin/category/add"> <button class="btn btn-success">Thêm thể loại</button></a>
+        <div class="text-center py-3">
+            <a href="admin/product/add"> <button class="btn btn-success">Thêm món mới</button></a>
+        </div>
         <!-- /.card-header -->
-        <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+        <div class="card-body table-responsive">
+            <table id="example1" class="table table-bordered table-striped table-hover">
                 <thead>
-                <tr>
-                    <th >Mã SP</th>
-                    <th>Tên Sp</th>
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                    <th>Thể loại</th>
-                    <th>Hình ảnh</th>
-                    <th>Mô tả</th>
-                    <th></th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th class="text-center" style="width: 50px">Mã</th>
+                        <th>Tên SP</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Danh mục</th>
+                        <th>Hình ảnh</th>
+                        <th>Mô tả</th>
+                        <th>Thao tác</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <?php $__currentLoopData = $product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
-                        <td><?php echo e($key -> id); ?></td>
-                        <td><?php echo e($key ->name); ?></td>
-                        <td><?php echo e($key ->price); ?></td>
-                        <td><?php echo e($key ->quantity); ?></td>
-                        <td><?php echo e($key -> category_linked -> name); ?></td>
-                        <td><img src="./img/products/<?php echo e($key ->image); ?>" width="120" height=200></td>
-
-                        <td><?php echo e($key ->description); ?></td>
-                        <td class="text-center"><a href="admin/product/edit/<?php echo e($key->id); ?>"><button class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>Sửa</button></a></td>
-                        
-                        <td class="text-center"> <input type="button" class="btn btn-danger" value="Xoá" onclick="return xoa(<?php echo e($key->id); ?>);"></td>
-                    </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                            <td class="text-center"><?php echo e($key->id); ?></td>
+                            <td><?php echo e($key->name); ?></td>
+                            <td><?php echo e($key->price); ?></td>
+                            <td><?php echo e($key->quantity); ?></td>
+                            <td><?php echo e($key->category_linked->name); ?></td>
+                            <td><img src="./img/products/<?php echo e($key->image); ?>" width="120"></td>
+                            
+                            <td><?php echo e($key->description); ?></td>
+                            <td class="text-center">
+                                <a class="btn btn-warning" href="admin/product/edit/<?php echo e($key->id); ?>">
+                                    <i class="fa fa-pencil fa-fw"></i>Sửa
+                                </a>
+                                
+                                <input type="button" class="btn btn-danger" value="Xoá"
+                                    onclick="return xoa(<?php echo e($key->id); ?>);">
+                            </td>
+                        </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -60,7 +66,7 @@
     </div>
 
     <script>
-        function xoa(id){
+        function xoa(id) {
             Swal.fire({
                 title: 'Bạn có chắc xoá không',
                 text: "Bạn sẽ không thể trở lại",
@@ -74,8 +80,7 @@
                 if (result.isConfirmed) {
                     location.href = "admin/product/delete/" + id;
                     return true;
-                }
-                else{
+                } else {
                     return false;
                 }
             })

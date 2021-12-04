@@ -1,133 +1,474 @@
 <!DOCTYPE html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Food</title>
+    <link rel="shortcut icon" href="client/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="client/css/style.css">
+</head>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<body>
+    <!-- ====   Navigation  ==== -->
+    <header>
+        <a href="#" class="logo">
+            <img src="client/images/logo.svg" alt="logo">
+        </a>
+        <ul class="navigation">
+            <span id="close-nav"><i class="fas fa-times"></i></span>
+            <li><a href="#" class="active">Trang chủ</a></li>
+            <li><a href="shop.html">Cửa hàng</a></li>
+            <li><a href="coming-soon.html">Hỗ trợ</a></li>
+            <li><a href="coming-soon.html">Thông báo</a></li>
+            <li class="user" style="display: none;">
+                <img src="" alt="img">
+                <h3>Join Hiddleston</h3>
+            </li>
+            <li><a href="register.html">Đăng ký</a></li>
+            <li><a href="login.html">Đăng nhập</a></li>
 
-        <!-- Styles -->
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-t{border-top-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.dark\:text-gray-500{--tw-text-opacity:1;color:#6b7280;color:rgba(107,114,128,var(--tw-text-opacity))}}}
-        </style>
+        </ul>
 
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
-    </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <?php if(Route::has('login')): ?>
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    <?php if(auth()->guard()->check()): ?>
-                        <a href="<?php echo e(url('/home')); ?>" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    <?php else: ?>
-                        <a href="<?php echo e(route('login')); ?>" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                        <?php if(Route::has('register')): ?>
-                            <a href="<?php echo e(route('register')); ?>" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        <?php endif; ?>
-                    <?php endif; ?>
+        <div class="icon">
+            <a href="cart.html">
+                <div class="cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="142.25" height="189.333" viewBox="0 0 142.25 189.333">
+                            <g id="shopping-bag-svgrepo-com" transform="translate(-55.3 -1.5)">
+                            <path id="Path_9" data-name="Path 9" d="M190.014,162.8l-10.1-121.435a5,5,0,0,0-4.836-4.737H154.286C154,16.368,138.48,0,119.425,0S84.852,16.368,84.564,36.627H63.777a4.974,4.974,0,0,0-4.836,4.737L48.836,162.8c0,.154-.036.308-.036.462,0,13.827,11.873,25.073,26.489,25.073h88.272c14.616,0,26.489-11.246,26.489-25.073A2,2,0,0,0,190.014,162.8ZM119.425,10.4c13.678,0,24.829,11.708,25.118,26.228H94.308C94.6,22.107,105.747,10.4,119.425,10.4Zm44.136,167.536H75.289c-9.166,0-16.6-6.47-16.745-14.443L68.216,47.064H84.528V62.855a4.882,4.882,0,1,0,9.744,0V47.064h50.271V62.855a4.882,4.882,0,1,0,9.744,0V47.064H170.6l9.708,116.428C180.162,171.464,172.692,177.935,163.561,177.935Z" transform="translate(7 2)" fill="#fff" stroke="#fff" stroke-width="3"/>
+                            </g>
+                        </svg>
+                    <span>1</span>
                 </div>
-            <?php endif; ?>
+            </a>
+            <span id="navbar-toggler">
+                <i class="fas fa-stream"></i>
+            </span>
+        </div>
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
-                        <g clip-path="url(#clip0)" fill="#EF3B2D">
-                            <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z"/>
-                        </g>
-                    </svg>
+    </header>
+    <!-- ---------------xx-------------- -->
+    <!-- ====   Banner  ==== -->
+
+    <div class="banner">
+        <div class="content">
+            <h1>Giao hàng tận nơi <span>với</span></h1>
+            <h1> Mức giá siêu ưu đãi !</h1>
+            <h4>Tìm kiếm các loại đồ ăn, thức uống nhanh chống, dễ dàng.</h4>
+            <form action="">
+                <div class="search-box">
+                    <input type="search" name="" id="" placeholder="Tìm loại  đồ ăn, thức uống...">
+                    <button class="btn btn-secondary ">Tìm kiếm</button>
                 </div>
+            </form>
+            <a href="#" class="btn btn-primary">Xem cửa hàng<i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
-                            </div>
+    <!-- --------------xx------------------- -->
+    <!-- ====    New Menu    ==== -->
+    <section class="new-menu">
+        <div class="title-box">
+            <h1 class="title-line">
+                <span>Thực đơn mới</span>
+            </h1>
+            <p>Cập nhật thực đơn thường xuyên để đáp ứng nhu cầu của khách hàng</p>
+        </div>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
-                                </div>
-                            </div>
-                        </div>
+        <div class="carousel">
+            <div class="owl-carousel owl-theme">
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                                </div>
-                            </div>
-                        </div>
+                <div class="item card-product">
+                    <img src="client/images/buger.jpg" alt="">
+                    <div class="title">
+                        <h3>Hamburger bò phô mai</h3>
+                        <p>Giá: 20.000</p>
+                    </div>
+                </div>
+                <div class="item card-product">
+                    <img src="client/images/buger.jpg" alt="">
+                    <div class="title">
+                        <h3>Hamburger bò phô mai</h3>
+                        <p>Giá: 20.000</p>
+                    </div>
+                </div>
+                <div class="item card-product">
+                    <img src="client/images/buger.jpg" alt="">
+                    <div class="title">
+                        <h3>Hamburger bò phô mai</h3>
+                        <p>Giá: 20.000</p>
+                    </div>
+                </div>
+                <div class="item card-product">
+                    <img src="client/images/buger.jpg" alt="">
+                    <div class="title">
+                        <h3>Hamburger bò phô mai</h3>
+                        <p>Giá: 20.000</p>
+                    </div>
+                </div>
+                <div class="item card-product">
+                    <img src="client/images/buger.jpg" alt="">
+                    <div class="title">
+                        <h3>Hamburger bò phô mai</h3>
+                        <p>Giá: 20.000</p>
+                    </div>
+                </div>
+                <div class="item card-product">
+                    <img src="client/images/buger.jpg" alt="">
+                    <div class="title">
+                        <h3>Hamburger bò phô mai</h3>
+                        <p>Giá: 20.000</p>
+                    </div>
+                </div>
+                <div class="item card-product">
+                    <img src="client/images/buger.jpg" alt="">
+                    <div class="title">
+                        <h3>Hamburger bò phô mai</h3>
+                        <p>Giá: 20.000</p>
                     </div>
                 </div>
 
-                <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
+            </div>
 
-                            <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                                Shop
-                            </a>
+        </div>
+    </section>
+    <!-- ---------------xx------------------ -->
+    <!-- ====   Banner 2    ==== -->
+    <section class="banner-2">
+        <div class="content">
+            <h3>Tuần lễ khai trương</h3>
+            <h1>Giảm lên đến 50% <br>cho các đơn hàng đầu tiên</h1>
+            <small>Từ 00:00h ngày 01/12/2021 đến 23:00h ngày 07/12/2021 </small>
+            <p>Giảm 50% cho các đơn hàng dưới 150k và 30% cho tất cả các đơn hàng trên 150k.</p>
+            <a href="#" class="btn btn-primary">Đặt hàng ngay</a>
+        </div>
+    </section>
+    <!-- ----------------xx------------------- -->
+    <!-- ====   Menu List   ==== -->
+    <section class="menu-list">
+        <div class="title-box">
+            <h1 class="title-line">
+                <span>Danh sách món</span>
+            </h1>
+        </div>
+        <div class="list-products">
+            <div class="card-product">
+                <img src="client/images/burger-2.jpg" alt="">
+                <h4>Hamburger Silton</h4>
+                <div>
+                    <p class="price">Giá: 50.000</p>
+                    <span><i class="fas fa-star"></i> 4.5</span>
+                </div>
+                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+            </div>
 
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
+            <div class="card-product">
+                <img src="client/images/burger-2.jpg" alt="">
+                <h4>Hamburger Silton</h4>
+                <div>
+                    <p class="price">Giá: 50.000</p>
+                    <span><i class="fas fa-star"></i> 4.5</span>
+                </div>
+                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+            </div>
+            <div class="card-product">
+                <img src="client/images/burger-2.jpg" alt="">
+                <h4>Hamburger Silton</h4>
+                <div>
+                    <p class="price">Giá: 50.000</p>
+                    <span><i class="fas fa-star"></i> 4.5</span>
+                </div>
+                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+            </div>
+            <div class="card-product">
+                <img src="client/images/burger-2.jpg" alt="">
+                <h4>Hamburger Silton</h4>
+                <div>
+                    <p class="price">Giá: 50.000</p>
+                    <span><i class="fas fa-star"></i> 4.5</span>
+                </div>
+                <button class="btn btn-secondary" id="45"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+            </div>
+            <div class="card-product">
+                <img src="client/images/burger-2.jpg" alt="">
+                <h4>Hamburger Silton</h4>
+                <div>
+                    <p class="price">Giá: 50.000</p>
+                    <span><i class="fas fa-star"></i> 4.5</span>
+                </div>
+                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+            </div>
+            <div class="card-product">
+                <img src="client/images/burger-2.jpg" alt="">
+                <h4>Hamburger Silton</h4>
+                <div>
+                    <p class="price">Giá: 50.000</p>
+                    <span><i class="fas fa-star"></i> 4.5</span>
+                </div>
+                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+            </div>
+            <div class="card-product">
+                <img src="client/images/burger-2.jpg" alt="">
+                <h4>Hamburger Silton</h4>
+                <div>
+                    <p class="price">Giá: 50.000</p>
+                    <span><i class="fas fa-star"></i> 4.5</span>
+                </div>
+                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+            </div>
+            <div class="card-product">
+                <img src="client/images/burger-2.jpg" alt="">
+                <h4>Hamburger Silton</h4>
+                <div>
+                    <p class="price">Giá: 50.000</p>
+                    <span><i class="fas fa-star"></i> 4.5</span>
+                </div>
+                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+            </div>
+        </div>
+        <div class="see-more">
+            <a href="#">
+                <button class="btn btn-primary">Xem cửa hàng<i class="fas fa-arrow-right"></i></button>
+            </a>
+        </div>
+    </section>
+    <!-- ------------------------xx------------------- -->
+    <!-- ====   Category description    ==== -->
 
-                            <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                                Sponsor
-                            </a>
-                        </div>
-                    </div>
+    <section class="category-introduce food-introduce">
+        <div class="box">
+            <div class="box-content">
+                <h2>Thức ăn</h2>
+                <p>&emsp; &emsp;Ẩm thực Âu - Mỹ lâu nay vẫn từng hấp dẫn nhiều tín đồ yêu thích ẩm thực bởi sự đa dạng trong nguyên liệu, đậm đà với vị sốt nhiều khẩu vị, cũng như màu sắc bắt mắt. Đặc biệt là với các thể loại món thức ăn nhanh như Pizza,
+                    Burger… được phủ ngập nhiều loại topping thịt bò, heo, gà, hải sản… khác nhau sẵn sàng cho một bữa tiệc siêu chill tại gia. Lớp đế được làm nóng hổi, giòn thơm mùi vỏ bánh, được xếp đặt ngập ngụa topping tương xứng với lớp sốt đi kèm,
+                    còn gì thích hơn cắn một miếng sẽ cảm nhận được từng tầng mùi thơm quyến luyến quyện với khẩu vị độc đáo phù hợp tay nghề của người làm bếp.<br><br> &emsp; &emsp;Lên kèo hẹn cạ cứng tại nhà, bật ngay ứng dụng FastFoodđể sẵn sàng đại
+                    tiệc thật ngon. Với danh sách các cửa hàng món Âu Mỹ thiệt xịn, ứng dụng sẽ giúp bạn tìm ra các cửa hàng cho phép đặt pizza online, order pizza tận nhà, đặt đồ ăn nhanh nhanh chóng mà không phải đi tìm từng địa chỉ trên thanh tìm kiếm.</p>
+                <a href="#">
+                    <button class="btn btn-primary">Vào cửa hàng</button>
+                </a>
+            </div>
+            <div class="box-img">
+                <img src="client/images/food-introduce.jpg" alt="">
+            </div>
+        </div>
+    </section>
+    <section class="category-introduce drink-introduce">
+        <div class="box">
 
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v<?php echo e(Illuminate\Foundation\Application::VERSION); ?> (PHP v<?php echo e(PHP_VERSION); ?>)
-                    </div>
+            <div class="box-img">
+                <img src="client/images/drink-introduce.jpg" alt="">
+            </div>
+            <div class="box-content">
+                <h2>Đồ uống và Tráng miệng</h2>
+                <p>&emsp;&emsp;Không còn gì tuyệt bằng việc tự thưởng cho bản thân tận hưởng hương vị ngon lành: trà sữa, sinh tố hay cafe… để nạp lại năng lượng sau khi kết thúc một ngày làm việc vất vả. Tuy nhiên, đôi khi vì lịch trình làm việc bận rộn,
+                    người dùng đã quen với việc sử dụng các ứng dụng giao đặt nước online để tiết kiệm thời gian mà vẫn khám phá được một món ngon lành thông qua. Trong đó, ứng dụng FastFood ngoài việc có các bộ lọc khác nhau còn đi kèm nhiều ưu đãi.<br><br>                    &emsp; &emsp; Ở nhà thưởng thức cả thế giới tráng miệng đa dạng chưa bao giờ dễ hơn ở thời điểm hiện tại với các tín đồ yêu thích ẩm thực. Thậm chí ở hiện tại, tráng miệng không chỉ được dùng sau bữa ăn chính như thói quen ngày xưa
+                    của nhiều gia đình, hay là đặt xôi chè trong các dịp lễ giỗ ở nhà, mà còn là các món bánh hay các món salad, kem,… sẵn sàng mời gọi mọi lúc. Thèm gì có đó, chỉ cần ở ngay tại nhà thông qua Internet, việc đặt món tráng miệng, các món
+                    dessert hay các món đồ ăn nhà làm, từ bình dân đến cao cấp đều dễ dàng tìm thấy được. </p>
+                <a href="#">
+                    <button class="btn btn-primary">Vào cửa hàng</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ---------------xx---------------- -->
+    <!-- ====   Banner lazy     ==== -->
+    <section class="banner-lazy">
+        <div class="box">
+            <div class="box-img">
+                <img src="client/images/banner-3.jpg" alt="">
+            </div>
+            <div class="box-content">
+                <h2>Pizza tươi ngon, đậm đà hương vị</h2>
+                <p>Phục vụ những chiếc bánh pizza lò củi đúng chuẩn Napoli ngon tuyệt và những món ăn phong vị Ý được lấy cảm hứng từ truyền thống hơn 200 năm.</p>
+                <img src="client/images/pizza-logo.png   " alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- --------------xx---------------- -->
+    <!-- ====   Service    ==== -->
+    <section class="service">
+        <div class="box">
+            <div class="card">
+                <div class="card-img">
+                    <img src="client/images/how_1.png" alt="">
+                </div>
+                <div class="card-content">
+                    <h3>Đặt hàng đơn giản</h3>
+                    <p>Truy cập vào website, chọn món ăn bạn muốn sau đó bấm thanh toán, chúng tôi sẽ giao đến tận nơi cho bạn.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="client/images/how_2.png" alt="">
+                </div>
+                <div class="card-content">
+                    <h3>Đặt hàng đơn giản</h3>
+                    <p>Truy cập vào website, chọn món ăn bạn muốn sau đó bấm thanh toán, chúng tôi sẽ giao đến tận nơi cho bạn.</p>
                 </div>
             </div>
         </div>
-    </body>
+        <div class="box">
+            <div class="card">
+                <div class="card-img">
+                    <img src="client/images/how_3.png" alt="">
+                </div>
+                <div class="card-content">
+                    <h3>Đặt hàng đơn giản</h3>
+                    <p>Truy cập vào website, chọn món ăn bạn muốn sau đó bấm thanh toán, chúng tôi sẽ giao đến tận nơi cho bạn.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-description">
+            <div class="box">
+                <h2>Đặt hàng ngay</h2>
+                <p>Trải nghiệm ẩm thực với đa dạng các món ăn đặc trưng vùng miền đầy sáng tạo luôn là trải nghiệm thú vị với tất cả thực khách ở các thành phố lớn. Tuy nhiên, vì nhịp sống bận rộn, nhiều người đã lựa chọn các app đặt đồ ăn online để giúp
+                    cho việc tận hưởng bữa ăn ngon thêm dễ dàng hơn rất nhiều. Đi kèm với các ưu đãi như miễn phí ship, khuyến mãi cho người dùng mới… FastFood với nhiều lựa chọn cửa hàng ở 16 tỉnh thành đang trở thành ứng dụng tiện ích giao đồ ăn nhanh
+                    chóng.
+                </p>
+                <a href="#">
+                    <button class="btn btn-primary">Xem thêm</button>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- ---------xx--------------- -->
+    <!-- ====   Footer  ==== -->
+    <footer class="footer">
+        <div class="box">
+            <div class="openning-hour">
+                <h2>Giờ mở cửa</h2>
+                <ul>
+                    <li>
+                        <span>Thứ hai - Thứ sáu</span>
+                        <span>08:30 - 23:00h</span>
+                    </li>
+                    <li>
+                        <span>Thứ bảy</span>
+                        <span>07:00 - 23:00h</span>
+                    </li>
+                    <li>
+                        <span>Chủ nhật</span>
+                        <span>07:00 - 23:00h</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="address">
+                <h2>Địa chỉ</h2>
+                <ul>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>273 An D. Vương, Phường 3, Quận 5,Thành phố Hồ Chí Minh, Việt Nam</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <p>0123 456 789</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <p>infor@domain.com</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.669658423672!2d106.68006961411632!3d10.75992236244198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1637559140172!5m2!1svi!2s" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div class="box">
+            <div class="subscribe">
+                <h2>Đăng ký ngay</h2>
+                <p>Đăng ký ngay để nhận các bản cập nhật mới của chúng tôi và nhận các ưu đãi và nội dung thường xuyên.</p>
+                <div class="textfield">
+                    <input type="email" placeholder="Địa chỉ mail của bạn">
+                    <button class="btn btn-primary">Đăng ký</button>
+                </div>
+            </div>
+
+            <div class="social">
+                <h2>Kết nối với chúng tôi</h2>
+                 <div class="list-item">
+                    <a href="#"><div class="item"><i class="fab fa-facebook-f"></i></div></a>
+                    <a href="#"><div class="item"><i class="fab fa-instagram"></i></div></a>
+                    <a href="#"><div class="item"><i class="fab fa-twitter"></i></div></a>
+                    <a href="#"><div class="item"><i class="fab fa-google-plus-g"></i></div></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- -----------xx--------------- -->
+
+    <!-- ====   Product details     ==== -->
+    <section class="product-details" >
+         <div class="card" id="card-detail">
+           <div class="card-front">
+                <div class="close-btn">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-img">
+                        <img src="client/images/buger.jpg" alt="">
+                    </div>
+                    <div class="card-detail">
+                        <h2>Bánh burger thịt cừu với gia vị Ấn độ và nước sốt ya-ua vị bạc hà</h2>
+                        <p>Giá: <span>50.000 đ</span></p>
+                        <div class="star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="quantity">
+                            <button>-</button>
+                            <input type="number" value="1">
+                            <button>+</button>
+                        </div>
+            </div>
+        </div>
+        <div class="add-to-cart">
+            <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i>Thêm</button>
+            <button class="btn btn-secondary" id="description-btn">Mô tả</button>
+        </div>
+
+        </div>
+        <div class="card-back">
+            <div class="close-btn">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="card-content">
+                <h3>Mô tả sản phẩm</h3>
+                <h2>Bánh burger thịt cừu với gia vị Ấn độ và nước sốt ya-ua vị bạc hà</h2>
+                <p>&emsp; &emsp;Phần nhân bánh được chế biến từ thịt cừu chăn nuôi ngoài đồng, loại thịt nạc vai chứa 2/3 lượng mỡ ít hơn thịt cừu nuôi siêu thịt. Để thịt ngon hơn thì nên xay nó nhỏ hơn trước khi chế biến. Thịt sau khi xay được tẩm ướp vadouvan,
+                    loại gia vị hỗn hợp của Ấn Độ được sử dụng nhiều trong việc tẩm ướp thịt nướng. Gia vị này kết hợp từ bột cà ri, thêm tỏi, hành khô. <br>&emsp; &emsp;Cuối cùng, một ít nước sốt ya-ua vị bạc hà, ít vị ngọt của ớt đỏ nướng và vị đắng
+                    của radicchio ở xung quanh sẽ đem đến một bánh burger đầy mùi vị.</p>
+            </div>
+            <div class="add-to-cart">
+                <button class="btn btn-secondary" id="back-btn">Quay lại</button>
+            </div>
+        </div>
+        </div>
+        </section>
+        <!-- -----------xx------------------ -->
+
+        <div class="coppyright">
+            <p>copyright © 2021 <span>Fast Food.</span> All rights reserved.</p>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="client/js/main.js"></script>
+</body>
+
+</html>
+
 </html>
 <?php /**PATH C:\xampp\htdocs\OrderFood\resources\views/client/welcome.blade.php ENDPATH**/ ?>

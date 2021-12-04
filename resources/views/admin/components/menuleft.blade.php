@@ -15,71 +15,30 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
-                    <a href="./admin" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                <li class="nav-item">
+                    <a href="./admin" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
                         <p>
                             Trang chủ
                         </p>
                     </a>
-
                 </li>
-
                 <li class="nav-item">
                     <a href="admin/category/list" class="nav-link">
-                        <i class="nav-icon fas fa-tree"></i>
+                        <i class="nav-icon fas fa-th-list"></i>
                         <p>
-                            Category
-                            <i class="fas fa-angle-left right"></i>
+                            Quản lý Danh mục
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="admin/category/list" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách thể loại</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="admin/category/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm thể loại</p>
-                            </a>
-                        </li>
-
-
-                    </ul>
                 </li>
-
-
                 <li class="nav-item">
-                    <a href="admin/products/list" class="nav-link">
-                        <i class="nav-icon fas fa-tree"></i>
+                    <a href="admin/product/list" class="nav-link">
+                        <i class="nav-icon fas fa-hamburger"></i>
                         <p>
-                            Products
-                            <i class="fas fa-angle-left right"></i>
+                            Quản lý Món ăn
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="admin/product/list" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách sản phẩm</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="admin/product/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm sản phẩm</p>
-                            </a>
-                        </li>
-
-
-                    </ul>
                 </li>
-
             </ul>
         </nav>
 
