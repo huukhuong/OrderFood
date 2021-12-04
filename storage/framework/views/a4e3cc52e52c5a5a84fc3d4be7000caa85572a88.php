@@ -1,23 +1,21 @@
-@extends('admin.main')
-
-@section('title')
+<?php $__env->startSection('title'); ?>
     <title>Admin | Trang chủ</title>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Thêm món ăn</h3>
         </div>
-        @if (count($errors) > 0)
+        <?php if(count($errors) > 0): ?>
             <div class="alert alert-danger">
-                @foreach ($errors -> all() as $err)
-                    {{$err}} <br>
-                @endforeach
+                <?php $__currentLoopData = $errors -> all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $err): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo e($err); ?> <br>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-        @endif
-        @if(session('chuacofile'))
+        <?php endif; ?>
+        <?php if(session('chuacofile')): ?>
             <script >
                 Swal.fire({
                     icon: 'success',
@@ -26,8 +24,8 @@
 
                 })
             </script>
-    @endif
-        @if(session('themthanhcong'))
+    <?php endif; ?>
+        <?php if(session('themthanhcong')): ?>
             <script >
                 Swal.fire({
                     icon: 'success',
@@ -36,7 +34,7 @@
 
                 })
             </script>
-    @endif
+    <?php endif; ?>
     <!-- /.card-header -->
         <div class="card card-primary">
             <div class="card-header">
@@ -46,7 +44,7 @@
             <!-- form start -->
             <form action="admin/product/add" method="post" enctype="multipart/form-data">
                 <div class="card-body">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <div class="form-group">
                         <label for="productName">Tên món ăn</label>
                         <input type="text" class="form-control" id="productName"  name="productName" placeholder="Nhập tên món ăn">
@@ -63,9 +61,9 @@
                         <label>Danh sách thể loại</label>
                         <select class="form-control" name="productCategoryID">
 
-                            @foreach($category as $key)
-                            <option value="{{$key -> id}}"> {{$key -> name}} </option>
-                           @endforeach
+                            <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($key -> id); ?>"> <?php echo e($key -> name); ?> </option>
+                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
 
@@ -103,4 +101,6 @@
         }
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views/admin/products/add.blade.php ENDPATH**/ ?>

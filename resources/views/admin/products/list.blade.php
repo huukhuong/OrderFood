@@ -14,6 +14,7 @@
             )
         </script>
     @endif
+
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Danh sách thể loại món ăn</h3>
@@ -24,21 +25,32 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th >Mã thể loại</th>
-                    <th>Tên thể loại</th>
+                    <th >Mã SP</th>
+                    <th>Tên Sp</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thể loại</th>
+                    <th>Hình ảnh</th>
+                    <th>Mô tả</th>
                     <th></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($category as $key)
-                <tr>
-                    <td>{{$key -> id}}</td>
-                    <td>{{$key ->name}}</td>
-                    <td class="text-center"><a href="admin/category/edit/{{$key->id}}"><button class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>Sửa</button></a></td>
-{{--                    <td class="text-center"><a href="admin/category/delete/{{$key->id}}"><button class="btn btn-danger"><i class="fas fa-trash"></i>Xoá</button></a></td>--}}
-                    <td class="text-center"> <input type="button" class="btn btn-danger" value="Xoá" onclick="return xoa({{$key->id}});"></td>
-                </tr>
+                @foreach($product as $key)
+                    <tr>
+                        <td>{{$key -> id}}</td>
+                        <td>{{$key ->name}}</td>
+                        <td>{{$key ->price}}</td>
+                        <td>{{$key ->quantity}}</td>
+                        <td>{{$key ->category_id}}</td>
+                        <td><img src="./img/products/{{$key ->image}}" width="120" height=200></td>
+{{--                        <td>{{$key ->image}}</td>--}}
+                        <td>{{$key ->description}}</td>
+                        <td class="text-center"><a href="admin/product/edit/{{$key->id}}"><button class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>Sửa</button></a></td>
+                        {{--                    <td class="text-center"><a href="admin/category/delete/{{$key->id}}"><button class="btn btn-danger"><i class="fas fa-trash"></i>Xoá</button></a></td>--}}
+                        <td class="text-center"> <input type="button" class="btn btn-danger" value="Xoá" onclick="return xoa({{$key->id}});"></td>
+                    </tr>
                 @endforeach
 
 
@@ -62,7 +74,7 @@
                 cancelButtonText: 'Không'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = "admin/category/delete/" + id;
+                    location.href = "admin/product/delete/" + id;
                     return true;
                 }
                 else{
