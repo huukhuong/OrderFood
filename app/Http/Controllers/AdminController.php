@@ -31,9 +31,9 @@ class AdminController extends Controller
                 'namecategory' => 'required|min:3|max:100'
             ],
             [
-                'namecategory.required' => 'Bạn chưa nhập tên thể loại',
-                'namecategory.min' => 'Tên thể loại có độ dài từ 3 - 100 kí tự',
-                'namecategory.max' => 'Tên thể loại có độ dài từ 3 - 100 kí tự'
+                'namecategory.required' => 'Bạn chưa nhập tên danh mục',
+                'namecategory.min' => 'Tên danh mục có độ dài từ 3 - 100 kí tự',
+                'namecategory.max' => 'Tên danh mục có độ dài từ 3 - 100 kí tự'
             ]
         );
         $cate = new categories();
@@ -56,9 +56,9 @@ class AdminController extends Controller
                 'namecategory' => 'required|min:3|max:100'
             ],
             [
-                'namecategory.required' => 'Bạn chưa nhập tên thể loại',
-                'namecategory.min' => 'Tên thể loại có độ dài từ 3 - 100 kí tự',
-                'namecategory.max' => 'Tên thể loại có độ dài từ 3 - 100 kí tự'
+                'namecategory.required' => 'Bạn chưa nhập tên danh mục',
+                'namecategory.min' => 'Tên danh mục có độ dài từ 3 - 100 kí tự',
+                'namecategory.max' => 'Tên danh mục có độ dài từ 3 - 100 kí tự'
             ]
         );
         $id = $request->id;
