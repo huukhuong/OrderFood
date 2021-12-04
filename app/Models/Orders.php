@@ -5,13 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class categories extends Model
+class Orders extends Model
 {
     use HasFactory;
-    protected $table = "categories";
+    protected $table = "orders";
     public $timestamps = false;
-    public function products(){
-        return $this ->hasMany('App\Models\products','id', 'id');
-    }
-
 }

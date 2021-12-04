@@ -43,7 +43,7 @@
                         <td>{{$key ->name}}</td>
                         <td>{{$key ->price}}</td>
                         <td>{{$key ->quantity}}</td>
-                        <td>{{$key ->category_id}}</td>
+                        <td>{{$key -> category_linked -> name }}</td>
                         <td><img src="./img/products/{{$key ->image}}" width="120" height=200></td>
 {{--                        <td>{{$key ->image}}</td>--}}
                         <td>{{$key ->description}}</td>

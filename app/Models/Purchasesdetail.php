@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class comments extends Model
+class Purchasesdetail extends Model
 {
     use HasFactory;
-    protected $table = "comments";
-
+    protected $table = "purchase_detail";
+    public $timestamps = false;
 }

@@ -13,14 +13,14 @@ class AdminController extends Controller
     public function index(){
         return view('admin.home');
     }
-    public function getlistcategory(){
+    public function getListCategory(){
         $category = categories::all();
         return view('admin.category.list',['category' => $category]);
     }
-    public function getaddcategory(){
+    public function getAddCategory(){
         return view('admin.category.add');
     }
-    public function postaddcategory(Request $request){
+    public function postAddCategory(Request $request){
         $this -> validate($request,
         ['namecategory' => 'required|min:3|max:100'
         ],
@@ -35,12 +35,12 @@ class AdminController extends Controller
         return redirect('admin/category/add') -> with('themthanhcong','success');
     }
 
-    public function geteditcategory($id){
+    public function getEditCategory($id){
         $category = categories::find($id);
         return view('admin.category.edit',['category' => $category]);
     }
 
-    public function posteditcategory(Request $request){
+    public function postEditCategory(Request $request){
         $this -> validate($request,
             ['namecategory' => 'required|min:3|max:100'
             ],
@@ -56,7 +56,7 @@ class AdminController extends Controller
         return redirect('admin/category/edit/'.$id) -> with('suathanhcong','success');
     }
 
-    public function deletecategory($id){
+    public function deleteCategory($id){
         $category = categories::find($id);
         $category -> delete();
         return redirect('admin/category/list') -> with('xoathanhcong','success');
@@ -66,19 +66,20 @@ class AdminController extends Controller
 
 
     /////////////////////////////////////////////////////////////////////////////
-    ///
-    ///     PRODUCT
-    ///
-    public function getlistproduct(){
+    ///                                                                       ///
+    ///                                 PRODUCT                               ///
+    ///                                                                       ///
+    /////////////////////////////////////////////////////////////////////////////
+    public function getListProduct(){
         $product = products::all();
         return view('admin.products.list',['product' => $product]);
     }
-    public function getaddproduct(){
+    public function getAddProduct(){
         $category = categories::all();
 
         return view('admin.products.add',['category' => $category]);
     }
-    public function postaddproduct(Request $request){
+    public function postAddProduct(Request $request){
        if($request -> hasFile('productImage')){
             $file = $request -> file('productImage');
             $filename = $file ->getClientOriginalName('productImage');
@@ -98,17 +99,17 @@ class AdminController extends Controller
         }
 
     }
-    public function geteditproduct($id){
+    public function getEditProduct($id){
         $product = products::find($id);
         $category = categories::all();
         return view('admin.products.edit',['product' => $product, 'category' =>$category]);
     }
 
-    public function posteditproduct(Request $request){
+    public function postEditProduct(Request $request){
         $id =$request -> id;
         $product = products::find($id);
         var_dump($product);
-        $product -> name = "test";
+        $product -> name = $request -> productName;
         $product -> description	 = $request -> productDescription;
         $product -> quantity = $request -> productQuantity;
         $product -> price = $request -> productPrice;
@@ -125,7 +126,7 @@ class AdminController extends Controller
         $product -> save();
         return  redirect('admin/product/edit/'.$id) -> with('suathanhcong','success');
     }
-    public function deleteproduct($id){
+    public function deleteProduct($id){
         $product = products::find($id);
         $product -> delete();
         return redirect('admin/product/list') -> with('xoathanhcong','success');

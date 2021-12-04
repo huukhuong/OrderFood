@@ -41,7 +41,7 @@
                         <td><?php echo e($key ->name); ?></td>
                         <td><?php echo e($key ->price); ?></td>
                         <td><?php echo e($key ->quantity); ?></td>
-                        <td><?php echo e($key ->category_id); ?></td>
+                        <td><?php echo e($key -> category_linked -> name); ?></td>
                         <td><img src="./img/products/<?php echo e($key ->image); ?>" width="120" height=200></td>
 
                         <td><?php echo e($key ->description); ?></td>

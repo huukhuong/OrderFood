@@ -5,21 +5,21 @@ use App\Http\Controllers\AdminController;
 Route::prefix('admin')->group(function () {
     Route::get('/',  [AdminController::class,'index']);
     Route::prefix('/category')->group(function () {
-        Route::get('/list',  [AdminController::class,'getlistcategory']);
-        Route::get('/add',  [AdminController::class,'getaddcategory']);
-        Route::post('add',[AdminController::class,'postaddcategory']);
-        Route::get('/edit/{id}',  [AdminController::class,'geteditcategory']);
-        Route::post('/edit',  [AdminController::class,'posteditcategory']);
-        Route::get('/delete/{id}',  [AdminController::class,'deletecategory']);
+        Route::get('/list',  [AdminController::class, 'getListCategory']);
+        Route::get('/add',  [AdminController::class, 'getAddCategory']);
+        Route::post('add',[AdminController::class, 'postAddCategory']);
+        Route::get('/edit/{id}',  [AdminController::class, 'getEditCategory']);
+        Route::post('/edit',  [AdminController::class, 'postEditCategory']);
+        Route::get('/delete/{id}',  [AdminController::class, 'deleteCategory']);
     });
 
     Route::prefix('/product')->group(function () {
-        Route::get('/list',  [AdminController::class,'getlistproduct']);
-        Route::get('/add',  [AdminController::class,'getaddproduct']);
-        Route::post('add',[AdminController::class,'postaddproduct']);
-        Route::get('/edit/{id}',  [AdminController::class,'geteditproduct']);
-        Route::post('/edit',  [AdminController::class,'posteditproduct']);
-        Route::get('/delete/{id}',  [AdminController::class,'deleteproduct']);
+        Route::get('/list',  [AdminController::class, 'getListProduct']);
+        Route::get('/add',  [AdminController::class, 'getAddProduct']);
+        Route::post('add',[AdminController::class, 'postAddProduct']);
+        Route::get('/edit/{id}',  [AdminController::class, 'getEditProduct']);
+        Route::post('/edit',  [AdminController::class, 'postEditProduct']);
+        Route::get('/delete/{id}',  [AdminController::class, 'deleteProduct']);
     });
 
 });
