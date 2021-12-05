@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
 <title>Đăng ký tài khoản</title>
 <?php $__env->stopSection(); ?>

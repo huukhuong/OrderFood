@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
     <title>Admin | Danh sách danh mục</title>
 <?php $__env->stopSection(); ?>
@@ -38,8 +40,9 @@
                             
                             
                             <td class="text-center">
-                                <a href="admin/category/edit/<?php echo e($key->id); ?>"><button class="btn btn-warning"><i
-                                            class="fa fa-pencil fa-fw"></i>Sửa</button></a>
+                                <a class="btn btn-warning" href="admin/category/edit/<?php echo e($key->id); ?>">
+                                    <i class="fa fa-pencil fa-fw"></i>Sửa
+                                </a>
                                 <input type="button" class="btn btn-danger" value="Xoá"
                                     onclick="return xoa(<?php echo e($key->id); ?>);">
                             </td>
