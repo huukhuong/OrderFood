@@ -6,23 +6,84 @@ use App\Http\Controllers\Controller;
 use App\Models\categories;
 use App\Models\products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 use function GuzzleHttp\Promise\all;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $user = Auth::user();
+            if ($user != null) {
+                if ($user->role != 1) {
+                    $this->logout();
+                    return redirect('admin');
+                }
+            }
+            return $next($request);
+        });
+    }
+
+    public function login()
+    {
+        return view('admin.auth.login');
+    }
+
+    public function postLogin(Request $request)
+    {
+        $request->validate(
+            [
+                'emai' => 'email',
+                'password' => 'required'
+            ],
+            [
+                'email.email' => 'Email không đúng định dạng',
+                'password.required' => 'Mật khẩu không được để trống'
+            ]
+        );
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $remember = $request->remember == null ? false : true;
+
+        $data = [
+            'email' => $email,
+            'password' => $password,
+            'role' => 1
+        ];
+
+        if (Auth::attempt($data, $remember)) {
+            return redirect('admin');
+        } else {
+            return Redirect::back()->withErrors(['msg' => 'Sai thông tin đăng nhập']);
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/admin');
+    }
+
     public function index()
     {
         return view('admin.home');
     }
+
     public function getListCategory()
     {
         $category = categories::all();
         return view('admin.category.list', ['category' => $category]);
     }
+
     public function getAddCategory()
     {
         return view('admin.category.add');
     }
+
     public function postAddCategory(Request $request)
     {
         $this->validate(
@@ -77,7 +138,6 @@ class AdminController extends Controller
 
 
 
-
     /////////////////////////////////////////////////////////////////////////////
     ///                                                                       ///
     ///                                 PRODUCT                               ///
@@ -88,12 +148,14 @@ class AdminController extends Controller
         $product = products::all();
         return view('admin.products.list', ['product' => $product]);
     }
+
     public function getAddProduct()
     {
         $category = categories::all();
 
         return view('admin.products.add', ['category' => $category]);
     }
+
     public function postAddProduct(Request $request)
     {
         if ($request->hasFile('productImage')) {
@@ -113,6 +175,7 @@ class AdminController extends Controller
             return  redirect('admin/product/list')->with('chuacofile', 'success');
         }
     }
+
     public function getEditProduct($id)
     {
         $product = products::find($id);
@@ -141,6 +204,7 @@ class AdminController extends Controller
         $product->save();
         return  redirect('admin/product/edit/' . $id)->with('suathanhcong', 'success');
     }
+
     public function deleteProduct($id)
     {
         $product = products::find($id);

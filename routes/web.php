@@ -4,9 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Client\HomeControlller;
 
-Route::prefix('admin')->group(function () {
+Route::get('/admin/login',  [AdminController::class, 'login'])->name('login');
+Route::post('/admin/login',  [AdminController::class, 'postLogin']);
+
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
 
     Route::get('/',  [AdminController::class, 'index']);
+    Route::get('/logout', [AdminController::class, 'logout']);
+
 
     Route::prefix('/category')->group(function () {
         Route::get('/list',  [AdminController::class, 'getListCategory']);
