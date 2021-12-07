@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateTblProductsStatus extends Migration
+class UpdateTblProductsStatusColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,9 @@ class UpdateTblProductsStatus extends Migration
      */
     public function up()
     {
-
+        Schema::table('products', function (Blueprint $table) {
+            $table->integer('status')->max(1);
+        });
     }
 
     /**

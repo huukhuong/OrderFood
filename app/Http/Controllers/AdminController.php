@@ -145,7 +145,7 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
     public function getListProduct()
     {
-        $product = products::all();
+        $product = products::where('status', 1)->get();
         return view('admin.products.list', ['product' => $product]);
     }
 
@@ -169,6 +169,7 @@ class AdminController extends Controller
             $product->price = $request->productPrice;
             $product->image = $filename;
             $product->category_id = $request->productCategoryID;
+            $product->status = 1;
             $product->save();
             return  redirect('admin/product/add')->with('themthanhcong', 'success');
         } else {
@@ -208,7 +209,8 @@ class AdminController extends Controller
     public function deleteProduct($id)
     {
         $product = products::find($id);
-        $product->delete();
+        $product->status = 0;
+        $product->save();
         return redirect('admin/product/list')->with('xoathanhcong', 'success');
     }
 }
