@@ -1,6 +1,12 @@
 <?php $__env->startSection('title'); ?>
-    <title>Đặt hàng</title>
+<title>Đặt hàng</title>
 <?php $__env->stopSection(); ?>
+
+<?php if(auth()->guard()->guest()): ?>
+    <?php
+        header('Location: /login');
+    ?>
+<?php endif; ?>
 
 <?php $__env->startSection('content'); ?>
     <!-- ---------------xx-------------- -->

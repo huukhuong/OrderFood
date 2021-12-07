@@ -1,7 +1,8 @@
+
 @extends('client.main')
 
 @section('title')
-    <title>Đặt hàng</title>
+<title>Đặt hàng</title>
 @endsection
 
 @section('content')

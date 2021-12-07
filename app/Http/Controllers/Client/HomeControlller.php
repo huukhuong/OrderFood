@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeControlller extends Controller
 {
@@ -13,7 +14,7 @@ class HomeControlller extends Controller
     public function index()
     {
         $products = Products::all();
-        return view('client.home', ['page' => 'home','products' => $products]);
+        return view('client.home', ['page' => 'home', 'products' => $products]);
     }
 
     public function shop()
@@ -31,12 +32,17 @@ class HomeControlller extends Controller
         return view('client.login', ['page' => 'login']);
     }
 
-    public function cart() {
+    public function cart()
+    {
         return view('client.cart', ['page' => 'cart']);
     }
 
-    public function order() {
-        return view('client.order', ['page' => 'order']);
+    public function order()
+    {
+        if (Auth::user()) {   // Check is user logged in
+            return view('client.order', ['page' => 'order']);
+        } else {
+            return redirect("login");
+        }
     }
-
 }
