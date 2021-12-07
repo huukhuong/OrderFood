@@ -16,7 +16,7 @@
             <li><a href="coming-soon" {!! $page == 'notification' ? 'class="active"' : '' !!}>Thông báo</a></li>
             @auth
                 <li class="user">
-                    <img src="img/{{ auth()->user()->img }}" alt="img">
+                    <img src="img/users/{{ auth()->user()->img }}" alt="img" class="user-avatar">
                     <h3>{{ auth()->user()->name }}</h3>
                 </li>
             @endauth

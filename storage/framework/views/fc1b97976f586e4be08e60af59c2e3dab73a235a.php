@@ -16,7 +16,7 @@
             <li><a href="coming-soon" <?php echo $page == 'notification' ? 'class="active"' : ''; ?>>Thông báo</a></li>
             <?php if(auth()->guard()->check()): ?>
                 <li class="user">
-                    <img src="img/<?php echo e(auth()->user()->img); ?>" alt="img">
+                    <img src="img/users/<?php echo e(auth()->user()->img); ?>" alt="img" class="user-avatar">
                     <h3><?php echo e(auth()->user()->name); ?></h3>
                 </li>
             <?php endif; ?>
