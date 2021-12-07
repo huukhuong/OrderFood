@@ -38,6 +38,7 @@ Route::prefix('/')->group(function () {
     Route::get('shop',  [HomeControlller::class, 'shop']);
     Route::get('register',  [HomeControlller::class, 'register']);
     Route::get('login',  [HomeControlller::class, 'login']);
+    Route::get('cart',  [HomeControlller::class, 'cart']);
 
     Route::get('coming-soon',  function() {
         return view('client.coming-soon');

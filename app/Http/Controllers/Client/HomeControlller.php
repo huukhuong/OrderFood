@@ -28,4 +28,8 @@ class HomeControlller extends Controller
         return view('client.login', ['page' => 'login']);
     }
 
+    public function cart() {
+        return view('client.cart', ['page' => 'cart']);
+    }
+
 }

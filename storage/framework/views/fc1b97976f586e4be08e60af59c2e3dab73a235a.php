@@ -24,7 +24,7 @@
         </ul>
 
         <div class="icon">
-            <a href="cart.html">
+            <a href="cart">
                 <div class="cart">
                     <svg xmlns="http://www.w3.org/2000/svg" width="142.25" height="189.333"
                         viewBox="0 0 142.25 189.333">
