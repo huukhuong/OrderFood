@@ -43,11 +43,8 @@ Route::prefix('/')->group(function () {
     Route::post('register',  [UserController::class, 'postRegister']);
     Route::post('login',  [UserController::class, 'postLogin']);
     Route::get('logout',  [UserController::class, 'logout']);
-<<<<<<< HEAD
-=======
     Route::get('order',  [HomeControlller::class, 'order']);
 
->>>>>>> 1e23f156d0591b8ef991d973fe06943beea76f60
     Route::get('coming-soon',  function() {
         return view('client.coming-soon');
     });
