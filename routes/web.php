@@ -44,6 +44,7 @@ Route::prefix('/')->group(function () {
     Route::post('login',  [UserController::class, 'postLogin']);
     Route::get('logout',  [UserController::class, 'logout']);
     Route::get('order',  [HomeControlller::class, 'order']);
+    Route::get('order_success',  [HomeControlller::class, 'orderSuccess']);
 
     Route::get('coming-soon',  function() {
         return view('client.coming-soon');

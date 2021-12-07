@@ -71,9 +71,10 @@
                         <span>Tổng cộng:</span>
                         <strong>50.000₫</strong>
                     </div>
-                    <button class="btn btn-primary">Đặt hàng</button>
+                    <a href="order_success">
+                        <button class="btn btn-primary">Đặt hàng</button>
+                    </a>
                 </div>
-
             </div>
         </div>
     </section>
