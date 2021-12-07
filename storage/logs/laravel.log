@@ -20081,3 +20081,69 @@ esources\\views/admin/products/list.blade.php(46): Illuminate\\Database\\Eloquen
 #6 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #7 {main}
 "} 
+[2021-12-07 22:36:44] local.ERROR: syntax error, unexpected '<<' (T_SL), expecting ')' {"exception":"[object] (ParseError(code: 0): syntax error, unexpected '<<' (T_SL), expecting ')' at C:\\xampp\\htdocs\\OrderFood\\bootstrap\\cache\outes-v7.php:27)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(957): Illuminate\\Foundation\\Support\\Providers\\RouteServiceProvider->Illuminate\\Foundation\\Support\\Providers\\{closure}(Object(Illuminate\\Foundation\\Application))
+#1 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(900): Illuminate\\Foundation\\Application->fireAppCallbacks(Array)
+#2 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#3 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(237): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#4 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#5 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#6 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 {main}
+"} 
+[2021-12-07 22:37:24] local.ERROR: syntax error, unexpected '<<' (T_SL), expecting ')' {"exception":"[object] (ParseError(code: 0): syntax error, unexpected '<<' (T_SL), expecting ')' at C:\\xampp\\htdocs\\OrderFood\\bootstrap\\cache\outes-v7.php:27)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(957): Illuminate\\Foundation\\Support\\Providers\\RouteServiceProvider->Illuminate\\Foundation\\Support\\Providers\\{closure}(Object(Illuminate\\Foundation\\Application))
+#1 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(900): Illuminate\\Foundation\\Application->fireAppCallbacks(Array)
+#2 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#3 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(237): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#4 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#5 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#6 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 {main}
+"} 
+[2021-12-07 22:37:24] local.ERROR: syntax error, unexpected '<<' (T_SL), expecting ')' {"exception":"[object] (ParseError(code: 0): syntax error, unexpected '<<' (T_SL), expecting ')' at C:\\xampp\\htdocs\\OrderFood\\bootstrap\\cache\outes-v7.php:27)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(957): Illuminate\\Foundation\\Support\\Providers\\RouteServiceProvider->Illuminate\\Foundation\\Support\\Providers\\{closure}(Object(Illuminate\\Foundation\\Application))
+#1 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(900): Illuminate\\Foundation\\Application->fireAppCallbacks(Array)
+#2 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#3 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(237): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#4 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#5 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#6 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 {main}
+"} 
+[2021-12-07 22:38:24] local.ERROR: syntax error, unexpected '<<' (T_SL), expecting ')' {"exception":"[object] (ParseError(code: 0): syntax error, unexpected '<<' (T_SL), expecting ')' at C:\\xampp\\htdocs\\OrderFood\\bootstrap\\cache\outes-v7.php:27)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(957): Illuminate\\Foundation\\Support\\Providers\\RouteServiceProvider->Illuminate\\Foundation\\Support\\Providers\\{closure}(Object(Illuminate\\Foundation\\Application))
+#1 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(900): Illuminate\\Foundation\\Application->fireAppCallbacks(Array)
+#2 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#3 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(237): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#4 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#5 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#6 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 {main}
+"} 
+[2021-12-07 22:38:24] local.ERROR: syntax error, unexpected '<<' (T_SL), expecting ')' {"exception":"[object] (ParseError(code: 0): syntax error, unexpected '<<' (T_SL), expecting ')' at C:\\xampp\\htdocs\\OrderFood\\bootstrap\\cache\outes-v7.php:27)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(957): Illuminate\\Foundation\\Support\\Providers\\RouteServiceProvider->Illuminate\\Foundation\\Support\\Providers\\{closure}(Object(Illuminate\\Foundation\\Application))
+#1 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(900): Illuminate\\Foundation\\Application->fireAppCallbacks(Array)
+#2 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#3 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(237): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#4 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#5 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#6 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 {main}
+"} 
+[2021-12-07 22:39:24] local.ERROR: syntax error, unexpected '<<' (T_SL), expecting ')' {"exception":"[object] (ParseError(code: 0): syntax error, unexpected '<<' (T_SL), expecting ')' at C:\\xampp\\htdocs\\OrderFood\\bootstrap\\cache\outes-v7.php:27)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(957): Illuminate\\Foundation\\Support\\Providers\\RouteServiceProvider->Illuminate\\Foundation\\Support\\Providers\\{closure}(Object(Illuminate\\Foundation\\Application))
+#1 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(900): Illuminate\\Foundation\\Application->fireAppCallbacks(Array)
+#2 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#3 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(237): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#4 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#5 C:\\xampp\\htdocs\\OrderFood\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#6 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 {main}
+"} 
