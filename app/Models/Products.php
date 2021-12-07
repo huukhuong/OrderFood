@@ -9,7 +9,9 @@ class Products extends Model
 {
     use HasFactory;
     protected $table = "products";
+
     public function category_linked(){
         return $this ->belongsTo('App\Models\Categories','category_id', 'id') ;
     }
+
 }
