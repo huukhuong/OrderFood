@@ -35,4 +35,8 @@ class HomeControlller extends Controller
         return view('client.cart', ['page' => 'cart']);
     }
 
+    public function order() {
+        return view('client.order', ['page' => 'order']);
+    }
+
 }

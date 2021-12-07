@@ -84,7 +84,9 @@
         <div class="cart-footer">
             <button class="btn btn-secondary">Xoá</button>
             <h3>Tổng thanh toán: <span>50.000₫</span></h3>
-            <button class="btn btn-primary">Đặt hàng</button>
+            <a href="order">
+                <button class="btn btn-primary">Đặt hàng</button>
+            </a>
         </div>
     </section>
     <!-- --------xx--------- -->
