@@ -17,13 +17,20 @@
             @auth
                 <li class="user">
                     <img src="img/users/{{ auth()->user()->img }}" alt="img" class="user-avatar">
-                    <h3>{{ auth()->user()->name }}</h3>
+                    <div class="user_detail">
+                        <h3>{{ auth()->user()->name }}</h3>
+
+                    </div>
                 </li>
+
+                <li><a href="logout">Đăng xuất</a></li>
             @endauth
+
             @guest
                 <li><a href="register">Đăng ký</a></li>
                 <li><a href="login">Đăng nhập</a></li>
             @endguest
+
         </ul>
 
         <div class="icon">

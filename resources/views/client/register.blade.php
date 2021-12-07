@@ -9,30 +9,38 @@
         <div class="register-form">
             <div class="logo">
                 <a href="/">
-                    <img src="images/logo.svg" alt="">
+                    <img src="client/images/logo.svg" alt="">
                 </a>
             </div>
-            <form action="">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <p class="m-0 p-0">{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+            <form action="register" method="POST">
+                @csrf
                 <div class="form-group">
                     <label for="name"><i class="fas fa-edit"></i></label>
-                    <input type="text" id="name" placeholder="Tên">
+                    <input type="text" id="name" placeholder="Tên" name="name" value="{{ old('name') }}">
                 </div>
                 <div class="form-group">
                     <label for="phone"><i class="fas fa-phone"></i></label>
-                    <input type="text" id="phone" placeholder="Số điện thoại">
+                    <input type="text" id="phone" placeholder="Số điện thoại" name="phone" value="{{ old('phone') }}">
                 </div>
                 <div class="form-group">
                     <label for="login-email"><i class="fas fa-envelope"></i></label>
-                    <input type="email" id="email" placeholder="Email">
+                    <input type="email" id="email" placeholder="Email" name="email" value="{{ old('email') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="login-password"><i class="fas fa-lock"></i></label>
-                    <input type="password" id="login-password" placeholder="Mật khẩu">
+                    <input type="password" id="login-password" placeholder="Mật khẩu" name="password" value="{{ old('password') }}">
                 </div>
                 <div class="form-group">
                     <label for="confirm-password"><i class="fas fa-lock"></i></label>
-                    <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu">
+                    <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu" name="re_password" value="{{ old('re_password') }}">
                 </div>
                 <button class="btn-login">Đăng ký ngay</button>
             </form>
