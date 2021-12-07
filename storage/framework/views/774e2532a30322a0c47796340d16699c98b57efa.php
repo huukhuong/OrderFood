@@ -21,24 +21,24 @@
                 <?php echo csrf_field(); ?>
                 <div class="form-group">
                     <label for="name"><i class="fas fa-edit"></i></label>
-                    <input type="text" id="name" placeholder="Tên" name="name">
+                    <input type="text" id="name" placeholder="Tên" name="name" value="<?php echo e(old('name')); ?>">
                 </div>
                 <div class="form-group">
                     <label for="phone"><i class="fas fa-phone"></i></label>
-                    <input type="text" id="phone" placeholder="Số điện thoại" name="phone">
+                    <input type="text" id="phone" placeholder="Số điện thoại" name="phone" value="<?php echo e(old('phone')); ?>">
                 </div>
                 <div class="form-group">
                     <label for="login-email"><i class="fas fa-envelope"></i></label>
-                    <input type="email" id="email" placeholder="Email" name="email">
+                    <input type="email" id="email" placeholder="Email" name="email" value="<?php echo e(old('email')); ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="login-password"><i class="fas fa-lock"></i></label>
-                    <input type="password" id="login-password" placeholder="Mật khẩu" name="password">
+                    <input type="password" id="login-password" placeholder="Mật khẩu" name="password" value="<?php echo e(old('password')); ?>">
                 </div>
                 <div class="form-group">
                     <label for="confirm-password"><i class="fas fa-lock"></i></label>
-                    <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu" name="re_password">
+                    <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu" name="re_password" value="<?php echo e(old('re_password')); ?>">
                 </div>
                 <button class="btn-login">Đăng ký ngay</button>
             </form>

@@ -45,9 +45,6 @@
         </div>
         <!-- /.card-body -->
     </div>
-
-
-
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views/admin/category/add.blade.php ENDPATH**/ ?>

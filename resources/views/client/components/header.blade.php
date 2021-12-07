@@ -20,6 +20,7 @@
                     <img src="img/users/{{ auth()->user()->img }}" alt="img" class="user-avatar">
                     <h3>{{ auth()->user()->name }}</h3>
                 </li>
+                <li><a href="logout">Đăng xuất</a></li>
             @endauth
 
             @guest
