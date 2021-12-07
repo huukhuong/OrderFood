@@ -66,10 +66,22 @@ class UserController extends Controller
                 're_password.required' => 'Xác nhận mật khẩu không được rỗng'
             ]
         );
+
         $password = $request->password;
         $re_password = $request->re_password;
         if ($password != $re_password) {
             return Redirect::back()->withErrors(['msg' => 'Xác nhận mật khẩu không khớp']);
         }
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        auth()->login($user);
+
+        return redirect('/');
     }
 }
