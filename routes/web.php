@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Client\HomeControlller;
+use App\Http\Controllers\Client\UserController;
 
 Route::get('/admin/login',  [AdminController::class, 'login'])->name('login');
 Route::post('/admin/login',  [AdminController::class, 'postLogin']);
@@ -39,6 +40,9 @@ Route::prefix('/')->group(function () {
     Route::get('register',  [HomeControlller::class, 'register']);
     Route::get('login',  [HomeControlller::class, 'login']);
     Route::get('cart',  [HomeControlller::class, 'cart']);
+
+    Route::post('register',  [UserController::class, 'postRegister']);
+    Route::post('login',  [UserController::class, 'postLogin']);
 
     Route::get('coming-soon',  function() {
         return view('client.coming-soon');

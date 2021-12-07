@@ -14,13 +14,16 @@
             <li><a href="shop" {!! $page == 'shop' ? 'class="active"' : '' !!}>Cửa hàng</a></li>
             <li><a href="coming-soon" {!! $page == 'support' ? 'class="active"' : '' !!}>Hỗ trợ</a></li>
             <li><a href="coming-soon" {!! $page == 'notification' ? 'class="active"' : '' !!}>Thông báo</a></li>
-            <li class="user" style="display: none;">
-                <img src="" alt="img">
-                <h3>Join Hiddleston</h3>
-            </li>
-            <li><a href="register">Đăng ký</a></li>
-            <li><a href="login">Đăng nhập</a></li>
-
+            @auth
+                <li class="user">
+                    <img src="img/{{ auth()->user()->img }}" alt="img">
+                    <h3>{{ auth()->user()->name }}</h3>
+                </li>
+            @endauth
+            @guest
+                <li><a href="register">Đăng ký</a></li>
+                <li><a href="login">Đăng nhập</a></li>
+            @endguest
         </ul>
 
         <div class="icon">

@@ -14,13 +14,16 @@
             <li><a href="shop" <?php echo $page == 'shop' ? 'class="active"' : ''; ?>>Cửa hàng</a></li>
             <li><a href="coming-soon" <?php echo $page == 'support' ? 'class="active"' : ''; ?>>Hỗ trợ</a></li>
             <li><a href="coming-soon" <?php echo $page == 'notification' ? 'class="active"' : ''; ?>>Thông báo</a></li>
-            <li class="user" style="display: none;">
-                <img src="" alt="img">
-                <h3>Join Hiddleston</h3>
-            </li>
-            <li><a href="register">Đăng ký</a></li>
-            <li><a href="login">Đăng nhập</a></li>
-
+            <?php if(auth()->guard()->check()): ?>
+                <li class="user">
+                    <img src="img/<?php echo e(auth()->user()->img); ?>" alt="img">
+                    <h3><?php echo e(auth()->user()->name); ?></h3>
+                </li>
+            <?php endif; ?>
+            <?php if(auth()->guard()->guest()): ?>
+                <li><a href="register">Đăng ký</a></li>
+                <li><a href="login">Đăng nhập</a></li>
+            <?php endif; ?>
         </ul>
 
         <div class="icon">
