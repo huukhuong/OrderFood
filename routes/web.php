@@ -69,6 +69,8 @@ Route::prefix('/')->group(function () {
     Route::get('login',  [HomeControlller::class, 'login']);
     Route::get('cart',  [HomeControlller::class, 'cart']);
 
+    Route::get('product_detail/{id}',  [HomeControlller::class, 'detailProduct']);
+
     Route::post('register',  [UserController::class, 'postRegister']);
     Route::post('login',  [UserController::class, 'postLogin']);
     Route::get('logout',  [UserController::class, 'logout']);

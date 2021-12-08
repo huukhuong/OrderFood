@@ -68,4 +68,11 @@ class HomeControlller extends Controller
     {
         return view('client.order_success', ['page' => 'order_success']);
     }
+
+    public function detailProduct($id)
+    {
+        $product = Products::find($id);
+        $products = Products::where('category_id', $product->category_id)->get();
+        return view('client.product_detail', ['page' => 'order_success', 'product' => $product, 'products' => $products]);
+    }
 }
