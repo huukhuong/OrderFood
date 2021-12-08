@@ -5,7 +5,7 @@
 <?php else: ?>
 
     <header <?php echo $page != 'home' ? 'class="fixed"' : ''; ?>>
-        <a href="#" class="logo">
+        <a href="/" class="logo">
             <img src="client/images/logo.svg" alt="logo">
         </a>
         <ul class="navigation">

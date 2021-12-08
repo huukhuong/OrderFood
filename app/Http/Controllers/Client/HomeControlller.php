@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeControlller extends Controller
 {
 
     public function index()
     {
+
         $products_newest = Products::where('status',1)->limit(10)->get();
         $products = Products::where('status',1)->limit(5)->get();
         return view('client.home',
@@ -19,6 +21,7 @@ class HomeControlller extends Controller
                 'products' => $products,
                 'products_newest' => $products_newest
             ]);
+
     }
 
     public function shop()
@@ -37,7 +40,8 @@ class HomeControlller extends Controller
         return view('client.login', ['page' => 'login']);
     }
 
-    public function cart() {
+    public function cart()
+    {
         return view('client.cart', ['page' => 'cart']);
     }
     public function search(Request $request){
@@ -47,4 +51,12 @@ class HomeControlller extends Controller
         return view('client.search', ['page' => 'shop','productsearch' => $productsearch,'category' => $category]);
     }
 
+    public function order()
+    {
+        if (Auth::user()) {   // Check is user logged in
+            return view('client.order', ['page' => 'order']);
+        } else {
+            return redirect("login");
+        }
+    }
 }
