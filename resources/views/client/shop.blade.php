@@ -74,29 +74,7 @@
                     </form>
                 </div>
             </div>
-            <div class="filter-option">
-                <div class="filter-option-heading">
-                    <h3>Đánh giá</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="filter-option-content">
-                    <form action="">
-                        <div class="form-group">
-                            <input type="checkbox" name="" id="">
-                            <label for="">Thức ăn</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="checkbox" name="" id="">
-                            <label for="">Thức uống</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="checkbox" name="" id="">
-                            <label for="">Tráng miệng</label>
-                        </div>
-                        <button class="btn">Thực hiện</button>
-                    </form>
-                </div>
-            </div>
+
         </div>
         <div class="shoppage-product">
 
