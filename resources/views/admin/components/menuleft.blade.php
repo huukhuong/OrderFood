@@ -42,7 +42,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="admin/user/list" class="nav-link">
-                        <i class="nav-icon fas fa-hamburger"></i>
+                        <i class="nav-icon fas fa-user"></i>
                         <p>
                             Quản lý người dùng
                         </p>
@@ -50,15 +50,15 @@
                 </li>
                 <li class="nav-item">
                     <a href="admin/order/list" class="nav-link">
-                        <i class="nav-icon fas fa-hamburger"></i>
+                        <i class="nav-icon fas fa-boxes"></i>
                         <p>
-                            Quản lý đặt hàng
+                            Quản lý đơn hàng
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="admin/partners/list" class="nav-link">
-                        <i class="nav-icon fas fa-hamburger"></i>
+                        <i class="nav-icon fas fa-handshake"></i>
                         <p>
                             Quản lý đối tác
                         </p>
@@ -81,13 +81,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="admin/statistical/topsanpham" class="nav-link">
+                            <a href="admin/404" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thống kê top sản phẩm bán chạy</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="admin/statistical/doanhthu" class="nav-link">
+                            <a href="admin/404" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thống kê doanh thu theo loại</p>
                             </a>

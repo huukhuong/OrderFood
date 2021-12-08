@@ -12,6 +12,9 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
 
     Route::get('/',  [AdminController::class, 'index']);
     Route::get('/logout', [AdminController::class, 'logout']);
+    Route::get('404', function() {
+        return view('admin.404');
+    });
 
     Route::prefix('/category')->group(function () {
         Route::get('/list',  [AdminController::class, 'getListCategory']);
