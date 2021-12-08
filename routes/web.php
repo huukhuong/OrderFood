@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
 
     Route::prefix('/order')->group(function () {
         Route::get('/list',  [AdminController::class, 'getListOrder']);
+        Route::get('/details/{id}',  [AdminController::class, 'getDetailOrder']);
         Route::get('/edit/{id}',  [AdminController::class, 'getEditOrder']);
         Route::post('/edit',  [AdminController::class, 'postEditOrder']);
     });

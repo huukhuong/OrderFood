@@ -37,7 +37,11 @@ class UserController extends Controller
             'email' => $email,
             'password' => $password,
         ];
-
+        // thêm tài khoản bị khoá
+        $status = User::where('email', $email)->value('status');
+        if($status == 0){
+            return Redirect::back()->withErrors(['msg' => 'Tài khoản của bạn đã bị khoá liên hệ admin để biết thêm chi tiết']);
+        }
         if (Auth::attempt($data, $remember)) {
             return redirect('/');
         } else {

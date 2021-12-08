@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\categories;
+use App\Models\Orderdetail;
+use App\Models\Orders;
 use App\Models\products;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -247,5 +249,21 @@ class AdminController extends Controller
     public function getEditUser($id){
         $user = User::find($id);
         return view('admin.user.edit',['user' => $user]);
+    }
+    /////////////////////////////////////////////////////////////////////////////
+    ///                                                                       ///
+    ///                               ORDER                                   ///
+    ///                                                                       ///
+    /////////////////////////////////////////////////////////////////////////////
+
+    public function getListOrder(){
+        $order = Orders::all();
+        return view('admin.order.list',['order' => $order]);
+    }
+
+    public function getDetailOrder($id){
+        $orderdetails = Orderdetail::where('order_id',$id)->get();
+        $order = Orders::find($id);
+        return view('admin.order.orderdetails',['order' => $order,'orderdetails' => $orderdetails] );
     }
 }

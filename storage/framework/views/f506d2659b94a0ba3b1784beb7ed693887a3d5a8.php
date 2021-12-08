@@ -1,11 +1,9 @@
-@extends('admin.main')
-
-@section('title')
+<?php $__env->startSection('title'); ?>
     <title>Admin | Danh sách món</title>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
-    @if (session('xoathanhcong'))
+<?php $__env->startSection('content'); ?>
+    <?php if(session('xoathanhcong')): ?>
         <script>
             Swal.fire(
                 'Đã xoá!',
@@ -13,7 +11,7 @@
                 'success'
             )
         </script>
-    @endif
+    <?php endif; ?>
 
     <div class="card">
         <div class="card-header">
@@ -37,50 +35,50 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($order as $key)
+                    <?php $__currentLoopData = $order; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td class="text-center">{{ $key->id }}</td>
-                            <td>{{ $key->user_id }}</td>
+                            <td class="text-center"><?php echo e($key->id); ?></td>
+                            <td><?php echo e($key->user_id); ?></td>
 
-                            <td>{{ $key->user_linked->name }}</td>
-                            <td>{{ number_format($key->total,0)}}</td>
-                            @if($key -> status == -1)
+                            <td><?php echo e($key->user_linked->name); ?></td>
+                            <td><?php echo e(number_format($key->total,0)); ?></td>
+                            <?php if($key -> status == -1): ?>
                                 <td>
                                     <span class="badge badge-danger">Đã huỷ đơn</span>
                                 </td>
-                            @elseif($key -> status == 0)
+                            <?php elseif($key -> status == 0): ?>
                                 <td>
                                     <span class="badge badge-warning">Đang chuẩn bị</span>
                                 </td>
-                            @elseif($key -> status == 1)
+                            <?php elseif($key -> status == 1): ?>
                                 <td>
                                     <span class="badge badge-info">Đang giao hàng</span>
                                 </td>
-                            @elseif($key -> status == 2)
+                            <?php elseif($key -> status == 2): ?>
                                 <td>
                                     <span class="badge badge-success">Đã giao hàng</span>
                                 </td>
-                            @endif
-                            <td>{{ $key->address }}</td>
-                            <td>{{ $key->phone }}</td>
-                            <td>{{ $key->description }}</td>
+                            <?php endif; ?>
+                            <td><?php echo e($key->address); ?></td>
+                            <td><?php echo e($key->phone); ?></td>
+                            <td><?php echo e($key->description); ?></td>
                             <td class="text-center">
-                                <a class="btn btn-primary" href="admin/order/details/{{ $key->id }}">
+                                <a class="btn btn-primary" href="admin/order/details/<?php echo e($key->id); ?>">
                                     Xem chi tiết
                                 </a>
-                                <a class="btn btn-warning" href="admin/order/edit/{{ $key->id }}">
+                                <a class="btn btn-warning" href="admin/order/edit/<?php echo e($key->id); ?>">
                                     Cập nhật
                                 </a>
-                                @if($key -> status == 0)
-                                    <a class="btn btn-secondary" href="admin/order/edit/{{ $key->id }}">
+                                <?php if($key -> status == 0): ?>
+                                    <a class="btn btn-secondary" href="admin/order/edit/<?php echo e($key->id); ?>">
                                         Phân Công
                                     </a>
-                               @endif
+                               <?php endif; ?>
 
-                                {{-- <td class="text-center"><a href="admin/category/delete/{{$key->id}}"><button class="btn btn-danger"><i class="fas fa-trash"></i>Xoá</button></a></td> --}}
+                                
                             </td>
                         </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -118,4 +116,6 @@
         }
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views/admin/order/list.blade.php ENDPATH**/ ?>
