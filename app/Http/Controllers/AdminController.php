@@ -312,5 +312,14 @@ class AdminController extends Controller
         $partners -> save();
         return redirect('admin/partners/list')->with('themthanhcong', 'success');
     }
+    /////////////////////////////////////////////////////////////////////////////
+    ///                                                                       ///
+    ///                               THỐNG KÊ                                ///
+    ///                                                                       ///
+    /////////////////////////////////////////////////////////////////////////////
+
+    public function khoangthoigian(){
+        return view('admin.statistical.khoangthoigian');
+    }
 
 }

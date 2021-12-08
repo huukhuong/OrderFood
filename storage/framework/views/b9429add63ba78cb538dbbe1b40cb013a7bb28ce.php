@@ -64,6 +64,36 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Quản lý thống kê
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="admin/statistical/khoangthoigian" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thống kê khoảng thời gian</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin/statistical/topsanpham" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thống kê top sản phẩm bán chạy</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin/statistical/doanhthu" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thống kê doanh thu theo loại</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
 

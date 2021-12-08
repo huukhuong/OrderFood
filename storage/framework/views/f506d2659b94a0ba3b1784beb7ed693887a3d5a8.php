@@ -71,11 +71,11 @@
                             <td><?php echo e($key->address); ?></td>
                             <td><?php echo e($key->phone); ?></td>
                             <td><?php echo e($key->description); ?></td>
-                            <td class="text-center">
-                                <a class="btn btn-primary" href="admin/order/details/<?php echo e($key->id); ?>">
+                            <td class="text-left">
+                                <a class="btn btn-primary " href="admin/order/details/<?php echo e($key->id); ?>">
                                     Xem chi tiết
                                 </a>
-                                <a class="btn btn-warning" href="admin/order/edit/<?php echo e($key->id); ?>">
+                                <a class="btn btn-warning " href="admin/order/edit/<?php echo e($key->id); ?>">
                                     Cập nhật
                                 </a>
                                 <?php if($key -> status == 0): ?>

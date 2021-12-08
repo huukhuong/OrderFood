@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/edit/{id}',  [AdminController::class, 'getEditOrder']);
         Route::post('/savepartner',  [AdminController::class, 'postSavePartners']);
         Route::post('/edit',  [AdminController::class, 'postEditOrder']);
+
     });
 
     Route::prefix('/user')->group(function () {
@@ -52,6 +53,11 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/edit/{id}',  [AdminController::class, 'getEditUser']);
         Route::get('/block/{id}',  [AdminController::class, 'blockUser']);
         Route::get('/resetpasswd/{id}',  [AdminController::class, 'resetPass']);
+    });
+    Route::prefix('/statistical')->group(function () {
+        Route::get('/khoangthoigian',  [AdminController::class, 'khoangthoigian']);
+        Route::get('/doanhthutheoloai',  [AdminController::class, 'doanhthutheoloai']);
+        Route::get('/topsanpham',  [AdminController::class, 'topsanpham']);
     });
 });
 

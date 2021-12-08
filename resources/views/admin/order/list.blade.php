@@ -73,11 +73,11 @@
                             <td>{{ $key->address }}</td>
                             <td>{{ $key->phone }}</td>
                             <td>{{ $key->description }}</td>
-                            <td class="text-center">
-                                <a class="btn btn-primary" href="admin/order/details/{{ $key->id }}">
+                            <td class="text-left">
+                                <a class="btn btn-primary " href="admin/order/details/{{ $key->id }}">
                                     Xem chi tiết
                                 </a>
-                                <a class="btn btn-warning" href="admin/order/edit/{{ $key->id }}">
+                                <a class="btn btn-warning " href="admin/order/edit/{{ $key->id }}">
                                     Cập nhật
                                 </a>
                                 @if($key -> status == 0)
