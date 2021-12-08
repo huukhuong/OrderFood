@@ -42,6 +42,10 @@
                     <label for="confirm-password"><i class="fas fa-lock"></i></label>
                     <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu" name="re_password" value="{{ old('re_password') }}">
                 </div>
+                <div class="form-group">
+                    <label for="address"><i class="fas fa-lock"></i></label>
+                    <input type="text" id="address" placeholder="Nhập địa chỉ" name="address" value="{{ old('address') }}">
+                </div>
                 <button class="btn-login">Đăng ký ngay</button>
             </form>
             <span>Bạn đã có tài khoản? <a href="login">Đăng nhập</a></span>

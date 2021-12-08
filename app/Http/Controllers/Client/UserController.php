@@ -54,6 +54,7 @@ class UserController extends Controller
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
                 're_password' => 'required',
+                'address' => 'required',
             ],
             [
                 'name.required' => 'Vui lòng nhập họ tên của bạn',
@@ -63,7 +64,8 @@ class UserController extends Controller
                 'email.email' => 'Định dạng email không hợp lệ',
                 'email.unique' => 'Email đã tồn tại trên hệ thống',
                 'password.required' => 'Không được để trống mật khẩu',
-                're_password.required' => 'Xác nhận mật khẩu không được rỗng'
+                're_password.required' => 'Xác nhận mật khẩu không được rỗng',
+                 'address.required' => 'Xác nhận địa chỉ không được rỗng'
             ]
         );
 
@@ -78,6 +80,8 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user -> address = $request -> address;
+        $user -> role = 0;
         $user->save();
 
         auth()->login($user);
