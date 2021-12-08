@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
-
     public function logout()
     {
         Auth::logout();
@@ -72,13 +71,11 @@ class UserController extends Controller
                  'address.required' => 'Xác nhận địa chỉ không được rỗng'
             ]
         );
-
         $password = $request->password;
         $re_password = $request->re_password;
         if ($password != $re_password) {
             return Redirect::back()->withErrors(['msg' => 'Xác nhận mật khẩu không khớp']);
         }
-
         $user = new User();
         $user->name = $request->name;
         $user->phone = $request->phone;
@@ -87,9 +84,7 @@ class UserController extends Controller
         $user -> address = $request -> address;
         $user -> role = 0;
         $user->save();
-
         auth()->login($user);
-
         return redirect('/');
     }
 }

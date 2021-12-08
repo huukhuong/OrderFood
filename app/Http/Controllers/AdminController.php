@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\categories;
 use App\Models\Orderdetail;
 use App\Models\Orders;
+use App\Models\Partners;
 use App\Models\products;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -257,8 +258,9 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
 
     public function getListOrder(){
+        $partners = Partners::all();
         $order = Orders::all();
-        return view('admin.order.list',['order' => $order]);
+        return view('admin.order.list',['order' => $order,'partners' => $partners]);
     }
 
     public function getDetailOrder($id){
@@ -266,4 +268,49 @@ class AdminController extends Controller
         $order = Orders::find($id);
         return view('admin.order.orderdetails',['order' => $order,'orderdetails' => $orderdetails] );
     }
+    public function getEditOrder($id){
+        $order = Orders::find($id);
+        return view('admin.order.edit',['order' => $order]);
+    }
+    public function postEditOrder(Request $request){
+        $id = $request -> idOrder;
+        $status = $request ->status;
+        echo $id;
+        $order = Orders::find($id);
+        $order -> status = $status;
+        $order -> save();
+        return redirect('admin/order/list')->with('capnhatdonhangthanhcong', 'success');
+    }
+
+    public function postSavePartners(Request $request){
+        $partners = $request -> idpartner;
+        $order = Orders::find($request -> idorder);
+        $order -> id_partner = $request ->idpartner;
+        $order -> status = 1;
+        $order -> save();
+        return redirect('admin/order/list')->with('capnhatgiaohang', 'success');
+    }
+
+    /////////////////////////////////////////////////////////////////////////////
+    ///                                                                       ///
+    ///                               PARTNERS                                ///
+    ///                                                                       ///
+    /////////////////////////////////////////////////////////////////////////////
+    public function getListPartners(){
+        $partners = Partners::all();
+        return view('admin.partners.list',['partners' => $partners]);
+    }
+    public function getAddPartners(){
+        return view('admin.partners.add');
+    }
+    public function postAddPartners(Request $request){
+        $partners = new Partners();
+        $partners -> name = $request ->name;
+        $partners -> email = $request -> email;
+        $partners -> phone = $request -> phone;
+        $partners -> address = $request -> address;
+        $partners -> save();
+        return redirect('admin/partners/list')->with('themthanhcong', 'success');
+    }
+
 }

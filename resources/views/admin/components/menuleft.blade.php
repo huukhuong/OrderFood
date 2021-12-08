@@ -28,7 +28,7 @@
                     <a href="admin/category/list" class="nav-link">
                         <i class="nav-icon fas fa-th-list"></i>
                         <p>
-                            Quản lý Danh mục
+                            Quản lý danh mục
                         </p>
                     </a>
                 </li>
@@ -36,7 +36,7 @@
                     <a href="admin/product/list" class="nav-link">
                         <i class="nav-icon fas fa-hamburger"></i>
                         <p>
-                            Quản lý Món ăn
+                            Quản lý món ăn
                         </p>
                     </a>
                 </li>
@@ -44,7 +44,7 @@
                     <a href="admin/user/list" class="nav-link">
                         <i class="nav-icon fas fa-hamburger"></i>
                         <p>
-                            Quản lý User
+                            Quản lý người dùng
                         </p>
                     </a>
                 </li>
@@ -52,7 +52,15 @@
                     <a href="admin/order/list" class="nav-link">
                         <i class="nav-icon fas fa-hamburger"></i>
                         <p>
-                            Quản lý Đặt hàng
+                            Quản lý đặt hàng
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="admin/partners/list" class="nav-link">
+                        <i class="nav-icon fas fa-hamburger"></i>
+                        <p>
+                            Quản lý đối tác
                         </p>
                     </a>
                 </li>

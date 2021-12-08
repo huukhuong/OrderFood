@@ -9,5 +9,5 @@ class Partners extends Model
 {
     use HasFactory;
     protected $table = "partners";
-    public $timestamps = false;
+
 }
