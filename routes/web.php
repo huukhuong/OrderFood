@@ -43,6 +43,7 @@ Route::prefix('/')->group(function () {
 
     Route::post('register',  [UserController::class, 'postRegister']);
     Route::post('login',  [UserController::class, 'postLogin']);
+    Route::get('logout',  [UserController::class, 'logout']);
 
     Route::get('coming-soon',  function() {
         return view('client.coming-soon');

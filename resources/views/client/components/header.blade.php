@@ -24,6 +24,7 @@
 {{--                <li><a href="register">Đăng ký</a></li>--}}
 {{--                <li><a href="login">Đăng nhập</a></li>--}}
 {{--            @endguest--}}
+
         </ul>
 
         <div class="icon">

@@ -15,8 +15,8 @@ class UpdateTblUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone')->max(11);
-            $table->string('address');
-            $table->integer('role');
+            $table->string('address')->default('no');
+            $table->integer('role')->default(0);
         });
     }
 
