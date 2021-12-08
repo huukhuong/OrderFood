@@ -14,7 +14,6 @@
             <li><a href="shop" <?php echo $page == 'shop' ? 'class="active"' : ''; ?>>Cửa hàng</a></li>
             <li><a href="coming-soon" <?php echo $page == 'support' ? 'class="active"' : ''; ?>>Hỗ trợ</a></li>
             <li><a href="coming-soon" <?php echo $page == 'notification' ? 'class="active"' : ''; ?>>Thông báo</a></li>
-<<<<<<< HEAD
 
 
 
@@ -24,24 +23,7 @@
 
 
 
-=======
-            <?php if(auth()->guard()->check()): ?>
-                <li class="user">
-                    <img src="img/users/<?php echo e(auth()->user()->img); ?>" alt="img" class="user-avatar">
-                    <div class="user_detail">
-                        <h3><?php echo e(auth()->user()->name); ?></h3>
 
-                    </div>
-                </li>
-
-                <li><a href="logout">Đăng xuất</a></li>
-            <?php endif; ?>
-
-            <?php if(auth()->guard()->guest()): ?>
-                <li><a href="register">Đăng ký</a></li>
-                <li><a href="login">Đăng nhập</a></li>
-            <?php endif; ?>
->>>>>>> f7111c058a45f640343bee650d317218507bcfa1
 
         </ul>
 

@@ -34,7 +34,6 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
 });
 
 Route::prefix('/')->group(function () {
-
     Route::get('/',  [HomeControlller::class, 'index']);
     Route::get('shop',  [HomeControlller::class, 'shop']);
     Route::get('register',  [HomeControlller::class, 'register']);
@@ -44,10 +43,9 @@ Route::prefix('/')->group(function () {
     Route::post('register',  [UserController::class, 'postRegister']);
     Route::post('login',  [UserController::class, 'postLogin']);
     Route::get('logout',  [UserController::class, 'logout']);
-
     Route::get('coming-soon',  function() {
         return view('client.coming-soon');
     });
-
+    Route::post('search',[HomeControlller::class,'search']);
 
 });

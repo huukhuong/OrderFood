@@ -12,13 +12,19 @@ class HomeControlller extends Controller
 
     public function index()
     {
-        $products = Products::all();
-        return view('client.home', ['page' => 'home','products' => $products]);
+        $products_newest = Products::where('status',1)->limit(10)->get();
+        $products = Products::where('status',1)->limit(5)->get();
+        return view('client.home',
+            ['page' => 'home',
+                'products' => $products,
+                'products_newest' => $products_newest
+            ]);
     }
 
     public function shop()
-    {
-        return view('client.shop', ['page' => 'shop']);
+    {   $category = Categories::all();
+        $products = Products::where('status',1)->get();
+        return view('client.shop', ['page' => 'shop','products' => $products,'category' => $category]);
     }
 
     public function register()
@@ -33,6 +39,12 @@ class HomeControlller extends Controller
 
     public function cart() {
         return view('client.cart', ['page' => 'cart']);
+    }
+    public function search(Request $request){
+        $name = $request -> keyword;
+        $category = Categories::all();
+        $productsearch = Products::where('name','like','%'.$name.'%' )->Paginate(10);
+        return view('client.search', ['page' => 'shop','productsearch' => $productsearch,'category' => $category]);
     }
 
 }

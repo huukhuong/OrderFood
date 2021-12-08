@@ -29,62 +29,18 @@
             </h1>
             <p>Cập nhật thực đơn thường xuyên để đáp ứng nhu cầu của khách hàng</p>
         </div>
-
         <div class="carousel">
             <div class="owl-carousel owl-theme">
-
+                <?php $__currentLoopData = $products_newest; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
+                    <img src="img/products/<?php echo e($key -> image); ?>" alt="">
                     <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
+                        <h3><?php echo e($key -> name); ?></h3>
+                        <p><?php echo e($key -> price); ?></p>
                     </div>
                 </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-
         </div>
     </section>
     <!-- ---------------xx------------------ -->
@@ -109,7 +65,7 @@
         <div class="list-products">
           <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
+                <img src="img/products/<?php echo e($key -> image); ?>" alt="">
                 <h4><?php echo e($key -> name); ?></h4>
                 <div>
                     <p class="price">Giá: <?php echo e(number_format($key -> price,0)); ?></p>

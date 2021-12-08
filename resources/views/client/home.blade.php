@@ -31,62 +31,18 @@
             </h1>
             <p>Cập nhật thực đơn thường xuyên để đáp ứng nhu cầu của khách hàng</p>
         </div>
-
         <div class="carousel">
             <div class="owl-carousel owl-theme">
-
+                @foreach($products_newest as $key)
                 <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
+                    <img src="img/products/{{$key -> image}}" alt="">
                     <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
+                        <h3>{{$key -> name }}</h3>
+                        <p>{{$key -> price }}</p>
                     </div>
                 </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-                <div class="item card-product">
-                    <img src="client/images/buger.jpg" alt="">
-                    <div class="title">
-                        <h3>Hamburger bò phô mai</h3>
-                        <p>Giá: 20.000</p>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
-
         </div>
     </section>
     <!-- ---------------xx------------------ -->
@@ -111,7 +67,7 @@
         <div class="list-products">
           @foreach($products as $key)
             <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
+                <img src="img/products/{{$key -> image}}" alt="">
                 <h4>{{$key -> name }}</h4>
                 <div>
                     <p class="price">Giá: {{number_format($key -> price,0)}}</p>

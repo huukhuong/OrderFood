@@ -13,8 +13,9 @@
             <p>Đảm bảo chất lượng tốt nhất đến mọi khách hàng</p>
         </div>
         <div class="search-box">
-            <form action="">
-                <input type="text" placeholder="Tìm kiếm trong cửa hàng">
+            <form action="search" method="post" >
+                @csrf
+                <input type="text"  name="keyword" placeholder="Tìm kiếm trong cửa hàng">
                 <button><i class="fas fa-search"></i></button>
             </form>
         </div>
@@ -60,19 +61,15 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="filter-option-content">
-                    <form action="">
+                    <form action="" >
+                        @csrf
+                        @foreach($category as $key)
                         <div class="form-group">
-                            <input type="checkbox" name="" id="">
-                            <label for="">Thức ăn</label>
+                            <input type="checkbox" name="danhmuc" id="danhmuc{{$key -> id}}">
+                            <input type="hidden" value="{{$key -> id}}">
+                            <label for="danhmuc{{$key -> id}}"">{{$key -> name}}</label>
                         </div>
-                        <div class="form-group">
-                            <input type="checkbox" name="" id="">
-                            <label for="">Thức uống</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="checkbox" name="" id="">
-                            <label for="">Tráng miệng</label>
-                        </div>
+                        @endforeach
                         <button class="btn">Thực hiện</button>
                     </form>
                 </div>
@@ -102,54 +99,7 @@
             </div>
         </div>
         <div class="shoppage-product">
-            <div class="collection">
-                <h2>Bộ sưu tập</h2>
-                <div class="carousel owl-carousel owl-theme">
-                    <div class="item card-product">
-                        <img src="client/images/hamburger-bo.jpg" alt="">
-                        <div class="title">
-                            <h3>Hamburger</h3>
-                        </div>
-                    </div>
 
-                    <div class="item card-product">
-                        <img src="client/images/pizza.jpg" alt="">
-                        <div class="title">
-                            <h3>Pizza</h3>
-                        </div>
-                    </div>
-                    <div class="item card-product">
-                        <img src="client/images/chicken.jpg" alt="">
-                        <div class="title">
-                            <h3>Gà rán</h3>
-                        </div>
-                    </div>
-                    <div class="item card-product">
-                        <img src="client/images/rice.jpg" alt="">
-                        <div class="title">
-                            <h3>Cơm</h3>
-                        </div>
-                    </div>
-                    <div class="item card-product">
-                        <img src="client/images/ice.jpg" alt="">
-                        <div class="title">
-                            <h3>Kem</h3>
-                        </div>
-                    </div>
-                    <div class="item card-product">
-                        <img src="client/images/tea.jpg" alt="">
-                        <div class="title">
-                            <h3>Trà sữa</h3>
-                        </div>
-                    </div>
-                    <div class="item card-product">
-                        <img src="client/images/cake.jpg" alt="">
-                        <div class="title">
-                            <h3>Bánh ngọt</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="shoppage-banner">
                 <div class="banner-content">
                     <h3>Đặt hàng ngay để nhận nhiều ưu đãi!</h3>
@@ -160,213 +110,32 @@
 
             <div class="products">
                 <h2>Danh sách sản phẩm</h2>
-
                 <div class="box">
+                    @foreach($products as $key)
+                    <div class="card-product">
+                        <div class="card-img">
+                            <div class="div">
+                                <img src="./img/products/{{$key -> image}}"/> alt="">
+                            </div>
+                            <span><i class="fas fa-star">4.5</i></span>
+                        </div>
+                        <div class="card-content">
+                            <h4>{{$key -> name}}</h4>
+                            <p class="price">Giá: {{number_format($key -> price,0)}}</p>
+                            <div class="card-btn">
+                                <button class="btn btn-secondary">
+                                    <a href="#" style="text-decoration: none; color: white">
+                                        <i class="fas fa-shopping-bag"></i>Thêm vào giỏ
+                                        hàng
+                                    </a>
+                                </button>
+                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
 
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/burger-2.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/burger-2.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/burger-2.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/burger-2.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/burger-2.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/buger.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/burger-2.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/burger-2.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/burger-2.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/buger.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/burger-2.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="client/images/buger.jpg" alt="">
-                            </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>Hamburger Silton</h4>
-                            <p class="price">Giá: 50.000</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ
-                                    hàng</button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="pagination">
