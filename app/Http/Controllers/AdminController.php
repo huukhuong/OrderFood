@@ -11,6 +11,7 @@ use App\Models\products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 use function GuzzleHttp\Promise\all;
@@ -319,7 +320,17 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
 
     public function khoangthoigian(){
-        return view('admin.statistical.khoangthoigian');
+        $thongke = array();
+        return view('admin.statistical.khoangthoigian',['thongke' => $thongke]);
+    }
+    public function thongke1(Request $request){ // khoảng thời gian
+        $thongke = DB::table('orders')
+            ->select( 'products.name', 'products.price' , 'order_detail.amount' , 'orders.created_at')
+            ->join('order_detail','orders.id', '=', 'order_detail.order_id')
+            -> join('products', 'products.id', '=', 'order_detail.product_id')
+            ->whereBetween('orders.created_at',[$request -> ngaybatdau, $request-> ngayketthuc])
+            -> get();
+        return view('admin.statistical.khoangthoigian',['thongke' => $thongke]);
     }
 
 }

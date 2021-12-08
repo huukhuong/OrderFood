@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/khoangthoigian',  [AdminController::class, 'khoangthoigian']);
         Route::get('/doanhthutheoloai',  [AdminController::class, 'doanhthutheoloai']);
         Route::get('/topsanpham',  [AdminController::class, 'topsanpham']);
+        Route::post('/thongke1',  [AdminController::class, 'thongke1']);
     });
 });
 

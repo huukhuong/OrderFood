@@ -17,17 +17,24 @@
             <h3 class="card-title">Thống kê</h3>
         </div>
         <div>
-            <form action="" method="post">
-                <div class="input-group date" data-provide="datepicker" style="max-width: 500px">
-                    <input type="date" class="form-control">
-                    <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-th"></span>
+            <form action="admin/statistical/thongke1" method="post">
+                <?php echo csrf_field(); ?>
+                <div class="card-header">
+                    <h3 class="card-title">Chọn ngày</h3>
+                    <br>
+                    <div class="input-group date" data-provide="datepicker" style="max-width: 500px">
+                        <input type="date" class="form-control" name="ngaybatdau">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                        <input type="date" class="form-control" name="ngayketthuc">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
                     </div>
-                    <input type="date" class="form-control">
-                    <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-th"></span>
-                    </div>
+                    <input type="submit" class="btn btn-outline-dark" value="Lọc">
                 </div>
+
             </form>
         </div>
         <!-- /.card-header -->
@@ -35,26 +42,33 @@
             <table id="example1" class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                    <th class="text-center" style="width: 50px">Mã</th>
-                    <th>Tên danh mục</th>
-                    <th class="text-center">Thao tác</th>
+                    <th class="text-center">Tên Sản Phẩm</th>
+                    <th class="text-center">Giá</th>
+                    <th class="text-center">Số lượng</th>
+                    <th class="text-center">Ngày đặt</th>
                 </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-center"></td>
-                        <td></td>
-                        
-                        
-                        <td class="text-center">
-                            <a class="btn btn-warning" href="admin/category/edit/">
-                                <i class="fa fa-pencil fa-fw"></i>Sửa
-                            </a>
-                            <input type="button" class="btn btn-danger" value="Xoá"
-                                   onclick="return xoa();">
-                        </td>
-                    </tr>
+                <?php $tong = 0 ?>
+                <?php $__currentLoopData = $thongke; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <tr>
+                    <td class="text-center"><?php echo e($key->name); ?></td>
+                    <td class="text-center"><?php echo e($key -> price); ?></td>
+                    <td class="text-center"><?php echo e($key -> amount); ?></td>
+                    <td class="text-center"><?php echo e($key -> created_at); ?></td>
+                    <?php $tong += $key ->price * $key -> amount ?>
+                </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <tr>
+                    <td colspan="3" class="text-right">
+                        <h4>
+                            Tổng doanh thu
+                        </h4>
+                    </td>
+                    <td class="text-center"> <h4>   <?php echo e(number_format($tong,0)); ?></h4> </td>
+                </tr>
                 </tbody>
+
             </table>
         </div>
         <!-- /.card-body -->
