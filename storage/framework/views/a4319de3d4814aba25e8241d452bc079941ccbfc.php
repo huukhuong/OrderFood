@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Trang chủ</title>
 <?php $__env->stopSection(); ?>
@@ -18,7 +16,7 @@
                     <button class="btn btn-secondary ">Tìm kiếm</button>
                 </div>
             </form>
-            <a href="#" class="btn btn-primary">Xem cửa hàng<i class="fas fa-arrow-right"></i></a>
+            <a href="shop" class="btn btn-primary">Xem cửa hàng<i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 
@@ -34,13 +32,15 @@
         <div class="carousel">
             <div class="owl-carousel owl-theme">
                 <?php $__currentLoopData = $products_newest; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="item card-product">
-                    <img src="img/products/<?php echo e($key -> image); ?>" alt="">
-                    <div class="title">
-                        <h3><?php echo e($key -> name); ?></h3>
-                        <p><?php echo e($key -> price); ?></p>
+                    <div class="item card-product">
+                        <a href="product_detail/<?php echo e($key->id); ?>">
+                            <img src="img/products/<?php echo e($key->image); ?>" alt="">
+                        </a>
+                        <div class="title">
+                            <h3><?php echo e($key->name); ?></h3>
+                            <p><?php echo e($key->price); ?></p>
+                        </div>
                     </div>
-                </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
@@ -65,24 +65,26 @@
             </h1>
         </div>
         <div class="list-products">
-          <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="card-product">
-                <img src="img/products/<?php echo e($key -> image); ?>" alt="">
-                <h4><?php echo e($key -> name); ?></h4>
-                <div>
-                    <p class="price">Giá: <?php echo e(number_format($key -> price,0)); ?></p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary">
-                    <a href="#" style="text-decoration: none; color: white">
-                        <i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng
+            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="card-product">
+                    <a href="product_detail/<?php echo e($key->id); ?>">
+                        <img src="img/products/<?php echo e($key->image); ?>" alt="">
                     </a>
-                </button>
-            </div>
+                    <h4><?php echo e($key->name); ?></h4>
+                    <div>
+                        <p class="price">Giá: <?php echo e(number_format($key->price, 0)); ?></p>
+                        <span><i class="fas fa-star"></i> 4.5</span>
+                    </div>
+                    <button class="btn btn-secondary">
+                        <a href="#" style="text-decoration: none; color: white">
+                            <i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng
+                        </a>
+                    </button>
+                </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
         <div class="see-more">
-            <a href="#">
+            <a href="shop">
                 <button class="btn btn-primary">Xem cửa hàng<i class="fas fa-arrow-right"></i></button>
             </a>
         </div>
@@ -106,7 +108,7 @@
                     tiệc thật ngon. Với danh sách các cửa hàng món Âu Mỹ thiệt xịn, ứng dụng sẽ giúp bạn tìm ra các cửa hàng
                     cho phép đặt pizza online, order pizza tận nhà, đặt đồ ăn nhanh nhanh chóng mà không phải đi tìm từng
                     địa chỉ trên thanh tìm kiếm.</p>
-                <a href="#">
+                <a href="shop">
                     <button class="btn btn-primary">Vào cửa hàng</button>
                 </a>
             </div>
@@ -135,7 +137,7 @@
                     salad, kem,… sẵn sàng mời gọi mọi lúc. Thèm gì có đó, chỉ cần ở ngay tại nhà thông qua Internet, việc
                     đặt món tráng miệng, các món
                     dessert hay các món đồ ăn nhà làm, từ bình dân đến cao cấp đều dễ dàng tìm thấy được. </p>
-                <a href="#">
+                <a href="shop">
                     <button class="btn btn-primary">Vào cửa hàng</button>
                 </a>
             </div>
@@ -207,70 +209,13 @@
                     dụng tiện ích giao đồ ăn nhanh
                     chóng.
                 </p>
-                <a href="#">
+                <a href="shop">
                     <button class="btn btn-primary">Xem thêm</button>
                 </a>
             </div>
         </div>
     </section>
     <!-- ---------xx--------------- -->
-
-    <!-- ====   Product details     ==== -->
-    <section class="product-details">
-        <div class="card" id="card-detail">
-            <div class="card-front">
-                <div class="close-btn">
-                    <i class="fas fa-times"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-img">
-                        <img src="client/images/buger.jpg" alt="">
-                    </div>
-                    <div class="card-detail">
-                        <h2>Bánh burger thịt cừu với gia vị Ấn độ và nước sốt ya-ua vị bạc hà</h2>
-                        <p>Giá: <span>50.000 đ</span></p>
-                        <div class="star">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <div class="quantity">
-                            <button>-</button>
-                            <input type="number" value="1">
-                            <button>+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="add-to-cart">
-                    <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i>Thêm</button>
-                    <button class="btn btn-secondary" id="description-btn">Mô tả</button>
-                </div>
-
-            </div>
-            <div class="card-back">
-                <div class="close-btn">
-                    <i class="fas fa-times"></i>
-                </div>
-                <div class="card-content">
-                    <h3>Mô tả sản phẩm</h3>
-                    <h2>Bánh burger thịt cừu với gia vị Ấn độ và nước sốt ya-ua vị bạc hà</h2>
-                    <p>&emsp; &emsp;Phần nhân bánh được chế biến từ thịt cừu chăn nuôi ngoài đồng, loại thịt nạc vai chứa
-                        2/3 lượng mỡ ít hơn thịt cừu nuôi siêu thịt. Để thịt ngon hơn thì nên xay nó nhỏ hơn trước khi chế
-                        biến. Thịt sau khi xay được tẩm ướp vadouvan,
-                        loại gia vị hỗn hợp của Ấn Độ được sử dụng nhiều trong việc tẩm ướp thịt nướng. Gia vị này kết hợp
-                        từ bột cà ri, thêm tỏi, hành khô. <br>&emsp; &emsp;Cuối cùng, một ít nước sốt ya-ua vị bạc hà, ít vị
-                        ngọt của ớt đỏ nướng và vị đắng
-                        của radicchio ở xung quanh sẽ đem đến một bánh burger đầy mùi vị.</p>
-                </div>
-                <div class="add-to-cart">
-                    <button class="btn btn-secondary" id="back-btn">Quay lại</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- -----------xx------------------ -->
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('client.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views/client/home.blade.php ENDPATH**/ ?>
