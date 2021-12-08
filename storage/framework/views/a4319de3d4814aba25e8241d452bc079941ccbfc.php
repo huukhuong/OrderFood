@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Trang chủ</title>
 <?php $__env->stopSection(); ?>
@@ -109,79 +107,21 @@
             </h1>
         </div>
         <div class="list-products">
+          <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="card-product">
                 <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
+                <h4><?php echo e($key -> name); ?></h4>
                 <div>
-                    <p class="price">Giá: 50.000</p>
+                    <p class="price">Giá: <?php echo e(number_format($key -> price,0)); ?></p>
                     <span><i class="fas fa-star"></i> 4.5</span>
                 </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+                <button class="btn btn-secondary">
+                    <a href="#" style="text-decoration: none; color: white">
+                        <i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng
+                    </a>
+                </button>
             </div>
-
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary" id="45"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
         <div class="see-more">
             <a href="#">

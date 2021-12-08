@@ -44,7 +44,7 @@
                             <td>{{ $key->name }}</td>
                             <td>{{ $key->price }}</td>
                             <td>{{ $key->quantity }}</td>
-                            <td>{{ $key->category_linked->name }}</td>
+                            <td>{{ $key->category_id }}</td>
                             <td><img src="./img/products/{{ $key->image }}" width="120"></td>
                             {{-- <td>{{$key ->image}}</td> --}}
                             <td>{{ $key->description }}</td>
@@ -63,8 +63,13 @@
 
                 </tbody>
             </table>
+
         </div>
         <!-- /.card-body -->
+
+    </div>
+    <div class="d-flex justify-content-center">
+        {!! $product->links() !!}
     </div>
 
     <script>

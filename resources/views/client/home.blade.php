@@ -109,79 +109,21 @@
             </h1>
         </div>
         <div class="list-products">
+          @foreach($products as $key)
             <div class="card-product">
                 <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
+                <h4>{{$key -> name }}</h4>
                 <div>
-                    <p class="price">Giá: 50.000</p>
+                    <p class="price">Giá: {{number_format($key -> price,0)}}</p>
                     <span><i class="fas fa-star"></i> 4.5</span>
                 </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
+                <button class="btn btn-secondary">
+                    <a href="#" style="text-decoration: none; color: white">
+                        <i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng
+                    </a>
+                </button>
             </div>
-
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary" id="45"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
-            <div class="card-product">
-                <img src="client/images/burger-2.jpg" alt="">
-                <h4>Hamburger Silton</h4>
-                <div>
-                    <p class="price">Giá: 50.000</p>
-                    <span><i class="fas fa-star"></i> 4.5</span>
-                </div>
-                <button class="btn btn-secondary"><i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng</button>
-            </div>
+            @endforeach
         </div>
         <div class="see-more">
             <a href="#">

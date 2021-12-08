@@ -145,14 +145,13 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
     public function getListProduct()
     {
-        $product = products::where('status', 1)->get();
+        $product = products::where('status', 1)->SimplePaginate(5);
+     //   $product = products::SimplePaginate(5)::where('status', 1);
         return view('admin.products.list', ['product' => $product]);
     }
-
     public function getAddProduct()
     {
         $category = categories::all();
-
         return view('admin.products.add', ['category' => $category]);
     }
 

@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Admin | Danh sách món</title>
 <?php $__env->stopSection(); ?>
@@ -44,7 +42,7 @@
                             <td><?php echo e($key->name); ?></td>
                             <td><?php echo e($key->price); ?></td>
                             <td><?php echo e($key->quantity); ?></td>
-                            <td><?php echo e($key->category_linked->name); ?></td>
+                            <td><?php echo e($key->category_id); ?></td>
                             <td><img src="./img/products/<?php echo e($key->image); ?>" width="120"></td>
                             
                             <td><?php echo e($key->description); ?></td>
@@ -63,8 +61,14 @@
 
                 </tbody>
             </table>
+
         </div>
         <!-- /.card-body -->
+
+    </div>
+    <div class="d-flex justify-content-center">
+        <?php echo $product->links(); ?>
+
     </div>
 
     <script>

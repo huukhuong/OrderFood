@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class HomeControlller extends Controller
@@ -10,7 +12,8 @@ class HomeControlller extends Controller
 
     public function index()
     {
-        return view('client.home', ['page' => 'home']);
+        $products = Products::all();
+        return view('client.home', ['page' => 'home','products' => $products]);
     }
 
     public function shop()
