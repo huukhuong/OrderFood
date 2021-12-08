@@ -40,6 +40,22 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="admin/user/list" class="nav-link">
+                        <i class="nav-icon fas fa-hamburger"></i>
+                        <p>
+                            Quản lý User
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="admin/order/list" class="nav-link">
+                        <i class="nav-icon fas fa-hamburger"></i>
+                        <p>
+                            Quản lý Đặt hàng
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
 

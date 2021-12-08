@@ -13,7 +13,6 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('/',  [AdminController::class, 'index']);
     Route::get('/logout', [AdminController::class, 'logout']);
 
-
     Route::prefix('/category')->group(function () {
         Route::get('/list',  [AdminController::class, 'getListCategory']);
         Route::get('/add',  [AdminController::class, 'getAddCategory']);
@@ -30,6 +29,19 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/edit/{id}',  [AdminController::class, 'getEditProduct']);
         Route::post('/edit',  [AdminController::class, 'postEditProduct']);
         Route::get('/delete/{id}',  [AdminController::class, 'deleteProduct']);
+    });
+
+    Route::prefix('/order')->group(function () {
+        Route::get('/list',  [AdminController::class, 'getListOrder']);
+        Route::get('/edit/{id}',  [AdminController::class, 'getEditOrder']);
+        Route::post('/edit',  [AdminController::class, 'postEditOrder']);
+    });
+
+    Route::prefix('/user')->group(function () {
+        Route::get('/list',  [AdminController::class, 'getListUser']);
+        Route::get('/edit/{id}',  [AdminController::class, 'getEditUser']);
+        Route::get('/block/{id}',  [AdminController::class, 'blockUser']);
+        Route::get('/resetpasswd/{id}',  [AdminController::class, 'resetPass']);
     });
 });
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\categories;
 use App\Models\products;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -211,5 +212,40 @@ class AdminController extends Controller
         $product->status = 0;
         $product->save();
         return redirect('admin/product/list')->with('xoathanhcong', 'success');
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////
+    ///                                                                       ///
+    ///                                USER                                   ///
+    ///                                                                       ///
+    /////////////////////////////////////////////////////////////////////////////
+
+    public function getListUser(){
+        $user = User::all();
+        return view('admin.user.list',['user' => $user]);
+    }
+    public function blockUser($id){
+        $user = User::find($id);
+        if($user -> status == 1){
+            $user -> status = 0;
+            $user ->save();
+            return redirect('admin/user/list')->with('khoathanhcong', 'success');
+        }
+        else{
+            $user -> status = 1;
+            $user ->save();
+            return redirect('admin/user/list')->with('mokhoathanhcong', 'success');
+        }
+    }
+    public function resetPass($id){
+        $user = User::find($id);
+        $user ->password = bcrypt('123456');
+        $user ->save();
+        return redirect('admin/user/list')->with('resetthanhcong', 'success');
+    }
+    public function getEditUser($id){
+        $user = User::find($id);
+        return view('admin.user.edit',['user' => $user]);
     }
 }
