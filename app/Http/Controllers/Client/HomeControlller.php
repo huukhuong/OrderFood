@@ -7,6 +7,9 @@ use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+
 
 class HomeControlller extends Controller
 {
@@ -45,7 +48,8 @@ class HomeControlller extends Controller
 
     public function cart()
     {
-        return view('client.cart', ['page' => 'cart']);
+        $products = Session::get('cart');
+        return view('client.cart', ['page' => 'cart', 'products' => $products]);
     }
     public function search(Request $request)
     {
@@ -58,7 +62,8 @@ class HomeControlller extends Controller
     public function order()
     {
         if (Auth::user()) {   // Check is user logged in
-            return view('client.order', ['page' => 'order']);
+            $products = Session::get('cart');
+            return view('client.order', ['page' => 'order','products' => $products]);
         } else {
             return redirect("login");
         }
@@ -66,6 +71,7 @@ class HomeControlller extends Controller
 
     public function orderSuccess()
     {
+
         return view('client.order_success', ['page' => 'order_success']);
     }
 
@@ -74,5 +80,49 @@ class HomeControlller extends Controller
         $product = Products::find($id);
         $products = Products::where('category_id', $product->category_id)->get();
         return view('client.product_detail', ['page' => 'order_success', 'product' => $product, 'products' => $products]);
+    }
+
+    public function addToCart($id){
+        $product = DB::select('select * from products where id='.$id);
+        $cart = Session::get('cart');
+        $cart[$product[0]->id] = array(
+            "id" => $product[0]->id,
+            "name" => $product[0]->name,
+            "price" => $product[0]->price,
+            "image" => $product[0]->image,
+            "quantity" => 1,
+        );
+        Session::put('cart', $cart);
+        return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
+    }
+    public function updateCart(Request $request){
+        $id = $request -> idUpdate;
+        $quantity = $request -> quantityUpdate;
+        $product = DB::select('select * from products where id='.$id);
+        $cart = Session::get('cart');
+        $cart[$product[0]->id] = array(
+            "id" => $product[0]->id,
+            "name" => $product[0]->name,
+            "price" => $product[0]->price,
+            "image" => $product[0]->image,
+            "quantity" => $quantity,
+        );
+
+        Session::put('cart', $cart);
+        return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
+    }
+
+    public function deleteCart($id){
+        $cart =  Session::get('cart');
+        foreach ($cart as $key => $value){
+            if ($value['id'] == $id){
+               unset($cart[$key]);
+            }
+        }
+        Session::put('cart', $cart);
+        return redirect()->back()->with('success', 'Sản phẩm đã xoa thành công!');
+//        $product = session::forget('cart', $key['id'])->first();
+//        $product->destroy($key['id']);
+
     }
 }

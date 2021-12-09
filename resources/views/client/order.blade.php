@@ -1,8 +1,7 @@
-
 @extends('client.main')
 
 @section('title')
-<title>Đặt hàng</title>
+    <title>Đặt hàng</title>
 @endsection
 
 @section('content')
@@ -28,18 +27,20 @@
                     <h3>Thông tin đặt hàng</h3>
                 </div>
                 <div class="content">
-                    <form action="">
+                    <form action="order_success">
                         <div class="form-group">
                             <label for="">Tên người đặt hàng</label>
-                            <input type="text" name="name" value="{{ old('name') }}">
+                            <input type="hidden" name="id" value="{{auth()->user()->id}}">
+                            <input type="hidden" name="total" value="0">
+                            <input type="text" name="name" value="{{ auth()->user() ->name}} ">
                         </div>
                         <div class="form-group">
                             <label for="">Điện thoại</label>
-                            <input type="text" name="phone" value="{{ old('phone') }}">
+                            <input type="text" name="phone" value="{{ auth()->user() ->phone }}">
                         </div>
                         <div class="form-group">
                             <label for="">Địa chỉ</label>
-                            <input type="text" name="address" value="{{ old('address') }}">
+                            <input type="text" name="address" value="{{ auth()->user() ->address}}">
                         </div>
                         <div class="form-group">
                             <label for="">Ghi chú</label>
@@ -57,24 +58,35 @@
                 <div class="content">
                     <i class="far fa-list-alt"></i>
                     <div class="list-items">
-                        <div class="item">
-                            <span>1 x Hamburger bò phô mai</span>
-                            <span>20.000₫</span>
-                        </div>
-                        <div class="item">
-                            <span>1 x Pizza tôm mực</span>
-                            <span>30.000₫</span>
-                        </div>
+                        @if(Session::has('cart'))
+                            @php
+                                $sum = 0;
+                            @endphp
+                            @foreach($products as $key => $item)
+                                <div class="item">
+                                    <span>{{$item['quantity']}} x {{$item['name']}} </span>
+                                    <span>{{number_format($item['quantity'] * $item['price'],0)}}₫</span>
+                                </div>
+                                @php
+                                    $sum += $item['quantity'] * $item['price'];
+                                @endphp
+
+                            @endforeach
+                        @endif
+
                     </div>
                     <p>Thanh toán khi nhận hàng</p>
                     <div class="total">
                         <span>Tổng cộng:</span>
-                        <strong>50.000₫</strong>
+                        <strong> @php
+                                echo number_format($sum ,0);
+                            @endphp₫</strong>
                     </div>
                     <a href="order_success">
                         <button class="btn btn-primary">Đặt hàng</button>
                     </a>
                 </div>
+
             </div>
         </div>
     </section>

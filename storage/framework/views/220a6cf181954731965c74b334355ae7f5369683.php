@@ -28,15 +28,15 @@
                     <form action="">
                         <div class="form-group">
                             <label for="">Tên người đặt hàng</label>
-                            <input type="text" name="name" value="<?php echo e(old('name')); ?>">
+                            <input type="text" name="name" value="<?php echo e(auth()->user() ->name); ?> ">
                         </div>
                         <div class="form-group">
                             <label for="">Điện thoại</label>
-                            <input type="text" name="phone" value="<?php echo e(old('phone')); ?>">
+                            <input type="text" name="phone" value="<?php echo e(auth()->user() ->phone); ?>">
                         </div>
                         <div class="form-group">
                             <label for="">Địa chỉ</label>
-                            <input type="text" name="address" value="<?php echo e(old('address')); ?>">
+                            <input type="text" name="address" value="<?php echo e(auth()->user() ->address); ?>">
                         </div>
                         <div class="form-group">
                             <label for="">Ghi chú</label>
@@ -54,19 +54,29 @@
                 <div class="content">
                     <i class="far fa-list-alt"></i>
                     <div class="list-items">
-                        <div class="item">
-                            <span>1 x Hamburger bò phô mai</span>
-                            <span>20.000₫</span>
-                        </div>
-                        <div class="item">
-                            <span>1 x Pizza tôm mực</span>
-                            <span>30.000₫</span>
-                        </div>
+                        <?php if(Session::has('cart')): ?>
+                            <?php
+                                $sum = 0;
+                            ?>
+                            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="item">
+                                    <span><?php echo e($item['quantity']); ?> x <?php echo e($item['name']); ?> </span>
+                                    <span><?php echo e(number_format($item['quantity'] * $item['price'],0)); ?>₫</span>
+                                </div>
+                                <?php
+                                    $sum += $item['quantity'] * $item['price'];
+                                ?>
+
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
+
                     </div>
                     <p>Thanh toán khi nhận hàng</p>
                     <div class="total">
                         <span>Tổng cộng:</span>
-                        <strong>50.000₫</strong>
+                        <strong> <?php
+                               echo number_format($sum ,0);
+                            ?>₫</strong>
                     </div>
                     <a href="order_success">
                         <button class="btn btn-primary">Đặt hàng</button>

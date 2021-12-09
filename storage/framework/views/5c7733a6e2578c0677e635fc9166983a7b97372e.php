@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Giỏ hàng</title>
 <?php $__env->stopSection(); ?>
@@ -37,53 +35,67 @@
             <div class="cart-total">
                 <p>Số tiền</p>
             </div>
+
         </div>
         <div class="cart-page-content">
-            <div class="row">
-                <div class="cart-checkbox">
-                    <input type="checkbox" name="" id="">
-                </div>
-                <div class="cart-product">
+            <?php if(Session::has('cart')): ?>
+                <?php
+                    $sum = 0;
+                ?>
+                <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                        <div class="row">
+                            <div class="cart-checkbox">
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div class="cart-product">
                     <span>
-                        <img src="client/images/buger.jpg" alt="">
-                        <p>Hamburger bò phô mai</p>
+                        <img src="img/products/<?php echo e($item['image']); ?>" alt="">
+                        <p><?php echo e($item['name']); ?></p>
                     </span>
-                </div>
-                <div class="cart-price">
-                    <p>20.000₫</p>
-                </div>
-                <div class="cart-quantity">
-                    <input type="number" name="" id="" value="1">
-                </div>
-                <div class="cart-total">
-                    <p>20.000₫</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="cart-checkbox">
-                    <input type="checkbox" name="" id="">
-                </div>
-                <div class="cart-product">
-                    <span>
-                        <img src="client/images/pizza-1.png" alt="">
-                        <p>Pizza tôm mực</p>
-                    </span>
-                </div>
-                <div class="cart-price">
-                    <p>30.000₫</p>
-                </div>
-                <div class="cart-quantity">
-                    <input type="number" name="quantity" id="" min="1" max="" value="1">
-                </div>
-                <div class="cart-total">
-                    <p>30.000₫</p>
-                </div>
-            </div>
+                            </div>
+                            <div class="cart-price">
+                                <p><?php echo e($item['price']); ?>₫</p>
+                            </div>
+                            <form action="updatecart" method="post">
+                                <div class="cart-quantity">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" value="<?php echo e($item['id']); ?>" name="idUpdate">
+                                    <input type="number" name="quantityUpdate" id="" value="<?php echo e($item['quantity']); ?>">
+                                    <button type="submit" class="btn btn-warning" value="Sửa">
+                                        Sửa
+                                    </button>
+                                    <a href="deletecart/<?php echo e($item['id']); ?>" class="btn btn-danger">
+                                        Xoá
+                                    </a>
+                                </div>
+
+                            </form>
+                            <div class="cart-total">
+                                <?php
+                                    $price = $item['price'];
+                                    $quantity = $item['quantity'];
+                                    $total_row = $price * $quantity;
+                                    $sum += $total_row;
+                                ?>
+                                <p><?php echo e($item['price'] * $item['quantity']); ?>₫</p>
+                            </div>
+
+                        </div>
+
+
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php else: ?>
+            <?php endif; ?>
+
         </div>
 
         <div class="cart-footer">
             <button class="btn btn-secondary">Xoá</button>
-            <h3>Tổng thanh toán: <span>50.000₫</span></h3>
+            <h3>Tổng thanh toán: <span>
+                     <?php
+                       echo  $sum ;
+                     ?>₫</span></h3>
             <a href="order">
                 <button class="btn btn-primary">Đặt hàng</button>
             </a>

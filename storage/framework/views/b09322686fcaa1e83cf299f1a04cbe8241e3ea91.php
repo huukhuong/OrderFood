@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
     <title>Chi tiết <?php echo e($product->name); ?></title>
 <?php $__env->stopSection(); ?>

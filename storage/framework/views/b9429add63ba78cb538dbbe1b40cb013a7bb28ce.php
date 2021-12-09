@@ -52,7 +52,7 @@
                     <a href="admin/order/list" class="nav-link">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
-                            Quản lý đặt hàng
+                            Quản lý đơn hàng
                         </p>
                     </a>
                 </li>

@@ -37,53 +37,67 @@
             <div class="cart-total">
                 <p>Số tiền</p>
             </div>
+
         </div>
         <div class="cart-page-content">
-            <div class="row">
-                <div class="cart-checkbox">
-                    <input type="checkbox" name="" id="">
-                </div>
-                <div class="cart-product">
+            @if(Session::has('cart'))
+                @php
+                    $sum = 0;
+                @endphp
+                @foreach($products as $key => $item)
+
+                        <div class="row">
+                            <div class="cart-checkbox">
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div class="cart-product">
                     <span>
-                        <img src="client/images/buger.jpg" alt="">
-                        <p>Hamburger bò phô mai</p>
+                        <img src="img/products/{{$item['image']}}" alt="">
+                        <p>{{$item['name']}}</p>
                     </span>
-                </div>
-                <div class="cart-price">
-                    <p>20.000₫</p>
-                </div>
-                <div class="cart-quantity">
-                    <input type="number" name="" id="" value="1">
-                </div>
-                <div class="cart-total">
-                    <p>20.000₫</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="cart-checkbox">
-                    <input type="checkbox" name="" id="">
-                </div>
-                <div class="cart-product">
-                    <span>
-                        <img src="client/images/pizza-1.png" alt="">
-                        <p>Pizza tôm mực</p>
-                    </span>
-                </div>
-                <div class="cart-price">
-                    <p>30.000₫</p>
-                </div>
-                <div class="cart-quantity">
-                    <input type="number" name="quantity" id="" min="1" max="" value="1">
-                </div>
-                <div class="cart-total">
-                    <p>30.000₫</p>
-                </div>
-            </div>
+                            </div>
+                            <div class="cart-price">
+                                <p>{{$item['price']}}₫</p>
+                            </div>
+                            <form action="updatecart" method="post">
+                                <div class="cart-quantity">
+                                    @csrf
+                                    <input type="hidden" value="{{$item['id']}}" name="idUpdate">
+                                    <input type="number" name="quantityUpdate" id="" value="{{$item['quantity']}}">
+                                    <button type="submit" class="btn btn-warning" value="Sửa">
+                                        Sửa
+                                    </button>
+                                    <a href="deletecart/{{$item['id']}}" class="btn btn-danger">
+                                        Xoá
+                                    </a>
+                                </div>
+
+                            </form>
+                            <div class="cart-total">
+                                @php
+                                    $price = $item['price'];
+                                    $quantity = $item['quantity'];
+                                    $total_row = $price * $quantity;
+                                    $sum += $total_row;
+                                @endphp
+                                <p>{{$item['price'] * $item['quantity']}}₫</p>
+                            </div>
+
+                        </div>
+
+
+                @endforeach
+            @else
+            @endif
+
         </div>
 
         <div class="cart-footer">
             <button class="btn btn-secondary">Xoá</button>
-            <h3>Tổng thanh toán: <span>50.000₫</span></h3>
+            <h3>Tổng thanh toán: <span>
+                     @php
+                       echo  $sum ;
+                     @endphp₫</span></h3>
             <a href="order">
                 <button class="btn btn-primary">Đặt hàng</button>
             </a>

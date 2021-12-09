@@ -85,7 +85,9 @@
                 </div>
                 <img src="images/motorbike.png" alt="">
             </div>
-
+            <div id="product" class="alert">
+                {{ session('success') }}
+            </div>
             <div class="products">
                 <h2>Danh sách sản phẩm</h2>
                 <div class="box">
@@ -102,7 +104,7 @@
                             <p class="price">Giá: {{number_format($key -> price,0)}}</p>
                             <div class="card-btn">
                                 <button class="btn btn-secondary">
-                                    <a href="#" style="text-decoration: none; color: white">
+                                    <a href="/addtocart/{{$key->id}}" style="text-decoration: none; color: white">
                                         <i class="fas fa-shopping-bag"></i>Thêm vào giỏ
                                         hàng
                                     </a>

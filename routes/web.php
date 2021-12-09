@@ -68,6 +68,9 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
 Route::prefix('/')->group(function () {
     Route::get('/',  [HomeControlller::class, 'index']);
     Route::get('shop',  [HomeControlller::class, 'shop']);
+    Route::get('addtocart/{id}',  [HomeControlller::class, 'addToCart']);
+    Route::post('updatecart',  [HomeControlller::class, 'updateCart']);
+    Route::get('deletecart/{id}',  [HomeControlller::class, 'deleteCart']);
     Route::get('register',  [HomeControlller::class, 'register']);
     Route::get('login',  [HomeControlller::class, 'login']);
     Route::get('cart',  [HomeControlller::class, 'cart']);
