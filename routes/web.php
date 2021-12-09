@@ -82,7 +82,9 @@ Route::prefix('/')->group(function () {
     Route::get('logout',  [UserController::class, 'logout']);
     Route::get('order',  [HomeControlller::class, 'order']);
     Route::post('order_success',  [HomeControlller::class, 'orderSuccess']);
-
+    Route::get('order_success',  function (){
+        return view('client.order_success',['page' => 'page']);
+    });
     Route::get('coming-soon',  function() {
         return view('client.coming-soon');
     });

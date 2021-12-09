@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
+use App\Models\Orderdetail;
 use App\Models\Orders;
 use App\Models\Products;
 use Database\Seeders\Order;
@@ -99,11 +100,18 @@ class HomeControlller extends Controller
         $order->save();
 
         $order_id = $order->id;
-
+        $cart = Session::get('cart');
         // đưa order_detai vào
-
-
-        return view('client.order_success', ['page' => 'order_success']);
+        foreach ($cart as $key => $value) {
+            $order_detail = new Orderdetail();
+            $order_detail -> order_id =$order_id;
+            $order_detail -> product_id =$value['id'];
+            $order_detail -> amount =$value['quantity'];
+            $order_detail -> price =$value['price'];
+            $order_detail -> save();
+        }
+        unset($cart);
+        return redirect('order_success');
     }
 
     public function detailProduct($id)
