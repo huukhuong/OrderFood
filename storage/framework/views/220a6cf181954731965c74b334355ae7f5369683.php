@@ -1,5 +1,5 @@
 <?php $__env->startSection('title'); ?>
-<title>Đặt hàng</title>
+    <title>Đặt hàng</title>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -25,9 +25,11 @@
                     <h3>Thông tin đặt hàng</h3>
                 </div>
                 <div class="content">
-                    <form action="">
+                    <form action="order_success">
                         <div class="form-group">
                             <label for="">Tên người đặt hàng</label>
+                            <input type="hidden" name="id" value="<?php echo e(auth()->user()->id); ?>">
+                            <input type="hidden" name="total" value="0">
                             <input type="text" name="name" value="<?php echo e(auth()->user() ->name); ?> ">
                         </div>
                         <div class="form-group">
@@ -75,13 +77,14 @@
                     <div class="total">
                         <span>Tổng cộng:</span>
                         <strong> <?php
-                               echo number_format($sum ,0);
+                                echo number_format($sum ,0);
                             ?>₫</strong>
                     </div>
                     <a href="order_success">
                         <button class="btn btn-primary">Đặt hàng</button>
                     </a>
                 </div>
+
             </div>
         </div>
     </section>
