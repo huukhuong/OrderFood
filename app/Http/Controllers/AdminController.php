@@ -151,7 +151,7 @@ class AdminController extends Controller
     public function getListProduct()
     {
         $product = products::where('status', 1)->SimplePaginate(5);
-     //   $product = products::SimplePaginate(5)::where('status', 1);
+        //   $product = products::SimplePaginate(5)::where('status', 1);
         return view('admin.products.list', ['product' => $product]);
     }
     public function getAddProduct()
@@ -225,32 +225,35 @@ class AdminController extends Controller
     ///                                                                       ///
     /////////////////////////////////////////////////////////////////////////////
 
-    public function getListUser(){
+    public function getListUser()
+    {
         $user = User::all();
-        return view('admin.user.list',['user' => $user]);
+        return view('admin.user.list', ['user' => $user]);
     }
-    public function blockUser($id){
+    public function blockUser($id)
+    {
         $user = User::find($id);
-        if($user -> status == 1){
-            $user -> status = 0;
-            $user ->save();
+        if ($user->status == 1) {
+            $user->status = 0;
+            $user->save();
             return redirect('admin/user/list')->with('khoathanhcong', 'success');
-        }
-        else{
-            $user -> status = 1;
-            $user ->save();
+        } else {
+            $user->status = 1;
+            $user->save();
             return redirect('admin/user/list')->with('mokhoathanhcong', 'success');
         }
     }
-    public function resetPass($id){
+    public function resetPass($id)
+    {
         $user = User::find($id);
-        $user ->password = bcrypt('123456');
-        $user ->save();
+        $user->password = bcrypt('123456');
+        $user->save();
         return redirect('admin/user/list')->with('resetthanhcong', 'success');
     }
-    public function getEditUser($id){
+    public function getEditUser($id)
+    {
         $user = User::find($id);
-        return view('admin.user.edit',['user' => $user]);
+        return view('admin.user.edit', ['user' => $user]);
     }
     /////////////////////////////////////////////////////////////////////////////
     ///                                                                       ///
@@ -258,37 +261,42 @@ class AdminController extends Controller
     ///                                                                       ///
     /////////////////////////////////////////////////////////////////////////////
 
-    public function getListOrder(){
+    public function getListOrder()
+    {
         $partners = Partners::all();
         $order = Orders::all();
-        return view('admin.order.list',['order' => $order,'partners' => $partners]);
+        return view('admin.order.list', ['order' => $order, 'partners' => $partners]);
     }
 
-    public function getDetailOrder($id){
-        $orderdetails = Orderdetail::where('order_id',$id)->get();
+    public function getDetailOrder($id)
+    {
+        $orderdetails = Orderdetail::where('order_id', $id)->get();
         $order = Orders::find($id);
-        return view('admin.order.orderdetails',['order' => $order,'orderdetails' => $orderdetails] );
+        return view('admin.order.orderdetails', ['order' => $order, 'orderdetails' => $orderdetails]);
     }
-    public function getEditOrder($id){
+    public function getEditOrder($id)
+    {
         $order = Orders::find($id);
-        return view('admin.order.edit',['order' => $order]);
+        return view('admin.order.edit', ['order' => $order]);
     }
-    public function postEditOrder(Request $request){
-        $id = $request -> idOrder;
-        $status = $request ->status;
+    public function postEditOrder(Request $request)
+    {
+        $id = $request->idOrder;
+        $status = $request->status;
         echo $id;
         $order = Orders::find($id);
-        $order -> status = $status;
-        $order -> save();
+        $order->status = $status;
+        $order->save();
         return redirect('admin/order/list')->with('capnhatdonhangthanhcong', 'success');
     }
 
-    public function postSavePartners(Request $request){
-        $partners = $request -> idpartner;
-        $order = Orders::find($request -> idorder);
-        $order -> id_partner = $request ->idpartner;
-        $order -> status = 1;
-        $order -> save();
+    public function postSavePartners(Request $request)
+    {
+        $partners = $request->idpartner;
+        $order = Orders::find($request->idorder);
+        $order->id_partner = $request->idpartner;
+        $order->status = 1;
+        $order->save();
         return redirect('admin/order/list')->with('capnhatgiaohang', 'success');
     }
 
@@ -297,20 +305,23 @@ class AdminController extends Controller
     ///                               PARTNERS                                ///
     ///                                                                       ///
     /////////////////////////////////////////////////////////////////////////////
-    public function getListPartners(){
+    public function getListPartners()
+    {
         $partners = Partners::all();
-        return view('admin.partners.list',['partners' => $partners]);
+        return view('admin.partners.list', ['partners' => $partners]);
     }
-    public function getAddPartners(){
+    public function getAddPartners()
+    {
         return view('admin.partners.add');
     }
-    public function postAddPartners(Request $request){
+    public function postAddPartners(Request $request)
+    {
         $partners = new Partners();
-        $partners -> name = $request ->name;
-        $partners -> email = $request -> email;
-        $partners -> phone = $request -> phone;
-        $partners -> address = $request -> address;
-        $partners -> save();
+        $partners->name = $request->name;
+        $partners->email = $request->email;
+        $partners->phone = $request->phone;
+        $partners->address = $request->address;
+        $partners->save();
         return redirect('admin/partners/list')->with('themthanhcong', 'success');
     }
     /////////////////////////////////////////////////////////////////////////////
@@ -319,18 +330,19 @@ class AdminController extends Controller
     ///                                                                       ///
     /////////////////////////////////////////////////////////////////////////////
 
-    public function khoangthoigian(){
+    public function khoangthoigian()
+    {
         $thongke = array();
-        return view('admin.statistical.khoangthoigian',['thongke' => $thongke]);
+        return view('admin.statistical.khoangthoigian', ['thongke' => $thongke]);
     }
-    public function thongke1(Request $request){ // khoảng thời gian
+    public function thongke1(Request $request)
+    { // khoảng thời gian
         $thongke = DB::table('orders')
-            ->select( 'products.name', 'products.price' , 'order_detail.amount' , 'orders.created_at')
-            ->join('order_detail','orders.id', '=', 'order_detail.order_id')
-            -> join('products', 'products.id', '=', 'order_detail.product_id')
-            ->whereBetween('orders.created_at',[$request -> ngaybatdau, $request-> ngayketthuc])
-            -> get();
-        return view('admin.statistical.khoangthoigian',['thongke' => $thongke]);
+            ->select('products.name', 'products.price', 'order_detail.amount', 'orders.created_at')
+            ->join('order_detail', 'orders.id', '=', 'order_detail.order_id')
+            ->join('products', 'products.id', '=', 'order_detail.product_id')
+            ->whereBetween('orders.created_at', [$request->ngaybatdau, $request->ngayketthuc])
+            ->get();
+        return view('admin.statistical.khoangthoigian', ['thongke' => $thongke]);
     }
-
 }

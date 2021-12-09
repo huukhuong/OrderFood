@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
+use App\Models\Orders;
 use App\Models\Products;
+use Database\Seeders\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
+use function PHPUnit\Framework\isEmpty;
 
 class HomeControlller extends Controller
 {
@@ -63,14 +66,42 @@ class HomeControlller extends Controller
     {
         if (Auth::user()) {   // Check is user logged in
             $products = Session::get('cart');
-            return view('client.order', ['page' => 'order','products' => $products]);
+            return view('client.order', ['page' => 'order', 'products' => $products]);
         } else {
             return redirect("login");
         }
     }
 
-    public function orderSuccess()
+    public function orderSuccess(Request $request)
     {
+        $request->validate(
+            [
+                'name' => 'required',
+                'phone' => 'required|numeric',
+                'address' => 'required',
+            ],
+            [
+                'name.required' => 'Vui lòng điền họ tên của bạn',
+                'phone.numberic' => 'Số điện thoại không hợp lệ',
+                'address.required' => 'Vui lòng điền địa chỉ'
+            ]
+        );
+
+        $user_id = $request->id;
+        $description = isEmpty($request->description) ? "Không" : $request->description;
+
+        $order = new Orders();
+        $order->user_id = $user_id;
+        $order->address = $request->address;
+        $order->total = $request->total;
+        $order->phone = $request->phone;
+        $order->description = $description;
+        $order->save();
+
+        $order_id = $order->id;
+
+        // đưa order_detai vào
+
 
         return view('client.order_success', ['page' => 'order_success']);
     }
@@ -82,8 +113,9 @@ class HomeControlller extends Controller
         return view('client.product_detail', ['page' => 'order_success', 'product' => $product, 'products' => $products]);
     }
 
-    public function addToCart($id){
-        $product = DB::select('select * from products where id='.$id);
+    public function addToCart($id)
+    {
+        $product = DB::select('select * from products where id=' . $id);
         $cart = Session::get('cart');
         $cart[$product[0]->id] = array(
             "id" => $product[0]->id,
@@ -95,10 +127,11 @@ class HomeControlller extends Controller
         Session::put('cart', $cart);
         return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
     }
-    public function updateCart(Request $request){
-        $id = $request -> idUpdate;
-        $quantity = $request -> quantityUpdate;
-        $product = DB::select('select * from products where id='.$id);
+    public function updateCart(Request $request)
+    {
+        $id = $request->idUpdate;
+        $quantity = $request->quantityUpdate;
+        $product = DB::select('select * from products where id=' . $id);
         $cart = Session::get('cart');
         $cart[$product[0]->id] = array(
             "id" => $product[0]->id,
@@ -112,17 +145,18 @@ class HomeControlller extends Controller
         return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
     }
 
-    public function deleteCart($id){
+    public function deleteCart($id)
+    {
         $cart =  Session::get('cart');
-        foreach ($cart as $key => $value){
-            if ($value['id'] == $id){
-               unset($cart[$key]);
+        foreach ($cart as $key => $value) {
+            if ($value['id'] == $id) {
+                unset($cart[$key]);
             }
         }
         Session::put('cart', $cart);
         return redirect()->back()->with('success', 'Sản phẩm đã xoa thành công!');
-//        $product = session::forget('cart', $key['id'])->first();
-//        $product->destroy($key['id']);
+        //        $product = session::forget('cart', $key['id'])->first();
+        //        $product->destroy($key['id']);
 
     }
 }
