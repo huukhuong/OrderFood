@@ -1,10 +1,8 @@
-@extends('client.main')
-
-@section('title')
+<?php $__env->startSection('title'); ?>
     <title>Giỏ hàng</title>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <!-- ---------------xx-------------- -->
     <section class="page-heading">
@@ -40,60 +38,60 @@
 
         </div>
         <div class="cart-page-content">
-            @if (Session::has('cart'))
-                @php
+            <?php if(Session::has('cart')): ?>
+                <?php
                     $sum = 0;
-                @endphp
-                @foreach ($products as $key => $item)
+                ?>
+                <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="row">
                         <div class="cart-checkbox">
                             <input type="checkbox" name="" id="">
                         </div>
                         <div class="cart-product">
                             <span>
-                                <img src="img/products/{{ $item['image'] }}" alt="">
-                                <p>{{ $item['name'] }}</p>
+                                <img src="img/products/<?php echo e($item['image']); ?>" alt="">
+                                <p><?php echo e($item['name']); ?></p>
                             </span>
                         </div>
                         <div class="cart-price">
-                            <p>{{ number_format($item['price']) }}₫</p>
+                            <p><?php echo e(number_format($item['price'])); ?>₫</p>
                         </div>
                         <form action="updatecart" method="post">
                             <div class="cart-quantity">
-                                @csrf
-                                <input type="hidden" value="{{ $item['id'] }}" name="idUpdate">
-                                <input type="number" name="quantityUpdate" id="" value="{{ $item['quantity'] }}">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" value="<?php echo e($item['id']); ?>" name="idUpdate">
+                                <input type="number" name="quantityUpdate" id="" value="<?php echo e($item['quantity']); ?>">
                                 <button type="submit" class="btn btn-warning" value="Sửa">
                                     Sửa
                                 </button>
-                                <a href="deletecart/{{ $item['id'] }}" class="btn btn-danger">
+                                <a href="deletecart/<?php echo e($item['id']); ?>" class="btn btn-danger">
                                     Xoá
                                 </a>
                             </div>
 
                         </form>
                         <div class="cart-total">
-                            @php
+                            <?php
                                 $price = $item['price'];
                                 $quantity = $item['quantity'];
                                 $total_row = $price * $quantity;
                                 $sum += $total_row;
-                            @endphp
-                            <p>{{ number_format($item['price'] * $item['quantity']) }}₫</p>
+                            ?>
+                            <p><?php echo e(number_format($item['price'] * $item['quantity'])); ?>₫</p>
                         </div>
 
                     </div>
 
 
-                @endforeach
-            @else
-            @endif
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php else: ?>
+            <?php endif; ?>
 
         </div>
 
         <div class="cart-footer">
             <button class="btn btn-secondary">Xoá</button>
-            <h3>Tổng thanh toán: <span>{{ number_format($sum) }}₫</span></h3>
+            <h3>Tổng thanh toán: <span><?php echo e(number_format($sum)); ?>₫</span></h3>
             <a href="order">
                 <button class="btn btn-primary">Đặt hàng</button>
             </a>
@@ -101,4 +99,6 @@
     </section>
     <!-- --------xx--------- -->
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('client.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views\client\cart.blade.php ENDPATH**/ ?>

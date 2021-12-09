@@ -94,4 +94,4 @@
     </form>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('client.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views/client/order.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('client.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views\client\order.blade.php ENDPATH**/ ?>
