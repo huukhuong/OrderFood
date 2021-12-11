@@ -129,21 +129,34 @@ class HomeControlller extends Controller
     }
 
     public function addToCart($id)
-    {
+    {   $check = true;
         $product = DB::select('select * from products where id=' . $id);
         $cart = Session::get('cart');
-        if (in_array($product[0]->id, $cart[$product[0]->id])) {
-            $cart[$product[0]->id]['quantity'] += 1;
-         } else {
-            $cart[$product[0]->id] = array(
-                "id" => $product[0]->id,
-                "name" => $product[0]->name,
-                "price" => $product[0]->price,
-                "image" => $product[0]->image,
-                "quantity" => 1,
-            );
+        // update nếu sản phẩm đã nằm trong session
+        foreach ($cart as &$key ) {
+            if ($key['id'] == $product[0]->id) {
+                $key['quantity'] += 1;
+                $check = false;
+            }
         }
+//        for ($i = 0 ; $i < sizeof($cart) ; $i++){
+//            if ($cart[$i]['id'] == $product[0]->id && $cart[$i] != null) {
+//                echo "true";
+//                $check = false;
+//
+//        dd("okkk");    }
+//        }
+        // thêm mới
 
+       if ($check){
+           $cart[$product[0]->id] = array(
+               "id" => $product[0]->id,
+               "name" => $product[0]->name,
+               "price" => $product[0]->price,
+               "image" => $product[0]->image,
+               "quantity" => 1,
+           );
+       }
         Session::put('cart', $cart);
         return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
     }
