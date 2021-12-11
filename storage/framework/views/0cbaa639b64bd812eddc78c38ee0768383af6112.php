@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Quản lý Món | Sửa thông tin</title>
 <?php $__env->stopSection(); ?>
@@ -62,10 +60,10 @@
                                placeholder=""disabled value="Người dùng">
                     <?php endif; ?>
                 </div>
+                <a href="javascript:history.back()" class="btn btn-default mt-2">Quay lại</a>
             </div>
             <!-- /.card-body -->
         </form>
-
     </div>
 
     <script type="text/javascript">

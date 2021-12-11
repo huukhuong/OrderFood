@@ -33,7 +33,7 @@
                     icon: 'success',
                     title: '',
                     text: 'Cập nhật trạng thái thành công',
-                }).then(function () {
+                }).then(function() {
 
                 });
             </script>
@@ -44,60 +44,51 @@
                 @csrf
                 <div class="form-group">
                     <label for="">Mã </label>
-                    <input type="hidden" class="form-control" id="id" name="idOrder"
-                           placeholder="" value="{{ $order->id }}">
-                    <input type="text" class="form-control" id="" name=""
-                           placeholder="" disabled value="{{ $order->id }}">
+                    <input type="hidden" class="form-control" id="id" name="idOrder" placeholder=""
+                        value="{{ $order->id }}">
+                    <input type="text" class="form-control" id="" name="" placeholder="" disabled
+                        value="{{ $order->id }}">
                 </div>
                 <div class="form-group">
                     <label for="order">Tên khách hàng</label>
-                    <input type="text" class="form-control" id="order" name="order"
-                           placeholder="" disabled value="{{ $order->user_linked->name}}">
+                    <input type="text" class="form-control" id="order" name="order" placeholder="" disabled
+                        value="{{ $order->user_linked->name }}">
                 </div>
                 <div class="form-group">
 
                     <label for="order">Địa chỉ</label>
-                    <input type="text" class="form-control" id="order" name="order"
-                           placeholder="" disabled value="{{ $order->address }}">
+                    <input type="text" class="form-control" id="order" name="order" placeholder="" disabled
+                        value="{{ $order->address }}">
                 </div>
                 <div class="form-group">
                     <label for="order">Số điện thoại</label>
-                    <input type="text" class="form-control" id="order" name="order"
-                           placeholder="" disabled value="{{ $order->phone }}">
+                    <input type="text" class="form-control" id="order" name="order" placeholder="" disabled
+                        value="{{ $order->phone }}">
                 </div>
                 <div class="form-group">
                     <label for="order">Thời gian tạo đơn</label>
-                    <input type="text" class="form-control" id="order" name="order"
-                           placeholder="" disabled value="{{ $order->created_at }}">
+                    <input type="text" class="form-control" id="order" name="order" placeholder="" disabled
+                        value="{{ $order->created_at }}">
                 </div>
                 <div class="form-group">
                     <label for="order">Mô tả</label>
-                    <textarea class="form-control" id="order" name="order"
-                              placeholder="" disabled>{{ $order->description }} </textarea>
+                    <textarea class="form-control" id="order" name="order" placeholder=""
+                        disabled>{{ $order->description }} </textarea>
                 </div>
                 <div class="form-group">
                     <label>Trạng thái đơn hàng</label>
-                    <select class="form-control" name="status">
-                        @if($order -> status == 0)
-                            <option value="1">Đang giao hàng</option>
-                        @elseif($order -> status == 1)
-                            <option value="2">Đã giao hàng</option>
-
-                        @elseif($order -> status == 2)
-                            <option value="-1">Đã huỷ đơn</option>
-
-                        @elseif($order -> status == -1)
-                            <option value="1">Đang chuẩn bị</option>
+                    <select class="form-control" name="status" {{ $order->status == 0 ? 'disabled' : '' }}>
+                        @if ($order->status == 0)
+                            <option value="0">Đang chuẩn bị</option>
                         @endif
-
-
+                        <option value="2" {{ $order->status == 1 ? 'selected' : '' }}>Đã giao hàng</option>
                     </select>
                 </div>
-
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Lưu</button>
+                <a href="javascript:history.back()" class="btn btn-default">Quay lại</a>
+                <button type="submit" class="btn btn-primary" {{ $order->status == 0 ? 'disabled' : '' }}>Lưu</button>
             </div>
         </form>
 

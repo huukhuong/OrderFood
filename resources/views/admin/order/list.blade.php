@@ -52,8 +52,8 @@
                             <td>{{ $key->user_id }}</td>
 
                             <td>{{ $key->user_linked->name }}</td>
-                            <td>{{ number_format($key->total,0)}}</td>
-                            @if($key -> status == -1)
+                            <td>{{ number_format($key->total, 0) }}</td>
+                            @if ($key->status == -1)
                                 <td>
                                     <span class="badge badge-danger">Đã huỷ đơn</span>
                                 </td>
@@ -80,44 +80,51 @@
                                 <a class="btn btn-warning " href="admin/order/edit/{{ $key->id }}">
                                     Cập nhật
                                 </a>
-                                @if($key -> status == 0)
+                                @if ($key->status == 0)
                                     <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#order{{$key->id}}">
-                                           Phân công
-                                        </button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                        data-target="#order{{ $key->id }}">
+                                        Phân công
+                                    </button>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="order{{$key->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="">Modal title</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="order{{ $key->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
 
-                                                        <form action="admin/order/savepartner"  class="" method="post">
-                                                            @csrf
-                                                            <select class="form-control" name="idpartner">
-                                                                @foreach($partners as $key2)
-                                                                    <option value="{{$key2 -> id}}">{{$key2  -> name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            <input type="hidden" value="{{$key -> id}}"name="idorder" >
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                                            </div>
-                                                        </form>
-
-                                                    </div>
+                                                    <form action="admin/order/savepartner" class=""
+                                                        method="post">
+                                                        @csrf
+                                                        <select class="form-control" name="idpartner">
+                                                            @foreach ($partners as $key2)
+                                                                <option value="{{ $key2->id }}">{{ $key2->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        <input type="hidden" value="{{ $key->id }}" name="idorder">
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save
+                                                                changes</button>
+                                                        </div>
+                                                    </form>
 
                                                 </div>
+
                                             </div>
                                         </div>
-                               @endif
+                                    </div>
+                                @endif
 
                                 {{-- <td class="text-center"><a href="admin/category/delete/{{$key->id}}"><button class="btn btn-danger"><i class="fas fa-trash"></i>Xoá</button></a></td> --}}
                             </td>

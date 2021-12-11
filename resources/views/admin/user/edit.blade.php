@@ -62,10 +62,10 @@
                                placeholder=""disabled value="Người dùng">
                     @endif
                 </div>
+                <a href="javascript:history.back()" class="btn btn-default mt-2">Quay lại</a>
             </div>
             <!-- /.card-body -->
         </form>
-
     </div>
 
     <script type="text/javascript">

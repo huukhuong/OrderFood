@@ -1,91 +1,80 @@
-@extends('admin.main')
+<?php $__env->startSection('title'); ?>
+    <title>Quản lý Món | Thêm mới</title>
+<?php $__env->stopSection(); ?>
 
-@section('title')
-    <title>Quản lý Món | Sửa thông tin</title>
-@endsection
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Sửa thông tin món</h3>
+            <h3 class="card-title">Thêm món ăn</h3>
         </div>
-        @if (count($errors) > 0)
+        <?php if(count($errors) > 0): ?>
             <div class="alert alert-danger">
-                @foreach ($errors->all() as $err)
-                    {{ $err }} <br>
-                @endforeach
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $err): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo e($err); ?> <br>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-        @endif
-        @if (session('chuacofile'))
+        <?php endif; ?>
+        <?php if(session('chuacofile')): ?>
             <script>
                 Swal.fire({
                     icon: 'success',
                     title: '',
                     text: 'Chưa thêm file',
-
                 })
             </script>
-        @endif
-        @if (session('suathanhcong'))
+        <?php endif; ?>
+        <?php if(session('themthanhcong')): ?>
             <script>
                 Swal.fire({
                     icon: 'success',
                     title: '',
-                    text: 'Sửa sản phẩm thành công',
+                    text: 'Thêm sản phẩm thành công',
                 }).then(function() {
                     window.location = "admin/product/list";
                 });
             </script>
-        @endif
-
-        <form action="admin/product/edit" method="post" enctype="multipart/form-data">
+        <?php endif; ?>
+        <!-- form start -->
+        <form action="admin/product/add" method="post" enctype="multipart/form-data">
             <div class="card-body">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="form-group">
-                    <input type="hidden" name="id" value="{{ $product->id }}">
                     <label for="productName">Tên món ăn</label>
                     <input type="text" class="form-control" id="productName" name="productName"
-                        placeholder="Nhập tên món ăn" value="{{ $product->name }}">
+                        placeholder="Nhập tên món ăn">
                 </div>
                 <div class="form-group">
                     <label for="productPrice">Giá tiền</label>
                     <input type="number" class="form-control" id="productPrice" name="productPrice"
-                        placeholder="Nhập giá tiền" value="{{ $product->price }}">
+                        placeholder="Nhập giá tiền">
                 </div>
                 <div class="form-group">
                     <label for="productQuantity">Số lượng</label>
                     <input type="number" class="form-control" id="productQuantity" name="productQuantity"
-                        placeholder="Nhập số lượng" value="{{ $product->quantity }}">
+                        placeholder="Nhập số lượng">
                 </div>
                 <div class="form-group">
                     <label>Danh sách thể loại</label>
                     <select class="form-control" name="productCategoryID">
-                        @foreach ($category as $key)
-                            @if ($product->category_id == $key->id)
-                                <option selected value="{{ $product->category_id }}"> {{ $key->name }} </option>
-                            @else
-                                <option value="{{ $key->id }}"> {{ $key->name }} </option>
-                            @endif
-                        @endforeach
+                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($key->id); ?>"> <?php echo e($key->name); ?> </option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Mô tả</label>
-                    <textarea class="form-control" name="productDescription" rows="3" placeholder="Enter ..."
-                        value="">{{ $product->description }}</textarea>
+                    <textarea class="form-control" name="productDescription" rows="3" placeholder="Enter ..."></textarea>
                 </div>
                 <label for="">Chọn ảnh</label>
                 <div class="custom-file">
-                    <input type="file" name="productImage" id="imgInp" class="custom-file-input" id="productImage"
-                        value="{{ $product->image }}">
+                    <input type="file" name="productImage" id="imgInp" class="custom-file-input" id="productImage">
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
                 <div class="form-group">
                     <label>Hình ảnh</label>
-                    <img src="img/products/{{ $product->image }}" style="max-width: 200px" id="blah">
-                    <input type="hidden" name="productImage2" value="{{ $product->image }}">
+                    <img src="" style="max-width: 200px" id="blah">
                 </div>
             </div>
             <!-- /.card-body -->
@@ -95,7 +84,7 @@
                 <button type="submit" class="btn btn-primary">Lưu</button>
             </div>
         </form>
-
+        <!-- /.card-body -->
     </div>
 
     <script type="text/javascript">
@@ -108,4 +97,6 @@
         }
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views/admin/products/add.blade.php ENDPATH**/ ?>

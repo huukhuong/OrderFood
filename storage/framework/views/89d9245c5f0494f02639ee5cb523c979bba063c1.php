@@ -1,23 +1,21 @@
-@extends('admin.main')
-
-@section('title')
+<?php $__env->startSection('title'); ?>
     <title>Quản lý Danh mục | Sửa thông tin</title>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Sửa danh mục</h3>
         </div>
-        @if (count($errors) > 0)
+        <?php if(count($errors) > 0): ?>
             <div class="alert alert-danger">
-                @foreach ($errors->all() as $err)
-                    {{ $err }} <br>
-                @endforeach
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $err): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo e($err); ?> <br>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-        @endif
-        @if (session('suathanhcong'))
+        <?php endif; ?>
+        <?php if(session('suathanhcong')): ?>
             <script>
                 Swal.fire({
                     icon: 'success',
@@ -27,17 +25,17 @@
                     window.location = "admin/category/list";
                 });
             </script>
-        @endif
+        <?php endif; ?>
         <!-- /.card-header -->
         <div class="card-body">
             <form action="admin/category/edit" method="post">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tên Danh mục</label>
-                        <input type="hidden" name="id" value="{{ $category->id }}">
+                        <input type="hidden" name="id" value="<?php echo e($category->id); ?>">
                         <input type="text" class="form-control" name="namecategory" id="namecategory"
-                            placeholder="Nhập tên Danh mục" value="{{ $category->name }}">
+                            placeholder="Nhập tên Danh mục" value="<?php echo e($category->name); ?>">
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -52,4 +50,6 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views/admin/category/edit.blade.php ENDPATH**/ ?>

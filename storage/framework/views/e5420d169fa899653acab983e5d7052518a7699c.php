@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Quản Đơn Hàng | Xem thông tin chi tiết đơn hàng</title>
 <?php $__env->stopSection(); ?>
@@ -41,38 +39,33 @@
         <div class="card-body table-responsive">
             <table id="example1" class="table table-bordered table-striped table-hover">
                 <thead>
-                <tr>
-                    <th class="text-center" style="width: 50px">Mã</th>
+                    <tr>
+                        <th class="text-center" style="width: 50px">Mã</th>
 
-                    <th class="text-center">Tên Sản phẩm</th>
-                    <th class="text-center" style="width: 100px">Số lượng</th>
-                    <th class="text-center">Giá</th>
-                    <th class="text-center">Tổng tiền</th>
-                </tr>
+                        <th class="text-center">Tên Sản phẩm</th>
+                        <th class="text-center" style="width: 100px">Số lượng</th>
+                        <th class="text-center">Giá</th>
+                        <th class="text-center">Tổng tiền</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <?php $__currentLoopData = $orderdetails; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $orderdetails; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                            <td class="text-center"><?php echo e($key->order_id); ?></td>
+                            <td><?php echo e($key->products_linked->name); ?></td>
+                            <td><?php echo e($key->amount); ?></td>
+                            <td><?php echo e(number_format($key->price, 0)); ?></td>
+                            <td><?php echo e(number_format($key->price * $key->amount, 0)); ?></td>
+                            
+                            
+                        </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td class="text-center"><?php echo e($key-> order_id); ?></td>
-                        <td><?php echo e($key->products_linked->name); ?></td>
-                        <td><?php echo e($key->amount); ?></td>
-                        <td><?php echo e(number_format($key-> price,0)); ?></td>
-                        <td><?php echo e(number_format($key->price * $key -> amount ,0)); ?></td>
-                        
-                        
+                        <td colspan="5" class="text-right">Tổng tiền : <?php echo e($order->total); ?> </td>
                     </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <tr>
-                    <td colspan="5" class="text-right">Tổng tiền : <?php echo e($order -> total); ?>  </td>
-
-
-                </tr>
-
-
-
                 </tbody>
             </table>
-
+            <a href="javascript:history.back()" class="btn btn-default mt-2">Quay lại</a>
         </div>
         <!-- /.card-body -->
     </div>
