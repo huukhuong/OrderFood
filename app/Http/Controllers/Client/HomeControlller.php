@@ -134,7 +134,7 @@ class HomeControlller extends Controller
         $cart = Session::get('cart');
         if (in_array($product[0]->id, $cart[$product[0]->id])) {
             $cart[$product[0]->id]['quantity'] += 1;
-         } else {
+        } else {
             $cart[$product[0]->id] = array(
                 "id" => $product[0]->id,
                 "name" => $product[0]->name,

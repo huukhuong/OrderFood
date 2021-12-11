@@ -42,7 +42,9 @@
                         </g>
                     </svg>
                     @if (Session::has('cart'))
-                        <span>{{ count(Session::get('cart')) }}</span>
+                        @if (count(Session::get('cart')) > 0)
+                            <span>{{ count(Session::get('cart')) }}</span>
+                        @endif
                     @endif
                 </div>
             </a>
