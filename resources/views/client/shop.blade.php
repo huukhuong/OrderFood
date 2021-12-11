@@ -85,9 +85,18 @@
                 </div>
                 <img src="images/motorbike.png" alt="">
             </div>
-            <div id="product" class="alert">
+            {{--<div id="product" class="alert">
                 {{ session('success') }}
-            </div>
+            </div>--}}
+            @if (session('success'))
+                <script>
+                    Swal.fire(
+                        'Đã thêm!',
+                        'Bạn đã thêm thành công vào giỏ hàng',
+                        'success'
+                    )
+                </script>
+            @endif
             <div class="products">
                 <h2>Danh sách sản phẩm</h2>
                 <div class="box">

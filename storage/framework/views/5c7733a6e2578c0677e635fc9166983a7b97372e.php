@@ -88,10 +88,18 @@
 
         <div class="cart-footer">
             <button class="btn btn-secondary">Xoá</button>
+            <?php if(Session::has('cart') && $sum > 0): ?>
             <h3>Tổng thanh toán: <span><?php echo e(number_format($sum)); ?>₫</span></h3>
-            <a href="order">
-                <button class="btn btn-primary">Đặt hàng</button>
-            </a>
+                <a href="order">
+                    <button class="btn btn-primary">Đặt hàng</button>
+                </a>
+            <?php else: ?>
+                <h3>Tổng thanh toán: <span> 0₫</span></h3>
+                <a href="order" style="pointer-events: none; cursor: default;">
+                    <button class="btn btn-primary">Đặt hàng</button>
+                </a>
+            <?php endif; ?>
+
         </div>
     </section>
     <!-- --------xx--------- -->

@@ -150,7 +150,7 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
     public function getListProduct()
     {
-        $product = products::where('status', 1)->SimplePaginate(5);
+        $product = products::where('status', 1)->orderBy('id','DESC')->SimplePaginate(5);
         //   $product = products::SimplePaginate(5)::where('status', 1);
         return view('admin.products.list', ['product' => $product]);
     }
@@ -264,7 +264,7 @@ class AdminController extends Controller
     public function getListOrder()
     {
         $partners = Partners::all();
-        $order = Orders::all();
+        $order = Orders::orderBy('id','DESC')->get();
         return view('admin.order.list', ['order' => $order, 'partners' => $partners]);
     }
 

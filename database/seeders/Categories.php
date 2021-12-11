@@ -19,8 +19,6 @@ class Categories extends Seeder
             ],
             [   'name' => 'Hamberger'
             ],
-            [   'name' => 'Khoai Tây'
-            ],
             [   'name' => 'Gà Rán'
             ],
 

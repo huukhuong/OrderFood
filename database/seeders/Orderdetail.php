@@ -21,11 +21,6 @@ class Orderdetail extends Seeder
                 'price' => '10000'
             ],
             [   'order_id' => '1',
-                'product_id' => '1',
-                'amount' => '1',
-                'price' => '10000'
-            ],
-            [   'order_id' => '1',
                 'product_id' => '2',
                 'amount' => '1',
                 'price' => '10000'
@@ -39,22 +34,22 @@ class Orderdetail extends Seeder
             [   'order_id' => '2',
                 'product_id' => '1',
                 'amount' => '2',
-                'price' => '20000'
+                'price' => '10000'
             ],
             [   'order_id' => '2',
                 'product_id' => '2',
                 'amount' => '2',
-                'price' => '20000'
+                'price' => '10000'
             ],
             [   'order_id' => '3',
                 'product_id' => '2',
                 'amount' => '3',
-                'price' => '30000'
+                'price' => '10000'
             ],
             [   'order_id' => '3',
                 'product_id' => '3',
                 'amount' => '4',
-                'price' => '40000'
+                'price' => '10000'
             ]
         ]);
     }

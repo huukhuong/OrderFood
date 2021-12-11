@@ -110,7 +110,13 @@ class HomeControlller extends Controller
             $order_detail -> price =$value['price'];
             $order_detail -> save();
         }
-        unset($cart);
+        //  unset($cart);
+        // méo hiểu sao đoạn này phải làm như này
+        $cart =  Session::get('cart');
+        foreach ($cart as $key => $value) {
+                unset($cart[$key]);
+        }
+        Session::put('cart', $cart);
         return redirect('order_success');
     }
 

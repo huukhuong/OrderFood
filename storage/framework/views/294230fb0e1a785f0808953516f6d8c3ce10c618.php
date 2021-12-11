@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Chọn món ngay</title>
 <?php $__env->stopSection(); ?>
@@ -85,10 +83,16 @@
                 </div>
                 <img src="images/motorbike.png" alt="">
             </div>
-            <div id="product" class="alert">
-                <?php echo e(session('success')); ?>
-
-            </div>
+            
+            <?php if(session('success')): ?>
+                <script>
+                    Swal.fire(
+                        'Đã thêm!',
+                        'Bạn đã thêm thành công vào giỏ hàng',
+                        'success'
+                    )
+                </script>
+            <?php endif; ?>
             <div class="products">
                 <h2>Danh sách sản phẩm</h2>
                 <div class="box">
