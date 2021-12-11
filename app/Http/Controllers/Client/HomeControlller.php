@@ -140,18 +140,18 @@ class HomeControlller extends Controller
                 $key['quantity'] += 1;
                 $check = false;
             }
-            if ($check) {
-                $cart[$product[0]->id] = array(
-                    "id" => $product[0]->id,
-                    "name" => $product[0]->name,
-                    "price" => $product[0]->price,
-                    "image" => $product[0]->image,
-                    "quantity" => 1,
-                );
-            }
-            Session::put('cart', $cart);
-            return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
         }
+        if ($check) {
+            $cart[$product[0]->id] = array(
+                "id" => $product[0]->id,
+                "name" => $product[0]->name,
+                "price" => $product[0]->price,
+                "image" => $product[0]->image,
+                "quantity" => 1,
+            );
+        }
+        Session::put('cart', $cart);
+        return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
     }
 
 
