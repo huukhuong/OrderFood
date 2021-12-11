@@ -14,29 +14,31 @@ class Partners extends Seeder
      */
     public function run()
     {
-        DB::table('partners') ->insert([
-            [   'name' => 'GRAPFOOD',
+        DB::table('partners')->insert([
+            [
+                'name' => 'GRAPFOOD',
                 'email' => 'grapfood@gmail.com',
                 'phone' => '0396527908',
                 'address' => 'Đặng chất ,Quận 8'
             ],
-            [   'name' => 'BEAMIN',
+            [
+                'name' => 'BEAMIN',
                 'email' => 'beaming@gmail.com',
                 'phone' => '0396527908',
                 'address' => 'Đặng chất ,Quận 8'
             ],
-            [   'name' => 'AHAMOVE',
+            [
+                'name' => 'AHAMOVE',
                 'email' => 'ahamove@gmail.com',
                 'phone' => '0396527908',
                 'address' => 'Đặng chất ,Quận 8'
             ],
-            [   'name' => 'GOFOOD',
+            [
+                'name' => 'GOFOOD',
                 'email' => 'gofood@gmail.com',
                 'phone' => '0396527908',
                 'address' => 'Đặng chất ,Quận 8'
             ],
-
-
         ]);
     }
 }

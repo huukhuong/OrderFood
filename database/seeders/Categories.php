@@ -17,12 +17,10 @@ class Categories extends Seeder
         DB::table('categories')-> insert([
             [   'name' => 'Pizza'
             ],
-            [   'name' => 'Hamberger'
+            [   'name' => 'Hamburger'
             ],
             [   'name' => 'Gà Rán'
             ],
-
-
         ]);
     }
 }
