@@ -14,7 +14,7 @@ class AddColumnPhoneToOrdersTbl extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('phone')->max(11);
+            $table->string('phone')->max(11)->default("no");
             $table->string('description')->default('no');
         });
     }
