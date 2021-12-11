@@ -150,7 +150,7 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
     public function getListProduct()
     {
-        $product = products::where('status', 1)->orderBy('id','DESC')->paginate(20);
+        $product = products::where('status', 1)->orderBy('id','DESC')->SimplePaginate(20);
         //   $product = products::SimplePaginate(5)::where('status', 1);
         return view('admin.products.list', ['product' => $product]);
     }

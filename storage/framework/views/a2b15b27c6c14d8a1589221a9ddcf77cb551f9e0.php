@@ -63,7 +63,7 @@
 
     </div>
     <div class="d-flex justify-content-center">
-        <?php echo e($product->links('admin.components.paginate')); ?>
+        <?php echo e($product->links()); ?>
 
     </div>
 

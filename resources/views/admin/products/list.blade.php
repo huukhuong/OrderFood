@@ -65,7 +65,7 @@
 
     </div>
     <div class="d-flex justify-content-center">
-        {{ $product->links('admin.components.paginate') }}
+        {{ $product->links() }}
     </div>
 
     <script>
