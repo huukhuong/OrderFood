@@ -58,18 +58,14 @@
                             </td>
                         </tr>
                     @endforeach
-
-
-
                 </tbody>
             </table>
-
         </div>
         <!-- /.card-body -->
 
     </div>
     <div class="d-flex justify-content-center">
-        {!! $product->links() !!}
+        {{ $product->links('admin.components.paginate') }}
     </div>
 
     <script>

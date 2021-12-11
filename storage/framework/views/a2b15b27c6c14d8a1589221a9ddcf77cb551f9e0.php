@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Admin | Danh sách món</title>
 <?php $__env->stopSection(); ?>
@@ -58,18 +56,14 @@
                             </td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-
-
                 </tbody>
             </table>
-
         </div>
         <!-- /.card-body -->
 
     </div>
     <div class="d-flex justify-content-center">
-        <?php echo $product->links(); ?>
+        <?php echo e($product->links('admin.components.paginate')); ?>
 
     </div>
 
