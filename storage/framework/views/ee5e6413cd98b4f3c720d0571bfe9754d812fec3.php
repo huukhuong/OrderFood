@@ -1,10 +1,10 @@
-@extends('client.main')
 
-@section('title')
+
+<?php $__env->startSection('title'); ?>
     <title>Chọn món ngay</title>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <!-- ---------------xx-------------- -->
     <!-- ====   Search  ==== -->
     <section class="page-heading">
@@ -14,7 +14,7 @@
         </div>
         <div class="search-box">
             <form action="search" method="post" >
-                @csrf
+                <?php echo csrf_field(); ?>
                 <input type="text"  name="keyword" placeholder="Tìm kiếm trong cửa hàng">
                 <button><i class="fas fa-search"></i></button>
             </form>
@@ -62,14 +62,14 @@
                 </div>
                 <div class="filter-option-content">
                     <form action="" >
-                        @csrf
-                        @foreach($category as $key)
+                        <?php echo csrf_field(); ?>
+                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="form-group">
-                                <input type="checkbox" name="danhmuc" id="danhmuc{{$key -> id}}">
-                                <input type="hidden" value="{{$key -> id}}">
-                                <label for="danhmuc{{$key -> id}}"">{{$key -> name}}</label>
+                                <input type="checkbox" name="danhmuc" id="danhmuc<?php echo e($key -> id); ?>">
+                                <input type="hidden" value="<?php echo e($key -> id); ?>">
+                                <label for="danhmuc<?php echo e($key -> id); ?>""><?php echo e($key -> name); ?></label>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <button class="btn">Thực hiện</button>
                     </form>
                 </div>
@@ -89,20 +89,20 @@
             <div class="products">
                 <h2>Danh sách sản phẩm</h2>
                 <div class="box">
-                    @foreach($productsearch as $key)
+                    <?php $__currentLoopData = $productsearch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="card-product">
                             <div class="card-img">
                                 <div class="div">
-                                    <img src="./img/products/{{$key -> image}}"/> alt="">
+                                    <img src="./img/products/<?php echo e($key -> image); ?>"/> alt="">
                                 </div>
                                 <span><i class="fas fa-star">4.5</i></span>
                             </div>
                             <div class="card-content">
-                                <h4>{{$key -> name}}</h4>
-                                <p class="price">Giá: {{number_format($key -> price,0)}}</p>
+                                <h4><?php echo e($key -> name); ?></h4>
+                                <p class="price">Giá: <?php echo e(number_format($key -> price,0)); ?></p>
                                 <div class="card-btn">
                                     <button class="btn btn-secondary">
-                                        <a href="/addtocart/{{$key->id}}" style="text-decoration: none; color: white">
+                                        <a href="#" style="text-decoration: none; color: white">
                                             <i class="fas fa-shopping-bag"></i>Thêm vào giỏ
                                             hàng
                                         </a>
@@ -111,9 +111,10 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
-                {!! $productsearch -> links() !!}
+                <?php echo $productsearch -> links(); ?>
+
                 <div class="pagination">
                     <ul>
                         <li> <a href=""><i class="fas fa-angle-double-left"></i></a></li>
@@ -128,4 +129,6 @@
         </div>
     </section>
     <!-- ----------xx------- -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('client.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\OrderFood\resources\views/client/search.blade.php ENDPATH**/ ?>

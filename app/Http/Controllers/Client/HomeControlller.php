@@ -55,6 +55,7 @@ class HomeControlller extends Controller
         $products = Session::get('cart');
         return view('client.cart', ['page' => 'cart', 'products' => $products]);
     }
+
     public function search(Request $request)
     {
         $name = $request->keyword;
@@ -104,17 +105,17 @@ class HomeControlller extends Controller
         // đưa order_detai vào
         foreach ($cart as $key => $value) {
             $order_detail = new Orderdetail();
-            $order_detail -> order_id =$order_id;
-            $order_detail -> product_id =$value['id'];
-            $order_detail -> amount =$value['quantity'];
-            $order_detail -> price =$value['price'];
-            $order_detail -> save();
+            $order_detail->order_id = $order_id;
+            $order_detail->product_id = $value['id'];
+            $order_detail->amount = $value['quantity'];
+            $order_detail->price = $value['price'];
+            $order_detail->save();
         }
         //  unset($cart);
         // méo hiểu sao đoạn này phải làm như này
-        $cart =  Session::get('cart');
+        $cart = Session::get('cart');
         foreach ($cart as $key => $value) {
-                unset($cart[$key]);
+            unset($cart[$key]);
         }
         Session::put('cart', $cart);
         return redirect('order_success');
@@ -131,16 +132,22 @@ class HomeControlller extends Controller
     {
         $product = DB::select('select * from products where id=' . $id);
         $cart = Session::get('cart');
-        $cart[$product[0]->id] = array(
-            "id" => $product[0]->id,
-            "name" => $product[0]->name,
-            "price" => $product[0]->price,
-            "image" => $product[0]->image,
-            "quantity" => 1,
-        );
+        if (in_array($product[0]->id, $cart[$product[0]->id])) {
+            $cart[$product[0]->id]['quantity'] += 1;
+         } else {
+            $cart[$product[0]->id] = array(
+                "id" => $product[0]->id,
+                "name" => $product[0]->name,
+                "price" => $product[0]->price,
+                "image" => $product[0]->image,
+                "quantity" => 1,
+            );
+        }
+
         Session::put('cart', $cart);
         return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
     }
+
     public function updateCart(Request $request)
     {
         $id = $request->idUpdate;
@@ -161,7 +168,7 @@ class HomeControlller extends Controller
 
     public function deleteCart($id)
     {
-        $cart =  Session::get('cart');
+        $cart = Session::get('cart');
         foreach ($cart as $key => $value) {
             if ($value['id'] == $id) {
                 unset($cart[$key]);

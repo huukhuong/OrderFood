@@ -78,7 +78,7 @@
                         <span><i class="fas fa-star"></i> 4.5</span>
                     </div>
                     <button class="btn btn-secondary">
-                        <a href="#" style="text-decoration: none; color: white">
+                        <a href="/addtocart/{{$key->id}}" style="text-decoration: none; color: white">
                             <i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng
                         </a>
                     </button>

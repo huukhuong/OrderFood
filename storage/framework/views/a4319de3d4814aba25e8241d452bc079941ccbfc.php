@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Trang chủ</title>
 <?php $__env->stopSection(); ?>
@@ -78,7 +76,7 @@
                         <span><i class="fas fa-star"></i> 4.5</span>
                     </div>
                     <button class="btn btn-secondary">
-                        <a href="#" style="text-decoration: none; color: white">
+                        <a href="/addtocart/<?php echo e($key->id); ?>" style="text-decoration: none; color: white">
                             <i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng
                         </a>
                     </button>
