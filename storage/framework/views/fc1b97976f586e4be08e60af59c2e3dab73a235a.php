@@ -42,7 +42,9 @@
                         </g>
                     </svg>
                     <?php if(Session::has('cart')): ?>
-                        <span><?php echo e(count(Session::get('cart'))); ?></span>
+                        <?php if(count(Session::get('cart')) > 0): ?>
+                            <span><?php echo e(count(Session::get('cart'))); ?></span>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
             </a>

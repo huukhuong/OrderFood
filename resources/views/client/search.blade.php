@@ -13,9 +13,9 @@
             <p>Đảm bảo chất lượng tốt nhất đến mọi khách hàng</p>
         </div>
         <div class="search-box">
-            <form action="search" method="post" >
+            <form action="search" method="post">
                 @csrf
-                <input type="text"  name="keyword" placeholder="Tìm kiếm trong cửa hàng">
+                <input type="text" name="keyword" placeholder="Tìm kiếm trong cửa hàng">
                 <button><i class="fas fa-search"></i></button>
             </form>
         </div>
@@ -61,48 +61,48 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="filter-option-content">
-                    <form action="" >
+                    <form action="">
                         @csrf
-                        @foreach($category as $key)
+                        @foreach ($category as $key)
                             <div class="form-group">
-                                <input type="checkbox" name="danhmuc" id="danhmuc{{$key -> id}}">
-                                <input type="hidden" value="{{$key -> id}}">
-                                <label for="danhmuc{{$key -> id}}"">{{$key -> name}}</label>
-                            </div>
-                        @endforeach
-                        <button class="btn">Thực hiện</button>
+                                <input type="checkbox" name="danhmuc" id="danhmuc{{ $key->id }}">
+                                <input type="hidden" value="{{ $key->id }}">
+                                <label for="danhmuc{{ $key->id }}"">{{ $key->name }}</label>
+                                </div>
+                             @endforeach
+                                    <button class="btn">Thực hiện</button>
                     </form>
                 </div>
             </div>
 
         </div>
         <div class="shoppage-product">
-
-            <div class="shoppage-banner">
-                <div class="banner-content">
-                    <h3>Đặt hàng ngay để nhận nhiều ưu đãi!</h3>
-                    <p>Miễn phí giao hàng cho 3 đơn hàng đầu tiên.</p>
-                </div>
-                <img src="images/motorbike.png" alt="">
-            </div>
-
             <div class="products">
-                <h2>Danh sách sản phẩm</h2>
+                <div style="display: flex; align-items: center">
+                    <h2>
+                        Kết quả tìm kiếm:
+                        <span style="color: rgb(59, 59, 59); font-weight: normal">{{ count($productsearch) }} Sản phẩm</span>
+                    </h2>
+                </div>
                 <div class="box">
-                    @foreach($productsearch as $key)
+                    @if (count($productsearch) <= 0)
+                        <h3 style="text-align: center">Không tìm thấy sản phẩm...</h3>
+                    @endif
+                    @foreach ($productsearch as $key)
                         <div class="card-product">
                             <div class="card-img">
                                 <div class="div">
-                                    <img src="./img/products/{{$key -> image}}"/> alt="">
+                                    <img src="./img/products/{{ $key->image }}" /> alt="">
                                 </div>
                                 <span><i class="fas fa-star">4.5</i></span>
                             </div>
                             <div class="card-content">
-                                <h4>{{$key -> name}}</h4>
-                                <p class="price">Giá: {{number_format($key -> price,0)}}</p>
+                                <h4>{{ $key->name }}</h4>
+                                <p class="price">Giá: {{ number_format($key->price, 0) }}</p>
                                 <div class="card-btn">
                                     <button class="btn btn-secondary">
-                                        <a href="/addtocart/{{$key->id}}" style="text-decoration: none; color: white">
+                                        <a href="/addtocart/{{ $key->id }}"
+                                            style="text-decoration: none; color: white">
                                             <i class="fas fa-shopping-bag"></i>Thêm vào giỏ
                                             hàng
                                         </a>
@@ -113,16 +113,8 @@
                         </div>
                     @endforeach
                 </div>
-                {!! $productsearch -> links() !!}
                 <div class="pagination">
-                    <ul>
-                        <li> <a href=""><i class="fas fa-angle-double-left"></i></a></li>
-                        <li class="active"><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href=""><i class="fas fa-angle-double-right"></i></a></li>
-                    </ul>
+                    {!! $productsearch->links('client.components.paginate') !!}
                 </div>
             </div>
         </div>
