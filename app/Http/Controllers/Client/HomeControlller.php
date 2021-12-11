@@ -60,7 +60,7 @@ class HomeControlller extends Controller
     {
         $name = $request->keyword;
         $category = Categories::all();
-        $productsearch = Products::where('name', 'like', '%' . $name . '%')->Paginate(10);
+        $productsearch = Products::where('name', 'like', '%' . $name . '%')->paginate(10);
         return view('client.search', ['page' => 'shop', 'productsearch' => $productsearch, 'category' => $category]);
     }
 
