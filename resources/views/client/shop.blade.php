@@ -104,7 +104,9 @@
                         <div class="card-product col-4">
                             <div class="card-img">
                                 <div class="div">
-                                    <img src="./img/products/{{ $key->image }}" /> alt="">
+                                    <a href="product_detail/{{ $key->id }}">
+                                        <img src="./img/products/{{ $key->image }}" /> alt="">
+                                    </a>
                                 </div>
                                 <span><i class="fas fa-star">4.5</i></span>
                             </div>

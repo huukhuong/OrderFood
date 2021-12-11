@@ -36,7 +36,7 @@ class HomeControlller extends Controller
     public function shop()
     {
         $category = Categories::all();
-        $products = Products::where('status', 1)->paginate(20);
+        $products = Products::where('status', 1)->paginate(8);
         return view('client.shop', ['page' => 'shop', 'products' => $products, 'category' => $category]);
     }
 

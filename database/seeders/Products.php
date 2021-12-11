@@ -16,8 +16,8 @@ class Products extends Seeder
     {
         DB::table('products')->insert([
             [
-                'name' => 'Pizza 1',
-                'description' => 'Pizza rất ngon',
+                'name' => 'Pizza Hải Sản Pesto Xanh',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'pizza0.png',
@@ -25,8 +25,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Pizza 2',
-                'description' => 'Pizza2 rất ngon',
+                'name' => 'Pizza Hải Sản Nhiệt Đới',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'pizza1.png',
@@ -34,8 +34,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Pizza 3',
-                'description' => 'Pizza3 rất ngon',
+                'name' => 'Pizza Hải Sản Cocktail',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'pizza2.png',
@@ -43,8 +43,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Pizza 3',
-                'description' => 'Pizza3 rất ngon',
+                'name' => 'Pizza Tôm Cocktail',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'pizza3.png',
@@ -52,8 +52,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Pizza 3',
-                'description' => 'Pizza3 rất ngon',
+                'name' => 'Pizza Aloha',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'pizza4.png',
@@ -61,8 +61,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Pizza 3',
-                'description' => 'Pizza3 rất ngon',
+                'name' => 'Pizza Thịt Xông Khói',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'pizza5.png',
@@ -70,8 +70,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Pizza 3',
-                'description' => 'Pizza3 rất ngon',
+                'name' => 'Pizza Thịt Nguội',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'pizza6.png',
@@ -79,8 +79,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Pizza 3',
-                'description' => 'Pizza3 rất ngon',
+                'name' => 'Pizza Gà Nướng 3 Vị',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'pizza7.png',
@@ -88,8 +88,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Hamburger 1',
-                'description' => 'Hamburger rất ngon',
+                'name' => 'Hamburger gà nướng 3 vị',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'hamburger0.jpg',
@@ -97,8 +97,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Hamburger 2',
-                'description' => 'Hamburger2 rất ngon',
+                'name' => 'Hamburger tôm',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'hamburger1.jpg',
@@ -106,8 +106,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Hamburger 3',
-                'description' => 'Hamburger3 rất ngon',
+                'name' => 'Hamburger bò lúc lắc',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'hamburger2.jpg',
@@ -115,8 +115,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Gà Rán 1',
-                'description' => 'Gà Rán rất ngon',
+                'name' => 'Gà Rán truyền thống',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'ga-ran1.jpg',
@@ -124,8 +124,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Gà Rán 2',
-                'description' => 'Gà Rán2 rất ngon',
+                'name' => 'Gà Rán giòn cay kèm khoai tây',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'ga-ran2.jpg',
@@ -133,8 +133,8 @@ class Products extends Seeder
                 'status' => '1'
             ],
             [
-                'name' => 'Gà Rán 3',
-                'description' => 'Gà Rán rất ngon',
+                'name' => 'Gà Rán không cay kèm khoai tây size lớn',
+                'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ipsa libero itaque voluptates excepturi numquam ea cumque voluptatem ipsam, dolores, quos aut optio sed iure. Aspernatur minus ut nulla maiores?',
                 'quantity' => '100',
                 'price' => '10000',
                 'image' => 'ga-ran3.jpg',
