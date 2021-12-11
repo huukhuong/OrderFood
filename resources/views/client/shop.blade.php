@@ -13,9 +13,9 @@
             <p>Đảm bảo chất lượng tốt nhất đến mọi khách hàng</p>
         </div>
         <div class="search-box">
-            <form action="search" method="post" >
+            <form action="search" method="post">
                 @csrf
-                <input type="text"  name="keyword" placeholder="Tìm kiếm trong cửa hàng">
+                <input type="text" name="keyword" placeholder="Tìm kiếm trong cửa hàng">
                 <button><i class="fas fa-search"></i></button>
             </form>
         </div>
@@ -61,14 +61,14 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="filter-option-content">
-                    <form action="" >
+                    <form action="">
                         @csrf
-                        @foreach($category as $key)
-                        <div class="form-group">
-                            <input type="checkbox" name="danhmuc" id="danhmuc{{$key -> id}}">
-                            <input type="hidden" value="{{$key -> id}}">
-                            <label for="danhmuc{{$key -> id}}"">{{$key -> name}}</label>
-                        </div>
+                        @foreach ($category as $key)
+                            <div class="form-group">
+                                <input type="checkbox" name="danhmuc" id="danhmuc{{ $key->id }}">
+                                <input type="hidden" value="{{ $key->id }}">
+                                <label for="danhmuc{{ $key->id }}">{{ $key->name }}</label>
+                            </div>
                         @endforeach
                         <button class="btn">Thực hiện</button>
                     </form>
@@ -85,9 +85,9 @@
                 </div>
                 <img src="images/motorbike.png" alt="">
             </div>
-            {{--<div id="product" class="alert">
+            {{-- <div id="product" class="alert">
                 {{ session('success') }}
-            </div>--}}
+            </div> --}}
             @if (session('success'))
                 <script>
                     Swal.fire(
@@ -99,43 +99,35 @@
             @endif
             <div class="products">
                 <h2>Danh sách sản phẩm</h2>
-                <div class="box">
-                    @foreach($products as $key)
-                    <div class="card-product">
-                        <div class="card-img">
-                            <div class="div">
-                                <img src="./img/products/{{$key -> image}}"/> alt="">
+                <div class="box row">
+                    @foreach ($products as $key)
+                        <div class="card-product col-4">
+                            <div class="card-img">
+                                <div class="div">
+                                    <img src="./img/products/{{ $key->image }}" /> alt="">
+                                </div>
+                                <span><i class="fas fa-star">4.5</i></span>
                             </div>
-                            <span><i class="fas fa-star">4.5</i></span>
-                        </div>
-                        <div class="card-content">
-                            <h4>{{$key -> name}}</h4>
-                            <p class="price">Giá: {{number_format($key -> price,0)}}</p>
-                            <div class="card-btn">
-                                <button class="btn btn-secondary">
-                                    <a href="/addtocart/{{$key->id}}" style="text-decoration: none; color: white">
+                            <div class="card-content">
+                                <h4>{{ $key->name }}</h4>
+                                <p class="price">Giá: {{ number_format($key->price, 0) }}</p>
+                                <div class="card-btn">
+                                    <a class="btn btn-secondary" href="/addtocart/{{ $key->id }}"
+                                        style="text-decoration: none; color: white">
                                         <i class="fas fa-shopping-bag"></i>Thêm vào giỏ
                                         hàng
                                     </a>
-                                </button>
-                                <button class="btn btn-favou"><i class="far fa-heart"></i></button>
+                                    <button class="btn btn-favou"><i class="far fa-heart"></i></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
 
 
                 </div>
 
                 <div class="pagination">
-                    <ul>
-                        <li> <a href=""><i class="fas fa-angle-double-left"></i></a></li>
-                        <li class="active"><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href=""><i class="fas fa-angle-double-right"></i></a></li>
-                    </ul>
+                    {{ $products->links('client.components.paginate') }}
                 </div>
             </div>
         </div>
