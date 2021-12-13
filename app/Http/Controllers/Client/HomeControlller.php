@@ -134,13 +134,14 @@ class HomeControlller extends Controller
         $product = DB::select('select * from products where id=' . $id);
         $cart = Session::get('cart');
 
-        // update nếu sản phẩm đã nằm trong session
-        foreach ($cart as &$key) {
-            if ($key['id'] == $product[0]->id) {
-                $key['quantity'] += 1;
-                $check = false;
+        if ($cart != null)
+            // update nếu sản phẩm đã nằm trong session
+            foreach ($cart as &$key) {
+                if ($key['id'] == $product[0]->id) {
+                    $key['quantity'] += 1;
+                    $check = false;
+                }
             }
-        }
         if ($check) {
             $cart[$product[0]->id] = array(
                 "id" => $product[0]->id,
