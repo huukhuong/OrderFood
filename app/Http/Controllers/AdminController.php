@@ -80,7 +80,7 @@ class AdminController extends Controller
 
     public function getListCategory()
     {
-        $category = categories::all();
+        $category = categories::where('status', 1)->get();
         return view('admin.category.list', ['category' => $category]);
     }
 
@@ -137,7 +137,8 @@ class AdminController extends Controller
     public function deleteCategory($id)
     {
         $category = categories::find($id);
-        $category->delete();
+        $category->status = 0;
+        $category->save();
         return redirect('admin/category/list')->with('xoathanhcong', 'success');
     }
 

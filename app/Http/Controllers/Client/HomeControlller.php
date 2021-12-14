@@ -110,6 +110,10 @@ class HomeControlller extends Controller
             $order_detail->amount = $value['quantity'];
             $order_detail->price = $value['price'];
             $order_detail->save();
+
+            $product = Products::where('id', $order_detail->product_id)->first();
+            $product->quantity -= $order_detail->amount;
+            $product->save();
         }
         //  unset($cart);
         // méo hiểu sao đoạn này phải làm như này
