@@ -1,7 +1,5 @@
-
-
 <?php $__env->startSection('title'); ?>
-    <title>Admin | Danh sách nhân viên</title>
+    <title>Admin | Danh sách đối tác</title>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -25,10 +23,10 @@
     <?php endif; ?>
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách nhân viên</h3>
+            <h3 class="card-title">Danh sách đối tác</h3>
         </div>
         <div class="text-center py-3">
-            <a href="admin/partners/add"> <button class="btn btn-success">Thêm nhân viên</button></a>
+            <a href="admin/partners/add"> <button class="btn btn-success">Thêm đối tác</button></a>
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive">
@@ -57,7 +55,7 @@
                                     <i class="fa fa-pencil fa-fw"></i>Sửa
                                 </a>
                                 <input type="button" class="btn btn-danger" value="Xoá"
-                                    onclick="return xoa(<?php echo e($key->id); ?>);">
+                                    onclick="return">
                             </td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

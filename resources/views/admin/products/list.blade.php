@@ -47,7 +47,7 @@
                             <td>{{ $key->category_id }}</td>
                             <td><img src="./img/products/{{ $key->image }}" width="120"></td>
                             {{-- <td>{{$key ->image}}</td> --}}
-                            <td>{{ $key->description }}</td>
+                            <td class="text-truncate" style="max-width: 200px;">{!! $key->description !!}</td>
                             <td class="text-center">
                                 <a class="btn btn-warning" href="admin/product/edit/{{ $key->id }}">
                                     <i class="fa fa-pencil fa-fw"></i>Sửa

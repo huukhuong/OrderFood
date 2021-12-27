@@ -35,13 +35,13 @@
                 <thead>
                     <tr>
                         <th class="text-center" style="width: 50px">Mã</th>
-                        <th>Mã Khách hàng</th>
                         <th>Tên Khách hàng</th>
                         <th>Tổng tiền</th>
                         <th>Trạng thái</th>
                         <th>Địa chỉ</th>
                         <th>Số điện thoại</th>
                         <th>Mô tả</th>
+                        <th>Ngày đặt</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
@@ -49,7 +49,6 @@
                     @foreach ($order as $key)
                         <tr>
                             <td class="text-center">{{ $key->id }}</td>
-                            <td>{{ $key->user_id }}</td>
 
                             <td>{{ $key->user_linked->name }}</td>
                             <td>{{ number_format($key->total, 0) }}</td>
@@ -73,6 +72,7 @@
                             <td>{{ $key->address }}</td>
                             <td>{{ $key->phone }}</td>
                             <td>{{ $key->description }}</td>
+                            <td>{{ $key->created_at }}</td>
                             <td class="text-left">
                                 <a class="btn btn-primary " href="admin/order/details/{{ $key->id }}">
                                     Xem chi tiết

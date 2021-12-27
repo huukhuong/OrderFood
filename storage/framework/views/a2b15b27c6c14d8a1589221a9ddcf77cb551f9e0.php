@@ -45,7 +45,7 @@
                             <td><?php echo e($key->category_id); ?></td>
                             <td><img src="./img/products/<?php echo e($key->image); ?>" width="120"></td>
                             
-                            <td><?php echo e($key->description); ?></td>
+                            <td class="text-truncate" style="max-width: 200px;"><?php echo $key->description; ?></td>
                             <td class="text-center">
                                 <a class="btn btn-warning" href="admin/product/edit/<?php echo e($key->id); ?>">
                                     <i class="fa fa-pencil fa-fw"></i>Sửa

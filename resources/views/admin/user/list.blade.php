@@ -57,7 +57,6 @@
                             <td>{{ $key->email  }}</td>
                             @if($key -> role == 1 )
                                <td>Admin</td>
-
                             @else
                             <td>Người dùng</td>
 

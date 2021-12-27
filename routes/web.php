@@ -49,14 +49,17 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/block/{id}',  [AdminController::class, 'blockUser']);
         Route::get('/resetpasswd/{id}',  [AdminController::class, 'resetPass']);
     });
+
     Route::prefix('/partners')->group(function () {
         Route::get('/list',  [AdminController::class, 'getListPartners']);
-        Route::get('/add',  [AdminController::class, 'getAddPartners']);
-        Route::post('/add',  [AdminController::class, 'postAddPartners']);
-        Route::get('/edit/{id}',  [AdminController::class, 'getEditUser']);
-        Route::get('/block/{id}',  [AdminController::class, 'blockUser']);
-        Route::get('/resetpasswd/{id}',  [AdminController::class, 'resetPass']);
+        Route::get('/add', function() {
+            return view('admin.404');
+        });
+        Route::get('/edit/{id}', function() {
+            return view('admin.404');
+        });
     });
+
     Route::prefix('/statistical')->group(function () {
         Route::get('/khoangthoigian',  [AdminController::class, 'khoangthoigian']);
         Route::get('/doanhthutheoloai',  [AdminController::class, 'doanhthutheoloai']);

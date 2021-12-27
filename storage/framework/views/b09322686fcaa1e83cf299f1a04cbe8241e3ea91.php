@@ -43,7 +43,7 @@
         <div class="box">
             <div class="description">
                 <h2>Mô tả sản phẩm</h2>
-                <p><?php echo e($product->description); ?></p>
+                <p><?php echo $product->description; ?></p>
             </div>
         </div>
     </section>

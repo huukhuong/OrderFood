@@ -45,7 +45,7 @@
         <div class="box">
             <div class="description">
                 <h2>Mô tả sản phẩm</h2>
-                <p>{{ $product->description }}</p>
+                <p>{!! $product->description !!}</p>
             </div>
         </div>
     </section>

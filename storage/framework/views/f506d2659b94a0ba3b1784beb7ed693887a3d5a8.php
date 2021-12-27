@@ -33,13 +33,13 @@
                 <thead>
                     <tr>
                         <th class="text-center" style="width: 50px">Mã</th>
-                        <th>Mã Khách hàng</th>
                         <th>Tên Khách hàng</th>
                         <th>Tổng tiền</th>
                         <th>Trạng thái</th>
                         <th>Địa chỉ</th>
                         <th>Số điện thoại</th>
                         <th>Mô tả</th>
+                        <th>Ngày đặt</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
@@ -47,7 +47,6 @@
                     <?php $__currentLoopData = $order; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td class="text-center"><?php echo e($key->id); ?></td>
-                            <td><?php echo e($key->user_id); ?></td>
 
                             <td><?php echo e($key->user_linked->name); ?></td>
                             <td><?php echo e(number_format($key->total, 0)); ?></td>
@@ -71,6 +70,7 @@
                             <td><?php echo e($key->address); ?></td>
                             <td><?php echo e($key->phone); ?></td>
                             <td><?php echo e($key->description); ?></td>
+                            <td><?php echo e($key->created_at); ?></td>
                             <td class="text-left">
                                 <a class="btn btn-primary " href="admin/order/details/<?php echo e($key->id); ?>">
                                     Xem chi tiết
