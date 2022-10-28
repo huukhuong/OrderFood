@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderDetails;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::post('/edit',  [AdminController::class, 'postEditProduct']);
         Route::get('/delete/{id}',  [AdminController::class, 'deleteProduct']);
         Route::get('/search',  [AdminController::class, 'searchProduct']);
+        Route::get('/getDetails/{id}',[AdminController::class,'getProduct']);
     });
 
 
@@ -53,6 +55,15 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/edit/{id}',  [AdminController::class, 'getEditOrder']);
         Route::post('/savepartner',  [AdminController::class, 'postSavePartners']);
         Route::post('/edit',  [AdminController::class, 'postEditOrder']);
+
+    });
+
+    Route::prefix('/orderdetails')->group(function () {
+        Route::post('/add', [OrderDetails::class, 'postAddOrderDetails']);
+        Route::get('/list',  [OrderDetails::class, 'getListOrder']);
+        Route::get('/edit/{id}',  [OrderDetails::class, 'getEditOrderDetails']);
+        Route::post('/savepartner',  [OrderDetails::class, 'postSavePartners']);
+        Route::post('/edit',  [OrderDetails::class, 'postEditOrder']);
 
     });
 

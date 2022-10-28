@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <link rel="apple-touch-icon" sizes="57x57" href="admin_lte/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="admin_lte/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="admin_lte/favicon/apple-icon-72x72.png">

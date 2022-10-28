@@ -184,6 +184,10 @@ class AdminController extends Controller
         }
     }
 
+    public function getProduct($id){
+        $product = products::find($id);
+        return response()->json($product);
+    }
     public function getEditProduct($id)
     {
 
@@ -289,15 +293,22 @@ class AdminController extends Controller
     public function getEditOrder($id)
     {
         $order = Orders::find($id);
-        return view('admin.order.edit', ['order' => $order]);
+        $orderdetails = Orderdetail::where('order_id', $id)->get();
+        $partners = Partners::all();
+        $products = Products::all();
+        return view('admin.order.edit', ['order' => $order,'partners'=>$partners,'orderdetails' => $orderdetails,'products' => $products]);
     }
     public function postEditOrder(Request $request)
     {
-        $id = $request->idOrder;
-        $status = $request->status;
-        echo $id;
+        $id = $request->orderId;
         $order = Orders::find($id);
-        $order->status = $status;
+        $order -> user_id = $request -> orderIDCustommer;
+        $order -> user_id = 1;
+        $order->address = $request -> orderAddress;
+        $order->phone = $request -> orderPhone;
+        $order->description = $request -> orderDescription;
+        $order->id_partner = $request -> partnerId;
+        $order->status = $request -> orderStatus;
         $order->save();
         return redirect('admin/order/list')->with('capnhatdonhangthanhcong', 'success');
     }
