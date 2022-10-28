@@ -7,12 +7,16 @@ use App\Models\Categories;
 use App\Models\Orderdetail;
 use App\Models\Orders;
 use App\Models\Products;
+use App\Models\User;
 use Database\Seeders\Order;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Str;
+use phpDocumentor\Reflection\Types\Array_;
+use phpDocumentor\Reflection\Types\String_;
 use function PHPUnit\Framework\isEmpty;
 
 class HomeControlller extends Controller
@@ -53,25 +57,131 @@ class HomeControlller extends Controller
     public function cart()
     {
         $products = Session::get('cart');
-        return view('client.cart', ['page' => 'cart', 'products' => $products]);
+        if(Auth::user()){
+            if(auth()->user()->id != null){
+                $user_id = auth()->user()->id ;
+                $order = \App\Models\User::find($user_id)->order_linked;
+                return view('client.cart', ['page' => 'cart', 'products' => $products,'order' => $order]);
+            }
+        }
+        else{
+            return view('client.cart', ['page' => 'cart', 'products' => $products]);
+        }
+
     }
 
-    public function search(Request $request)
+    public function cartDetails($id){
+        if (Auth::user()) {   // Check is user logged in
+            $order = Orders::find($id);
+            $orderdetails = Orderdetail::where('order_id', $id)->get();
+            return view('client.cart_details', ['page' => 'cart','orderdetails' => $orderdetails,'order' => $order]);
+        } else {
+            return redirect("login");
+        }
+    }
+
+    public static function search(Request $request)
     {
-        $name = $request->keyword;
+        //$search = !empty(Request::input('category')) ? Request::input('category') : '';
+        //        $currentURL = url()->current();
+        //        $fullURL =  url()->full();
+        //        $links = Str::replace($currentURL, '', $fullURL);
+        $products = Products::query();
         $category = Categories::all();
-        $productsearch = Products::where('name', 'like', '%' . $name . '%')->paginate(10);
-        return view('client.search', ['page' => 'shop', 'productsearch' => $productsearch, 'category' => $category]);
+        if($request -> has('category')){
+            $products -> whereIn('category_id' , $request -> category)->paginate(10);
+        }
+        if ($request -> has('rdSort')){
+            switch ($request -> rdSort){
+                case 'A-Z' :
+                    $products -> orderBy('name', 'ASC');
+                    break;
+                case 'giathapdencao':
+                    $products -> orderBy('price', 'ASC');
+                    break;
+                case 'giacaotoithap':
+                    $products -> orderBy('price', 'DESC');
+                    break;
+            }
+        }
+        if ($request ->has('keyword')){
+            $name = $request -> keyword;
+            $products -> where('name', 'like', '%' . $name . '%')->paginate(10);
+        }
+        $productss =  $products->paginate(10);
+
+//        $name = $request->keyword;
+//        $category = Categories::all();
+//        $products = Products::where('name', 'like', '%' . $name . '%')->simplePaginate(5);
+        return view('client.search', ['page' => 'search', 'products' => $productss, 'category' => $category]);
+    }
+
+    public function searchCategories(Request $request){
+
+
+
+//        $categories = $request -> category;
+//        if(!$categories){
+//            return redirect()->back()->with('fail', 'Không tìm thấy');
+//        }
+//        $productsearch = new Collection(new Products());
+//        $category = Categories::all();
+//        foreach ($categories as $key){
+//            $products = Products::where('category_id' , $key)->get();
+//            $productsearch = $productsearch -> merge($products);
+//        }
+//        if(!$productsearch){
+//            return redirect()->back()->with('fail', 'Không tìm thấy');
+//        }
+//        return view('client.shop', ['page' => 'shop', 'products' => $productsearch, 'category' => $category]);
+    }
+
+    public function checkSoLuongTrongKho($id){
+        $product = Products::where('id',$id)->first();
+        if($product != null){
+            return $product -> quantity;
+        }
+        return 0;
     }
 
     public function order()
-    {
-        if (Auth::user()) {   // Check is user logged in
-            $products = Session::get('cart');
+    {   $products = Session::get('cart');
+        // kiểm tra số lượng sản phẩm trước khi đặt hàng
+        foreach ($products as $item => $value){
+                $item_id = $value['id'];
+                $item_quantity = $value['quantity'];
+                $item_kho = $this->checkSoLuongTrongKho($item_id);
+                if($item_kho < $item_quantity){
+                    return redirect()->back()->with('fail', 'Đặt hàng không thành công,trong kho chỉ còn ' . $item_kho. " " . $value['name'] );
+                }
+        }
+         if (Auth::user()) {   // Check is user logged in
             return view('client.order', ['page' => 'order', 'products' => $products]);
         } else {
             return redirect("login");
         }
+    }
+
+    public function orderDelete($id){
+        $order = Orders::find($id);
+        $order->status = 0;
+        if($order->save()){
+            return redirect()->back()->with('success', 'Đã huỷ đơn đặt hàng thành công');
+        }
+        else{
+            return redirect()->back()->with('fail', 'Có lỗi xảy ra');
+        }
+    }
+    public function orderCancel($id){
+        $order = Orders::find($id);
+        $order->status = -1;
+        if($order->save()){
+            return redirect()->back()->with('success', 'Đã huỷ đơn đặt hàng thành công');
+        }
+        else{
+            return redirect()->back()->with('fail', 'Có lỗi xảy ra');
+        }
+
     }
 
     public function orderSuccess(Request $request)
@@ -137,7 +247,10 @@ class HomeControlller extends Controller
         $check = true;
         $product = DB::select('select * from products where id=' . $id);
         $cart = Session::get('cart');
-
+        $soluongtrongkho = $this->checkSoLuongTrongKho($id);
+        if($soluongtrongkho <= 0){
+            return redirect()->back()->with('fail', 'Thêm sản phẩm không thành công, trong kho chỉ còn '.$soluongtrongkho);
+        }
         if ($cart != null)
             // update nếu sản phẩm đã nằm trong session
             foreach ($cart as &$key) {
@@ -156,7 +269,7 @@ class HomeControlller extends Controller
             );
         }
         Session::put('cart', $cart);
-        return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
+        return redirect()->back()->with('themgiohangthanhcong', 'Sản phẩm đã thêm thành công!');
     }
 
 
@@ -175,7 +288,7 @@ class HomeControlller extends Controller
         );
 
         Session::put('cart', $cart);
-        return redirect()->back()->with('success', 'Sản phẩm đã thêm thành công!');
+        return redirect()->back()->with('success', 'Sản phẩm đã sửa thành công!');
     }
 
     public function deleteCart($id)
@@ -187,9 +300,12 @@ class HomeControlller extends Controller
             }
         }
         Session::put('cart', $cart);
-        return redirect()->back()->with('success', 'Sản phẩm đã xoa thành công!');
+        return redirect()->back()->with('success', 'Sản phẩm đã xoá thành công!');
         //        $product = session::forget('cart', $key['id'])->first();
         //        $product->destroy($key['id']);
 
+    }
+    public function deleteCarts(Request $request){
+        dd($request);
     }
 }

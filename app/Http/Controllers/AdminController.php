@@ -8,6 +8,7 @@ use App\Models\Orderdetail;
 use App\Models\Orders;
 use App\Models\Partners;
 use App\Models\products;
+use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -151,14 +152,14 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
     public function getListProduct()
     {
-        $product = products::where('status', 1)->orderBy('id','DESC')->SimplePaginate(20);
+        $product = products::where('status', 1)->orderBy('id','DESC')->paginate(5);
         //   $product = products::SimplePaginate(5)::where('status', 1);
         return view('admin.products.list', ['product' => $product]);
     }
     public function getAddProduct()
-    {
+    {   $supplier = Supplier::all();
         $category = categories::all();
-        return view('admin.products.add', ['category' => $category]);
+        return view('admin.products.add', ['category' => $category,'supplier'=>$supplier]);
     }
 
     public function postAddProduct(Request $request)
@@ -184,9 +185,11 @@ class AdminController extends Controller
 
     public function getEditProduct($id)
     {
+
         $product = products::find($id);
         $category = categories::all();
-        return view('admin.products.edit', ['product' => $product, 'category' => $category]);
+        $supplier = Supplier::all();
+        return view('admin.products.edit', ['product' => $product, 'category' => $category,'suppliers' => $supplier]);
     }
 
     public function postEditProduct(Request $request)
@@ -199,6 +202,7 @@ class AdminController extends Controller
         $product->quantity = $request->productQuantity;
         $product->price = $request->productPrice;
         $product->category_id = $request->productCategoryID;
+        $product->id_supplier = $request -> supplierID;
         if ($request->hasFile('productImage')) {
             $file = $request->file('productImage');
             $filename = $file->getClientOriginalName('productImage');
@@ -217,6 +221,12 @@ class AdminController extends Controller
         $product->status = 0;
         $product->save();
         return redirect('admin/product/list')->with('xoathanhcong', 'success');
+    }
+
+    public function searchProduct(Request $request){
+        $product = products::where('status', 1)->where('name', 'LIKE', '%'.$request->searchName.'%')->orderBy('id','DESC')->SimplePaginate(10);
+        //$product = products::SimplePaginate(5)::where('status', 1);
+        return view('admin.products.search', ['product' => $product]);
     }
 
 
@@ -265,7 +275,7 @@ class AdminController extends Controller
     public function getListOrder()
     {
         $partners = Partners::all();
-        $order = Orders::orderBy('id','DESC')->get();
+        $order = Orders::orderBy('id','DESC')->paginate(5);
         return view('admin.order.list', ['order' => $order, 'partners' => $partners]);
     }
 

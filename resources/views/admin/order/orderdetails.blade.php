@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header  bg-blue">
             <h3 class="card-title"> Xem thông tin chi tiết đơn hàng</h3>
         </div>
         @if (count($errors) > 0)

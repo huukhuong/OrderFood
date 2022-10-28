@@ -22,7 +22,8 @@ class Products extends Seeder
                 'price' => '10000',
                 'image' => 'pizza0.png',
                 'category_id' => '1',
-                'status' => '1'
+                'status' => '1',
+                'id_supplier' => '1'
             ],
             [
                 'name' => 'Pizza Hải Sản Nhiệt Đới',
@@ -32,6 +33,7 @@ class Products extends Seeder
                 'image' => 'pizza1.png',
                 'category_id' => '1',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Pizza Hải Sản Cocktail',
@@ -41,6 +43,7 @@ class Products extends Seeder
                 'image' => 'pizza2.png',
                 'category_id' => '1',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Pizza Tôm Cocktail',
@@ -50,6 +53,7 @@ class Products extends Seeder
                 'image' => 'pizza3.png',
                 'category_id' => '1',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Pizza Aloha',
@@ -59,6 +63,7 @@ class Products extends Seeder
                 'image' => 'pizza4.png',
                 'category_id' => '1',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Pizza Thịt Xông Khói',
@@ -68,6 +73,7 @@ class Products extends Seeder
                 'image' => 'pizza5.png',
                 'category_id' => '1',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Pizza Thịt Nguội',
@@ -77,6 +83,7 @@ class Products extends Seeder
                 'image' => 'pizza6.png',
                 'category_id' => '1',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Pizza Gà Nướng 3 Vị',
@@ -86,6 +93,7 @@ class Products extends Seeder
                 'image' => 'pizza7.png',
                 'category_id' => '1',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Hamburger gà nướng 3 vị',
@@ -95,6 +103,7 @@ class Products extends Seeder
                 'image' => 'hamburger0.jpg',
                 'category_id' => '2',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Hamburger tôm',
@@ -104,6 +113,7 @@ class Products extends Seeder
                 'image' => 'hamburger1.jpg',
                 'category_id' => '2',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Hamburger bò lúc lắc',
@@ -113,6 +123,7 @@ class Products extends Seeder
                 'image' => 'hamburger2.jpg',
                 'category_id' => '2',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Gà Rán truyền thống',
@@ -122,6 +133,7 @@ class Products extends Seeder
                 'image' => 'ga-ran1.jpg',
                 'category_id' => '3',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Gà Rán giòn cay kèm khoai tây',
@@ -131,6 +143,7 @@ class Products extends Seeder
                 'image' => 'ga-ran2.jpg',
                 'category_id' => '3',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ],
             [
                 'name' => 'Gà Rán không cay kèm khoai tây size lớn',
@@ -140,6 +153,7 @@ class Products extends Seeder
                 'image' => 'ga-ran3.jpg',
                 'category_id' => '3',
                 'status' => '1'
+                ,'id_supplier' => '1'
             ]
         ]);
     }

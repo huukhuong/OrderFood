@@ -5,7 +5,15 @@
 @endsection
 
 @section('content')
-
+    @if (session('themgiohangthanhcong'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '',
+                text: 'Đã thêm vào giỏ hàg',
+            })
+        </script>
+    @endif
     <!-- ====   Banner  ==== -->
     <div class="banner">
         <div class="content">
@@ -40,7 +48,8 @@
                         </a>
                         <div class="title">
                             <h3>{{ $key->name }}</h3>
-                            <p>{{ $key->price }}</p>
+                            <p>{{ $key->price }} vnđ</p>
+                            <h3>Còn lại {{ $key->quantity}}</h3>
                         </div>
                     </div>
                 @endforeach
@@ -77,6 +86,7 @@
                         <p class="price">Giá: {{ number_format($key->price, 0) }}</p>
                         <span><i class="fas fa-star"></i> 4.5</span>
                     </div>
+                    <p class="price">Còn lại: {{ number_format($key->quantity, 0) }}</p>
                     <button class="btn btn-secondary">
                         <a href="/addtocart/{{$key->id}}" style="text-decoration: none; color: white">
                             <i class="fas fa-shopping-bag"></i>Thêm vào giỏ hàng
