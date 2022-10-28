@@ -25,7 +25,7 @@
     @endif
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header  bg-blue" >
             <h3 class="card-title">Danh sách đơn hàng</h3>
         </div>
 
@@ -58,15 +58,23 @@
                                 </td>
                             @elseif($key -> status == 0)
                                 <td>
-                                    <span class="badge badge-warning">Đang chuẩn bị</span>
+                                    <span class="badge badge-warning">Đang đợi xác nhận</span>
                                 </td>
                             @elseif($key -> status == 1)
                                 <td>
-                                    <span class="badge badge-info">Đang giao hàng</span>
+                                    <span class="badge badge-info">Đang chuẩn bị</span>
                                 </td>
                             @elseif($key -> status == 2)
                                 <td>
-                                    <span class="badge badge-success">Đã giao hàng</span>
+                                    <span class="badge badge-primary">Đang giao hàng</span>
+                                </td>
+                            @elseif($key -> status == 3)
+                                <td>
+                                    <span class="badge badge-secondary">Đã giao hàng</span>
+                                </td>
+                            @elseif($key -> status == 4)
+                                <td>
+                                    <span class="badge badge-success">Đã nhận được hàng</span>
                                 </td>
                             @endif
                             <td>{{ $key->address }}</td>
@@ -138,7 +146,9 @@
 
         </div>
         <!-- /.card-body -->
-
+        <div class="d-flex justify-content-center">
+            {{ $order->links('pagination::bootstrap-4') }}
+        </div>
     </div>
     <div class="d-flex justify-content-center">
 

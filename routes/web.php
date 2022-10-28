@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Client\HomeControlller;
@@ -32,6 +33,18 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/edit/{id}',  [AdminController::class, 'getEditProduct']);
         Route::post('/edit',  [AdminController::class, 'postEditProduct']);
         Route::get('/delete/{id}',  [AdminController::class, 'deleteProduct']);
+        Route::get('/search',  [AdminController::class, 'searchProduct']);
+    });
+
+
+    Route::prefix('/supplier')->group(function () {
+        Route::get('/list',  [SupplierController::class, 'getListSupplier']);
+        Route::get('/add',  [SupplierController::class, 'getAddSupplier']);
+        Route::post('add', [SupplierController::class, 'postAddSupplier']);
+        Route::get('/edit/{id}',  [SupplierController::class, 'getEditSupplier']);
+        Route::post('/edit',  [SupplierController::class, 'postEditSupplier']);
+        Route::get('/delete/{id}',  [SupplierController::class, 'deleteSupplier']);
+        Route::get('/search',  [SupplierController::class, 'searchSupplier']);
     });
 
     Route::prefix('/order')->group(function () {
@@ -74,6 +87,8 @@ Route::prefix('/')->group(function () {
     Route::get('addtocart/{id}',  [HomeControlller::class, 'addToCart']);
     Route::post('updatecart',  [HomeControlller::class, 'updateCart']);
     Route::get('deletecart/{id}',  [HomeControlller::class, 'deleteCart']);
+    Route::get('cart_details/{id}',  [HomeControlller::class, 'cartDetails']);
+    Route::post('deleteCarts', [HomeControlller::class, 'deleteCarts']);
     Route::get('register',  [HomeControlller::class, 'register']);
     Route::get('login',  [HomeControlller::class, 'login']);
     Route::get('cart',  [HomeControlller::class, 'cart']);
@@ -84,6 +99,8 @@ Route::prefix('/')->group(function () {
     Route::post('login',  [UserController::class, 'postLogin']);
     Route::get('logout',  [UserController::class, 'logout']);
     Route::get('order',  [HomeControlller::class, 'order']);
+    Route::get('orderDelete/{id}',[HomeControlller::class,'orderDelete']);
+    Route::get('orderCancel/{id}',[HomeControlller::class,'orderCancel']);
     Route::post('order_success',  [HomeControlller::class, 'orderSuccess']);
     Route::get('order_success',  function (){
         return view('client.order_success',['page' => 'page']);
@@ -91,6 +108,5 @@ Route::prefix('/')->group(function () {
     Route::get('coming-soon',  function() {
         return view('client.coming-soon');
     });
-    Route::post('search',[HomeControlller::class,'search']);
-
+    Route::get('search',[HomeControlller::class,'search']);
 });

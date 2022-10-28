@@ -15,11 +15,14 @@ class Categories extends Seeder
     public function run()
     {
         DB::table('categories')-> insert([
-            [   'name' => 'Pizza'
+            [   'name' => 'Pizza',
+                'status' => '1'
             ],
-            [   'name' => 'Hamburger'
+            [   'name' => 'Hamburger',
+                 'status' => '1'
             ],
-            [   'name' => 'Gà Rán'
+            [   'name' => 'Gà Rán',
+                'status' => '1'
             ],
         ]);
     }
