@@ -64,7 +64,14 @@
                         @endforeach
                     </select>
                 </div>
-
+                <div class="form-group">
+                    <label>Danh sách NCC</label>
+                    <select class="form-control" name="supplierID">
+                        @foreach ($suppliers as $key)
+                                <option value="{{ $key->id }}"> {{ $key->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Mô tả</label>
                     <textarea class="form-control" name="productDescription" rows="3" placeholder="Enter ..."></textarea>

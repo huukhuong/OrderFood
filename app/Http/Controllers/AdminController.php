@@ -159,7 +159,7 @@ class AdminController extends Controller
     public function getAddProduct()
     {   $supplier = Supplier::all();
         $category = categories::all();
-        return view('admin.products.add', ['category' => $category,'supplier'=>$supplier]);
+        return view('admin.products.add', ['category' => $category,'suppliers'=>$supplier]);
     }
 
     public function postAddProduct(Request $request)
@@ -176,6 +176,7 @@ class AdminController extends Controller
             $product->image = $filename;
             $product->category_id = $request->productCategoryID;
             $product->status = 1;
+            $product->id_supplier = $request -> supplierID;
             $product->save();
             return  redirect('admin/product/add')->with('themthanhcong', 'success');
         } else {

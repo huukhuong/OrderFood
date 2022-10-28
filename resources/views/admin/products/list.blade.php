@@ -33,12 +33,12 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive">
-            <table id="example1" class="table table-bordered table-striped table-hover">
+            <table id="dtBasicExample" class="table table-bordered table-striped table-hover text-center ">
                 <thead>
                 <tr>
-                    <th class="text-center" style="width: 50px">Mã</th>
+                    <th>Mã</th>
                     <th>Tên SP</th>
-                    <th>Đơn giá</th>
+                    <th> Đơn giá</th>
                     <th>Số lượng</th>
                     <th>Danh mục</th>
                     <th>NCC</th>
@@ -73,7 +73,6 @@
             </table>
         </div>
         <!-- /.card-body -->
-
     </div>
     <div class="d-flex justify-content-center">
         {{ $product->links('pagination::bootstrap-4') }}
