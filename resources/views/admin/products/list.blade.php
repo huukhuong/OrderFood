@@ -20,16 +20,41 @@
         </a>
     </div>
 
-    <form action="admin/product/search" method="get">
-        @csrf
-        <p>Tìm Kiếm món ăn</p>
-        <div class="form-outline mb-4">
-            <input type="search" name="searchName" class="form-control" id="" placeholder="Tìm Kiếm">
+    <div class="card">
+        <div class="card-header">
+            <p>Tìm kiếm sản phẩm</p>
+            <form class="form-inline" action="admin/product/search" method="get">
+                @csrf
+                <div class="form-outline p-sm-1">
+                    <input type="search" name="searchName" class="form-control" id="" placeholder="Nhập tên sản phẩm">
+                </div>
+                <div class="form-outline p-1">
+                    <select class="form-control" name="category">
+                        <optgroup label="Chọn danh mục">
+                            <option value="" selected="selected" style="display:none">Danh mục</option>
+                            @foreach($categories as $key)
+                                <option value="{{$key->id}}">{{$key -> name}}</option>
+                            @endforeach
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-outline p-1">
+                    <select class="form-control" name="supplier">
+                        <optgroup label="Chọn nhà sản xuất">
+                            <option value="" selected="selected" style="display:none">Nhà cung cấp</option>
+                            @foreach($supplier as $key)
+                                <option value="{{$key->id}}">{{$key -> name}}</option>
+                            @endforeach
+                        </optgroup>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Tìm</button>
+            </form>
         </div>
-    </form>
+    </div>
     <div class="card">
         <div class="card-header bg-blue">
-            <h3 class="card-title">Danh sách món ăn</h3>
+            <h3 class="card-title">Danh sách sản phẩm</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive">

@@ -22,7 +22,7 @@
         <?php if(session('success')): ?>
             <div class="cart-page-heading" style="background: #00b44e; margin-bottom: 10px; display: inline-block">
                 <p>
-                    <?php echo \Session::get('success'); ?>
+                    <?php echo Session::get('success'); ?>
 
                 </p>
             </div>
@@ -30,7 +30,7 @@
             <?php if(session('fail')): ?>
                 <div class="cart-page-heading" style="background: #ff5c0f; margin-bottom: 10px; display: inline-block">
                     <p>
-                        <?php echo \Session::get('fail'); ?>
+                        <?php echo Session::get('fail'); ?>
 
                     </p>
                 </div>

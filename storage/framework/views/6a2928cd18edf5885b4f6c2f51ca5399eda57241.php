@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Admin | Danh sách đối tác</title>
 <?php $__env->stopSection(); ?>
@@ -66,7 +64,10 @@
         </div>
         <!-- /.card-body -->
     </div>
+    <div class="d-flex justify-content-center">
+        <?php echo e($partners->links('pagination::bootstrap-4')); ?>
 
+    </div>
     <script>
         function xoa(id) {
             Swal.fire({

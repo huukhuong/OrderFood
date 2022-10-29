@@ -32,7 +32,11 @@
             )
         </script>
     @endif
-
+    <div class="card">
+        <div class="card-header">
+            <a href="admin/user/add"><button class="btn btn-success">Thêm</button></a>
+        </div>
+    </div>
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Danh sách người dùng</h3>

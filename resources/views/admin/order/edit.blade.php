@@ -151,7 +151,7 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Mã hoá đơn</label>
-                                    <input type="text" class="form-control" name="idOrder"   value="{{ $order->id }}" >
+                                    <input type="text" class="form-control" name="idOrder"  readonly  value="{{ $order->id }}" >
 
                                 </div>
                                 <input type="hidden" name="application_url" id="application_url" value="{{  url('') }}"/>
@@ -229,7 +229,7 @@
                     <td>{{ number_format($key->price, 0) }}</td>
                     <td>{{ number_format($key->price * $key->amount, 0) }}</td>
                     <td class="text-center">
-                        <a class="btn btn-warning" href="admin/orderdetails/edit/{{ $key->order_id }}">
+                        <a class="btn btn-warning" href="admin/orderdetails/edit/orderID={{$key->order_id}}&productID={{$key->product_id}}">
                             <i class="fa fa-pencil fa-fw"></i>Sửa
                         </a>
                         <input type="button" class="btn btn-danger" value="Xoá"

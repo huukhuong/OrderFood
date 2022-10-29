@@ -153,8 +153,10 @@ class AdminController extends Controller
     public function getListProduct()
     {
         $product = products::where('status', 1)->orderBy('id','DESC')->paginate(5);
+        $supplier = Supplier::where('status',1)->get();
+        $categories = Categories::where('status',1) -> get();
         //   $product = products::SimplePaginate(5)::where('status', 1);
-        return view('admin.products.list', ['product' => $product]);
+        return view('admin.products.list', ['product' => $product,'supplier' =>$supplier, 'categories' => $categories]);
     }
     public function getAddProduct()
     {   $supplier = Supplier::all();
@@ -229,9 +231,23 @@ class AdminController extends Controller
     }
 
     public function searchProduct(Request $request){
-        $product = products::where('status', 1)->where('name', 'LIKE', '%'.$request->searchName.'%')->orderBy('id','DESC')->SimplePaginate(10);
-        //$product = products::SimplePaginate(5)::where('status', 1);
-        return view('admin.products.search', ['product' => $product]);
+        $product = Products::query();
+        if($request->has('searchName') && !is_null($request->searchName)){
+            $product ->where('name', 'LIKE', '%'.$request->searchName.'%');
+        }
+        if($request ->has('category') && !is_null($request->category)){
+            $product -> where('category_id',$request->category);
+        }
+        if($request->has('supplier') && !is_null($request->supplier)){
+            $product -> where('id_supplier',$request->supplier);
+        }
+        $products =$product ->where('status', 1) ->paginate(5);
+        $supplier = Supplier::where('status',1)->get();
+        $categories = Categories::where('status',1) -> get();
+
+        return view('admin.products.search', ['product' => $products,'supplier' =>$supplier, 'categories' => $categories]);
+//        ->orderBy('id','DESC')->SimplePaginate(10)
+
     }
 
 
@@ -245,6 +261,9 @@ class AdminController extends Controller
     {
         $user = User::all();
         return view('admin.user.list', ['user' => $user]);
+    }
+    public function getAddUser(){
+        return view('admin.user.add');
     }
     public function blockUser($id)
     {
@@ -330,7 +349,7 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
     public function getListPartners()
     {
-        $partners = Partners::all();
+        $partners = Partners::paginate(5);
         return view('admin.partners.list', ['partners' => $partners]);
     }
     public function getAddPartners()

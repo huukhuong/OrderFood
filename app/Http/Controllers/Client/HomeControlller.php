@@ -118,8 +118,6 @@ class HomeControlller extends Controller
 
     public function searchCategories(Request $request){
 
-
-
 //        $categories = $request -> category;
 //        if(!$categories){
 //            return redirect()->back()->with('fail', 'Không tìm thấy');

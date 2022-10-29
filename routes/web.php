@@ -61,15 +61,18 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::prefix('/orderdetails')->group(function () {
         Route::post('/add', [OrderDetails::class, 'postAddOrderDetails']);
         Route::get('/list',  [OrderDetails::class, 'getListOrder']);
-        Route::get('/edit/{id}',  [OrderDetails::class, 'getEditOrderDetails']);
+      //  Route::get('/edit/{id}',  [OrderDetails::class, 'getEditOrderDetails']);
         Route::post('/savepartner',  [OrderDetails::class, 'postSavePartners']);
-        Route::post('/edit',  [OrderDetails::class, 'postEditOrder']);
+        Route::post('/edit',  [OrderDetails::class, 'postEditOrderDetails']);
+       // Route::post('/edit/orderID={id1}&productID={id2}',  [OrderDetails::class, 'postEditOrderDetails']);
+        Route::get('/edit/orderID={id1}&productID={id2}',  [OrderDetails::class, 'getEditOrderDetails']);
 
     });
 
     Route::prefix('/user')->group(function () {
         Route::get('/list',  [AdminController::class, 'getListUser']);
         Route::get('/edit/{id}',  [AdminController::class, 'getEditUser']);
+        Route::get('/add',  [AdminController::class, 'getAddUser']);
         Route::get('/block/{id}',  [AdminController::class, 'blockUser']);
         Route::get('/resetpasswd/{id}',  [AdminController::class, 'resetPass']);
     });

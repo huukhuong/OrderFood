@@ -24,14 +24,14 @@
         @if(session('success'))
             <div class="cart-page-heading" style="background: #00b44e; margin-bottom: 10px; display: inline-block">
                 <p>
-                    {!! \Session::get('success') !!}
+                    {!! Session::get('success') !!}
                 </p>
             </div>
         @endif
             @if(session('fail'))
                 <div class="cart-page-heading" style="background: #ff5c0f; margin-bottom: 10px; display: inline-block">
                     <p>
-                        {!! \Session::get('fail') !!}
+                        {!! Session::get('fail') !!}
                     </p>
                 </div>
             @endif
