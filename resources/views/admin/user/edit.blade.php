@@ -18,54 +18,52 @@
             </div>
         @endif
 
-        <form action="admin/user/edit" method="post" enctype="multipart/form-data">
+        <form action="admin/user/edit" method="post">
             <div class="card-body">
                 @csrf
                 <div class="form-group">
-                    <input type="hidden" name="id" value="{{ $user->id }}">
+                    <input type="hidden" name="userId" value="{{ $user->id }}">
                     <label for="">Tên người dùng</label>
-                    <input type="text" class="form-control" id="" name=""
-                        placeholder="Nhập tên món ăn" disabled  value="{{ $user->name }} ">
+                    <input type="text" class="form-control" id="" name="userName"
+                        placeholder=""   value="{{ $user->name }} ">
                 </div>
                 <div class="form-group">
                     <label for="">Địa chỉ email</label>
-                    <input type="text" class="form-control" id="" name=""
-                           placeholder="" disabled value="{{ $user->email }}">
+                    <input type="text" class="form-control" id="" name="userEmail"
+                           placeholder=""  value="{{ $user->email }}">
                 </div>
                 <div class="form-group">
                     <label for="">Số điện thoại</label>
-                    <input type="text" class="form-control" id="" name=""
-                           placeholder=""disabled value="{{ $user->phone }}">
+                    <input type="text" class="form-control" id="" name="userPhone"
+                           placeholder="" value="{{ $user->phone }}">
                 </div>
                 <div class="form-group">
                     <label for="">Địa chỉ</label>
-                    <input type="text" class="form-control" id="" name=""
-                           placeholder=""disabled value="{{ $user->address }}">
+                    <input type="text" class="form-control" id="" name="userAddress"
+                           placeholder="" value="{{ $user->address }}">
                 </div>
                 <div class="form-group">
                     <label for="">Trạng thái</label>
-                    @if($user -> status == 1)
-                        <input type="text" class="form-control" id="" name=""
-                               placeholder=""disabled value="Đang hoạt động">
-                    @else
-                        <input type="text" class="form-control" id="" name=""
-                               placeholder=""disabled value="Đang bi khoá ">
-                    @endif
+                    <select class="form-control" name="userStatus">
+                        <option value="0" @if($user -> status == 0) selected @endif>Đang tạm khoá</option>
+                        <option value="1" @if($user -> status == 1) selected @endif>Đang hoạt động</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="">Quyền</label>
-                    @if($user -> role == 1)
-                        <input type="text" class="form-control" id="" name=""
-                               placeholder=""disabled value="Admin">
-                    @else
-                        <input type="text" class="form-control" id="" name=""
-                               placeholder=""disabled value="Người dùng">
-                    @endif
+                    <select class="form-control" name="userRole">
+                        <option value="0" @if($user -> role == 0) selected @endif>Người dùng</option>
+                        <option value="1" @if($user -> status == 1) selected @endif>Admin</option>
+                        <option value="2" @if($user -> status == 2) selected @endif>Quản lý bán hàng</option>
+                        <option value="3" @if($user -> status == 3) selected @endif>Quản lý kho</option>
+                    </select>
                 </div>
-                <a href="javascript:history.back()" class="btn btn-default mt-2">Quay lại</a>
+                <a href="javascript:history.back()" class="btn btn-primary">Quay lại</a>
+                <button type="submit" class="btn btn-success">Lưu</button>
             </div>
             <!-- /.card-body -->
         </form>
+
     </div>
 
     <script type="text/javascript">

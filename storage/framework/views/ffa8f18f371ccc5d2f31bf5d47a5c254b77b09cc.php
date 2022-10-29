@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     <title>Quản lý Món | Sửa thông tin</title>
 <?php $__env->stopSection(); ?>
@@ -18,54 +16,52 @@
             </div>
         <?php endif; ?>
 
-        <form action="admin/user/edit" method="post" enctype="multipart/form-data">
+        <form action="admin/user/edit" method="post">
             <div class="card-body">
                 <?php echo csrf_field(); ?>
                 <div class="form-group">
-                    <input type="hidden" name="id" value="<?php echo e($user->id); ?>">
+                    <input type="hidden" name="userId" value="<?php echo e($user->id); ?>">
                     <label for="">Tên người dùng</label>
-                    <input type="text" class="form-control" id="" name=""
-                        placeholder="Nhập tên món ăn" disabled  value="<?php echo e($user->name); ?> ">
+                    <input type="text" class="form-control" id="" name="userName"
+                        placeholder=""   value="<?php echo e($user->name); ?> ">
                 </div>
                 <div class="form-group">
                     <label for="">Địa chỉ email</label>
-                    <input type="text" class="form-control" id="" name=""
-                           placeholder="" disabled value="<?php echo e($user->email); ?>">
+                    <input type="text" class="form-control" id="" name="userEmail"
+                           placeholder=""  value="<?php echo e($user->email); ?>">
                 </div>
                 <div class="form-group">
                     <label for="">Số điện thoại</label>
-                    <input type="text" class="form-control" id="" name=""
-                           placeholder=""disabled value="<?php echo e($user->phone); ?>">
+                    <input type="text" class="form-control" id="" name="userPhone"
+                           placeholder="" value="<?php echo e($user->phone); ?>">
                 </div>
                 <div class="form-group">
                     <label for="">Địa chỉ</label>
-                    <input type="text" class="form-control" id="" name=""
-                           placeholder=""disabled value="<?php echo e($user->address); ?>">
+                    <input type="text" class="form-control" id="" name="userAddress"
+                           placeholder="" value="<?php echo e($user->address); ?>">
                 </div>
                 <div class="form-group">
                     <label for="">Trạng thái</label>
-                    <?php if($user -> status == 1): ?>
-                        <input type="text" class="form-control" id="" name=""
-                               placeholder=""disabled value="Đang hoạt động">
-                    <?php else: ?>
-                        <input type="text" class="form-control" id="" name=""
-                               placeholder=""disabled value="Đang bi khoá ">
-                    <?php endif; ?>
+                    <select class="form-control" name="userStatus">
+                        <option value="0" <?php if($user -> status == 0): ?> selected <?php endif; ?>>Đang tạm khoá</option>
+                        <option value="1" <?php if($user -> status == 1): ?> selected <?php endif; ?>>Đang hoạt động</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="">Quyền</label>
-                    <?php if($user -> role == 1): ?>
-                        <input type="text" class="form-control" id="" name=""
-                               placeholder=""disabled value="Admin">
-                    <?php else: ?>
-                        <input type="text" class="form-control" id="" name=""
-                               placeholder=""disabled value="Người dùng">
-                    <?php endif; ?>
+                    <select class="form-control" name="userRole">
+                        <option value="0" <?php if($user -> role == 0): ?> selected <?php endif; ?>>Người dùng</option>
+                        <option value="1" <?php if($user -> status == 1): ?> selected <?php endif; ?>>Admin</option>
+                        <option value="2" <?php if($user -> status == 2): ?> selected <?php endif; ?>>Quản lý bán hàng</option>
+                        <option value="3" <?php if($user -> status == 3): ?> selected <?php endif; ?>>Quản lý kho</option>
+                    </select>
                 </div>
-                <a href="javascript:history.back()" class="btn btn-default mt-2">Quay lại</a>
+                <a href="javascript:history.back()" class="btn btn-primary">Quay lại</a>
+                <button type="submit" class="btn btn-success">Lưu</button>
             </div>
             <!-- /.card-body -->
         </form>
+
     </div>
 
     <script type="text/javascript">

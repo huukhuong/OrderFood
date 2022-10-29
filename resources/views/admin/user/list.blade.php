@@ -32,6 +32,15 @@
             )
         </script>
     @endif
+    @if (session('themthanhcong'))
+        <script>
+            Swal.fire(
+                'Thành công!',
+                'Bạn thêm thành công, mật khẩu mặc định là 123456',
+                'success'
+            )
+        </script>
+    @endif
     <div class="card">
         <div class="card-header">
             <a href="admin/user/add"><button class="btn btn-success">Thêm</button></a>

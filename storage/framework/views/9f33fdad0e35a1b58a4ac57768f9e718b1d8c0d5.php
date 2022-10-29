@@ -32,7 +32,7 @@
                     title: '',
                     text: 'Sửa sản phẩm thành công',
                 }).then(function() {
-                   
+
                 });
             </script>
         <?php endif; ?>
