@@ -104,7 +104,7 @@
                 @endif
                 @if(auth()->user()->role == 1 || auth()->user()->role == 3 )
                     <li class="nav-item">
-                        <a href="admin/" class="nav-link">
+                        <a href="admin/import/list" class="nav-link">
                             <i class="nav-icon fas fa-handshake"></i>
                             <p>
                                 Quản lý nhập hàng

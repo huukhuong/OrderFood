@@ -115,7 +115,7 @@
                            value="">
                 </div>
                 <div class="form-group" readonly>
-                    <label for="order">Tên khách hàng</label>
+                    <label for="order">Tên nhân viên</label>
                     <select class="form-control" name="partnerId">
                         @foreach ($users as $key)
                             @if(Auth::user()->role != 1 && $key->id == Auth::user()->id )

@@ -425,8 +425,12 @@ class AdminController extends Controller
     public function searchOrders(Request $request)
     {
         $order = Orders::query();
-        if (!is_null($request->searchId)) {
+        if (!is_null($request->searchId) && is_numeric($request->searchId)) {
             $order->find($request->searchId);
+        }
+        if (!is_null($request->searchId) && !is_numeric($request->searchId)) {
+            $user = User::where('name',$request->searchId)->first();
+            $order->where('user_id',$user->id);
         }
         if (!is_null($request->startDay) && !is_null($request->endDay)) {
             $order->whereBetween('created_at',[$request->startDay,$request->endDay]);
