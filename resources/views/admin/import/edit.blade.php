@@ -8,7 +8,7 @@
 
     <div class="card">
         <div class="card-header  bg-blue">
-            <h3 class="card-title">Sửa thông đơn hàng</h3>
+            <h3 class="card-title">Thêm Phiếu Nhập</h3>
         </div>
         @if (count($errors) > 0)
             <div class="alert alert-danger">
@@ -39,91 +39,70 @@
             </script>
         @endif
 
-        <form action="admin/import/edit" method="post">
+        <form action="admin/import/add" method="post">
             <div class="card-body">
                 @csrf
-                <div class="form-group">
-                    <label for="">Mã </label>
-                    <input type="hidden" class="form-control" id="id" name="orderId" placeholder=""
-                           value="{{ $order->id }}">
-                    <input type="text" class="form-control" id="" name="" placeholder=""
-                           value="{{ $order->id }}">
-                </div>
-                <div class="form-group">
-                    <label for="order">Tên khách hàng</label>
-                    <input type="hidden" class="form-control" id="order" name="orderIDCustommer" placeholder=""
-                           value="{{ $order->user_id}}">
-                    <input type="text" class="form-control" id="order" name="" placeholder=""
-                           value="{{ $order->user_linked->name }}">
-                </div>
-                <div class="form-group">
-
-                    <label for="order">Địa chỉ</label>
-                    <input type="text" class="form-control" id="order" name="orderAddress" placeholder=""
-                           value="{{ $order->address }}">
-                </div>
-                <div class="form-group">
-                    <label for="order">Số điện thoại</label>
-                    <input type="text" class="form-control" id="order" name="orderPhone" placeholder=""
-                           value="{{ $order->phone }}">
-                </div>
-                <div class="form-group">
-                    <label>Danh sách partners</label>
-                    <select class="form-control" name="partnerId">
-                        @foreach ($partners as $key)
-                            @if ($order ->id_partner == $key->id)
-                                <option selected value="{{ $order->id_partner }}"> {{ $key->name }} </option>
-                            @else
-                                <option value="{{ $key->id }}"> {{ $key->name }} </option>
+                <div class="form-group" readonly>
+                    <label for="order">Tên nhân viên</label>
+                    <select class="form-control" name="userId" >
+                        @foreach ($users as $key)
+                            @if(Auth::user()->role != 1 && $key->id == Auth::user()->id )
+                                <option value="{{ $key->id }}"
+                                        @if(Auth::user()->id == $key ->id) selected @endif> {{ $key->name }} </option>
+                            @endif
+                            @if(Auth::user()->role == 1)
+                                <option value="{{ $key->id }}"
+                                        @if(Auth::user()->id == $key ->id) selected @endif> {{ $key->name }} </option>
                             @endif
                         @endforeach
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="order">Thời gian tạo đơn</label>
-                    <input type="text" class="form-control" id="order" name="orderCreated" placeholder=""
-                           value="{{ $order->created_at }}">
-                </div>
-                <div class="form-group">
-                    <label for="order">Mô tả</label>
-                    <textarea class="form-control" id="order" name="orderDescription" placeholder=""
-                    >{{ $order->description }} </textarea>
-                </div>
-                <div class="form-group">
-                    <label>Trạng thái đơn hàng</label>
-                    <select class="form-control" name="orderStatus" {{ $order->status == 0 ? 'disabled' : '' }}>
-                        <option  @if ($order->status == -1) selected @endif  value="-1">Đơn hàng bị huỷ</option>
-                        <option  @if ($order->status == 0) selected @endif value="0">Đang đợi quán xác nhận</option>
-                        <option  @if ($order->status == 1) selected @endif value="1">Đang chuẩn bị</option>
-                        <option  @if ($order->status == 2) selected @endif value="2">Đang giao hàng</option>
-                        <option  @if ($order->status == 3) selected @endif value="3">Đã giao hàng</option>
-                        <option  @if ($order->status == 4) selected @endif value="4">Đã nhận được hàng</option>
-{{--                        @if ($order->status == -1)--}}
-{{--                            <option selected value="-1">Đơn hàng bị huỷ</option>--}}
-{{--                            @elseif ($order->status == 0)--}}
-{{--                                <option selected value="0">Đang đợi quán xác nhận</option>--}}
-{{--                                @elseif ($order->status == 1)--}}
-{{--                                    <option selected value="1">Đang chuẩn bị</option>--}}
-{{--                                    @elseif ($order->status == 2)--}}
-{{--                                        <option selected value="2">Đang giao hàng</option>--}}
-{{--                                        @elseif ($order->status == 3)--}}
-{{--                                            <option selected value="3">Đã giao hàng</option>--}}
-{{--                                            @elseif ($order->status == 4)--}}
-{{--                                                <option selected value="4">Đã nhận được hàng</option>--}}
-{{--                                        @endif--}}
-{{--                                        </option>--}}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="order">Tổng đơn hàng</label>
-                    <input type="number" class="form-control" id="order" name="orderCreated" placeholder="" disabled
-                           value="{{ $order->total }}">
+                    <div class="form-group">
+                        <label for="order">Thời gian tạo đơn</label>
+                        <input type="text" class="form-control" id="order" name="importCreated" placeholder=""
+                               value="{{$import -> created_at}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="order">Mô tả</label>
+                        <textarea class="form-control" id="order" name="importDescription" placeholder=""
+                        >Không</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Trạng thái đơn hàng</label>
+                        <select class="form-control" name="importStatus">
+                            <option value="0">Huỷ nhập hàng</option>
+                            <option value="1" selected>Nhập hàng thành công</option>
+                        </select>
+                    </div>
+                    <div class="card bg-cyan form-inline">
+                        <div class="mycopy d-inline-block" id="mycopy">
+                            <div class="form-group">
+                                <label>Sản phẩm</label>
+                                <select id="sectorSelect" class="form-control sectorSelect" name="productID[]">
+                                    @foreach ($products as $key)
+                                        <option value="{{ $key->id }}"> {{ $key->name }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="order">Số lượng</label>
+                                <input type="number" class="form-control" id="order" name="quantity[]" placeholder=""
+                                       value="" >
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success" onclick="addChild()">Thêm sản phẩm</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="order">Tổng tiền đơn hàng</label>
+                        <input type="number" class="form-control" id="order" name="importTotal" placeholder="" readonly
+                               required
+                               value="{{$import -> total}}">
+                    </div>
                 </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
                 <a href="javascript:history.back()" class="btn btn-default">Quay lại</a>
-                <button type="submit" class="btn btn-primary" {{ $order->status == 0 ? 'disabled' : '' }}>Lưu</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
             </div>
         </form>
 
@@ -132,7 +111,7 @@
     <div class="card">
         <div class="card-header">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" @if($order->status != 1 && $order->status != 0) disabled @endif data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-primary" data-toggle="modal" @if($import->status != 1 && $import->status != 0) disabled @endif data-target="#exampleModalCenter">
                 Thêm chi tiết đơn hàng
             </button>
 
@@ -146,12 +125,12 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="admin/orderdetails/add" method="post" id="myform">
+                        <form action="admin/importdetails/add" method="post" id="myform">
                             @csrf
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Mã hoá đơn</label>
-                                    <input type="text" class="form-control" name="idOrder"  readonly  value="{{ $order->id }}" >
+                                    <input type="text" class="form-control" name="idImport"  readonly  value="{{ $import->id }}" >
 
                                 </div>
                                 <input type="hidden" name="application_url" id="application_url" value="{{  url('') }}"/>
@@ -171,7 +150,6 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Giá</label>
                                     <input type="number" name="productPrice" id="productPrice" class="form-control"  value="" >
-
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -204,9 +182,9 @@
             </div>
     </div>
     </div>
-{{--    Thông tin chi tiết đơn đặt hàng--}}
+{{--    Thông tin chi tiết phiếu nhập--}}
     <div class="card">
-        <div class="card-header bg-gray"> Thông tin đơn hàng </div>
+        <div class="card-header bg-gray"> Thông tin chi tiết phiếu nhập hàng </div>
     <div class="card-body table-responsive">
         <table id="example1" class="table table-bordered table-striped table-hover">
             <thead>
@@ -221,15 +199,16 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($orderdetails as $key)
+
+            @foreach ($importdetails as $key)
                 <tr>
-                    <td class="text-center">{{ $key->order_id }}</td>
+                    <td class="text-center">{{ $key->import_id }}</td>
                     <td>{{ $key->products_linked->name }}</td>
                     <td>{{ $key->amount }}</td>
-                    <td>{{ number_format($key->price, 0) }}</td>
-                    <td>{{ number_format($key->price * $key->amount, 0) }}</td>
+                    <td>{{ number_format($key->products_linked->price, 0) }}</td>
+                    <td>{{ number_format($key->products_linked->price * $key->amount, 0) }}</td>
                     <td class="text-center">
-                        <a class="btn btn-warning" href="admin/orderdetails/edit/orderID={{$key->order_id}}&productID={{$key->product_id}}">
+                        <a class="btn btn-warning" href="admin/importdetails/edit/importID={{$key->import_id}}&productID={{$key->product_id}}">
                             <i class="fa fa-pencil fa-fw"></i>Sửa
                         </a>
                         <input type="button" class="btn btn-danger" value="Xoá"
@@ -238,7 +217,7 @@
                 </tr>
             @endforeach
             <tr>
-                <td colspan="6" class="text-right">Tổng tiền : {{ $order->total }} </td>
+                <td colspan="6" class="text-right">Tổng tiền : {{ number_format($import->total ,0)}} </td>
             </tr>
             </tbody>
         </table>

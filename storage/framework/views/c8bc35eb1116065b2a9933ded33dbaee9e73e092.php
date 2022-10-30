@@ -49,7 +49,7 @@
                     <input type="hidden" name="application_url" id="application_url" value="<?php echo e(url('')); ?>"/>
                     <div class="form-group">
                         <label>Danh sách sản phẩm</label>
-                        <select class="form-control" name="productID">
+                        <select class="form-control" name="productID" readonly="true" >
                             <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option  <?php if($orderDetails->product_id == $key->id): ?> selected <?php endif; ?> value="<?php echo e($key->id); ?>"> <?php echo e($key->name); ?> </option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

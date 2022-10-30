@@ -1,7 +1,7 @@
 @extends('admin.main')
 
 @section('title')
-    <title>Admin | Danh sách món</title>
+    <title>Admin | Danh sách đơn nhập hàng</title>
 @endsection
 
 @section('content')
@@ -32,7 +32,7 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <p>Tìm kiếm đơn hàng</p>
+            <p>Tìm kiếm</p>
             <form class="form-inline" action="admin/import/search" method="get">
                 <div class="form-outline p-sm-1">
                     <input type="search" name="searchId" class="form-control" id="" placeholder="Nhập mã đơn hàng">
@@ -53,7 +53,7 @@
     </div>
     <div class="card">
         <div class="card-header  bg-blue">
-            <h3 class="card-title">Danh sách đơn hàng</h3>
+            <h3 class="card-title">Danh sách đơn nhập hàng</h3>
         </div>
 
         <!-- /.card-header -->
@@ -62,52 +62,31 @@
                 <thead>
                 <tr>
                     <th class="text-center" style="width: 50px">Mã</th>
-                    <th>Tên Khách hàng</th>
+                    <th>Tên nhân viên nhập</th>
+                    <th>Ghi chú</th>
                     <th>Tổng tiền</th>
+                    <th>Ngày tạo</th>
                     <th>Trạng thái</th>
-                    <th>Địa chỉ</th>
-                    <th>Số điện thoại</th>
-                    <th>Mô tả</th>
-                    <th>Ngày đặt</th>
                     <th>Thao tác</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($order as $key)
+                @foreach ($imports as $key)
                     <tr>
                         <td class="text-center">{{ $key->id }}</td>
-
                         <td>{{ $key->user_linked->name }}</td>
-                        <td>{{ number_format($key->total, 0) }}</td>
-                        @if ($key->status == -1)
+                        <td>{{ $key->description }}</td>
+                        <td>{{ number_format($key->total ,0)}} VNĐ</td>
+                        <td>{{ $key->created_at }}</td>
+                         @if ($key->status == 0)
                             <td>
-                                <span class="badge badge-danger">Đã huỷ đơn</span>
-                            </td>
-                        @elseif($key -> status == 0)
-                            <td>
-                                <span class="badge badge-warning">Đang đợi xác nhận</span>
+                                <span class="badge badge-danger">Đã huỷ nhập</span>
                             </td>
                         @elseif($key -> status == 1)
                             <td>
-                                <span class="badge badge-info">Đang chuẩn bị</span>
-                            </td>
-                        @elseif($key -> status == 2)
-                            <td>
-                                <span class="badge badge-primary">Đang giao hàng</span>
-                            </td>
-                        @elseif($key -> status == 3)
-                            <td>
-                                <span class="badge badge-secondary">Đã giao hàng</span>
-                            </td>
-                        @elseif($key -> status == 4)
-                            <td>
-                                <span class="badge badge-success">Đã nhận được hàng</span>
+                                <span class="badge badge-warning">Đã nhập</span>
                             </td>
                         @endif
-                        <td>{{ $key->address }}</td>
-                        <td>{{ $key->phone }}</td>
-                        <td>{{ $key->description }}</td>
-                        <td>{{ $key->created_at }}</td>
                         <td class="text-left">
                             <a class="btn btn-primary " href="admin/import/details/{{ $key->id }}">
                                 Xem chi tiết
@@ -118,54 +97,6 @@
                             <a class="btn btn-dark " href="admin/import/print/{{ $key->id }}">
                                 PDF
                             </a>
-                        @if ($key->status == 0)
-                            <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                        data-target="#order{{ $key->id }}">
-                                    Phân công
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="order{{ $key->id }}" tabindex="-1" role="dialog"
-                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="">Modal title</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <form action="admin/import/savepartner" class=""
-                                                      method="post">
-                                                    @csrf
-                                                    <select class="form-control" name="idpartner">
-                                                        @foreach ($partners as $key2)
-                                                            <option value="{{ $key2->id }}">{{ $key2->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    <input type="hidden" value="{{ $key->id }}" name="idorder">
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Close
-                                                        </button>
-                                                        <button type="submit" class="btn btn-primary">Save
-                                                            changes
-                                                        </button>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-
                             {{-- <td class="text-center"><a href="admin/category/delete/{{$key->id}}"><button class="btn btn-danger"><i class="fas fa-trash"></i>Xoá</button></a></td> --}}
                         </td>
                     </tr>
@@ -178,7 +109,7 @@
         </div>
         <!-- /.card-body -->
         <div class="d-flex justify-content-center">
-            {{ $order->links('pagination::bootstrap-4') }}
+            {{ $imports->links('pagination::bootstrap-4') }}
         </div>
     </div>
     <div class="d-flex justify-content-center">

@@ -49,7 +49,7 @@
                     <input type="hidden" name="application_url" id="application_url" value="{{  url('') }}"/>
                     <div class="form-group">
                         <label>Danh sách sản phẩm</label>
-                        <select class="form-control" name="productID">
+                        <select class="form-control" name="productID" readonly="true" >
                             @foreach ($products as $key)
                                 <option  @if ($orderDetails->product_id == $key->id) selected @endif value="{{ $key->id }}"> {{ $key->name }} </option>
                             @endforeach

@@ -56,8 +56,8 @@
                             <td><?php echo e($key->amount); ?></td>
                             <td><?php echo e(number_format($key->price, 0)); ?></td>
                             <td><?php echo e(number_format($key->price * $key->amount, 0)); ?></td>
-                            
-                            
+
+
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <tr>
@@ -82,4 +82,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('admin.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\admin\Desktop\CodeNam4\OrderFood\resources\views/admin/order/orderdetails.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\admin\Desktop\CodeNam4\OrderFood\resources\views/admin/order/importdetails.blade.php ENDPATH**/ ?>

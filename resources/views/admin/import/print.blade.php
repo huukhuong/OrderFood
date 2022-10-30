@@ -13,16 +13,7 @@
         <div class="card-header bg-danger"> Hoá Đơn</div>
     </div>
     <div class="p-1">
-        Mã khách hàng : {{ $order->id }}
-    </div>
-    <div class="p-1">
-        Tên : {{ $order->user_linked->name }}
-    </div>
-    <div class="p-1">
-        Số điện thoại : {{ $order->phone }}
-    </div>
-    <div class="p-1">
-        Địa chỉ : {{ $order->address }}
+        Mã phiếu nhập : {{ $order->id }}
     </div>
     <div class="p-1">
         Ghi chú : {{ $order->description }}
@@ -31,10 +22,10 @@
         Thời gian : {{ $order->created_at }}
     </div>
     <div class="p-1">
-        Tổng tiền : {{ $order->total }}
+        Tổng tiền : {{number_format( $order->total,0 )}}
     </div>
     <div class="p-1">
-        Nhân Viên : {{auth()->user()->name}}
+        Nhân Viên : {{$order->user_linked->name}}
     </div>
     <div class="card">
         <div class="card-header bg-gray"> Thông tin đơn hàng </div>
@@ -56,15 +47,15 @@
                         <td class="text-center">{{ $key->order_id }}</td>
                         <td>{{ $key->products_linked->name }}</td>
                         <td>{{ $key->amount }}</td>
-                        <td>{{ number_format($key->price, 0) }}</td>
-                        <td>{{ number_format($key->price * $key->amount, 0) }}</td>
+                        <td>{{ number_format($key->products_linked->price, 0) }}</td>
+                        <td>{{ number_format($key->products_linked->price * $key->amount, 0) }}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-    <h3>Tổng tiền : {{ $order->total }} vnđ</h3>
+    <h3>Tổng tiền : {{ number_format($order->total,0) }} vnđ</h3>
 </div>
 {{--<button onclick="myprint()">Print this page</button>--}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

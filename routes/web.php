@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\ImportDetailsController;
 use App\Http\Controllers\OrderDetails;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -74,6 +75,15 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/search',  [ImportController::class, 'searchImports']);
         Route::get('/print/{id}',[ImportController::class,'getPrint']);
 
+    });
+
+    Route::prefix('/importdetails')->group(function () {
+        Route::get('/list',  [ImportController::class, 'getListImport']);
+        Route::post('/add',  [ImportDetailsController::class, 'postAddDetails']);
+        Route::get('/details/{id}',  [ImportController::class, 'getDetailImport']);
+        Route::get('/edit/importID={id1}&productID={id2}',  [ImportDetailsController::class, 'getEditDetail']);
+        Route::post('/savepartner',  [ImportController::class, 'postSavePartners']);
+        Route::post('/edit',  [ImportDetailsController::class, 'postEditDetails']);
     });
 
     Route::prefix('/orderdetails')->group(function () {
