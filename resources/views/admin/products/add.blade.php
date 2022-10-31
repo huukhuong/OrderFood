@@ -47,9 +47,14 @@
                         placeholder="Nhập tên món ăn">
                 </div>
                 <div class="form-group">
-                    <label for="productPrice">Giá tiền</label>
+                    <label for="productPrice">Giá bán</label>
                     <input type="number" class="form-control" id="productPrice" name="productPrice"
                         placeholder="Nhập giá tiền">
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Giá nhập</label>
+                    <input type="number" class="form-control" id="productPrice" name="productPriceImport"
+                           placeholder="Nhập giá tiền">
                 </div>
                 <div class="form-group">
                     <label for="productQuantity">Số lượng</label>

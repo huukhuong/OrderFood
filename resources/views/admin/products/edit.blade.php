@@ -51,7 +51,12 @@
                 <div class="form-group">
                     <label for="productPrice">Giá tiền</label>
                     <input type="number" class="form-control" id="productPrice" name="productPrice"
-                        placeholder="Nhập giá tiền" value="{{ $product->price }}">
+                        placeholder="Nhập giá tiền" value="{{ $product->price }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Giá nhập</label>
+                    <input type="number" class="form-control" id="productPrice" name="productPriceImport"
+                           placeholder="Nhập giá tiền" value="{{$product->price_import}}" required>
                 </div>
                 <div class="form-group">
                     <label for="productQuantity">Số lượng</label>

@@ -12,15 +12,31 @@
             )
         </script>
     <?php endif; ?>
-    <div class="py-3">
-        <a href="admin/product/add">
-            <button class="btn btn-success">Thêm món mới</button>
-        </a>
+    <div class="card">
+        <div class="card-header bg-cyan">
+            Thông báo
+        </div>
+        <div class="card-body bg-gray">
+            <?php if(!is_null($SanPhamHetHang)): ?>
+                Sản phẩm sắp hết hàng :
+                <?php $__currentLoopData = $SanPhamHetHang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo e($key -> name); ?>  ==> <a href="admin/import/add" class="text-cyan">Nhập hàng ngay</a>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
+        </div>
     </div>
-
+    <div class="card">
+        <div class="card-header">
+            <a href="admin/product/add">
+                <button class="btn btn-success">Thêm món mới</button>
+            </a>
+        </div>
+    </div>
     <div class="card">
         <div class="card-header">
             <p>Tìm kiếm sản phẩm</p>
+        </div>
+        <div class="card-body">
             <form class="form-inline" action="admin/product/search" method="get">
                 <?php echo csrf_field(); ?>
                 <div class="form-outline p-sm-1">
@@ -62,6 +78,7 @@
                     <th>Mã</th>
                     <th>Tên SP</th>
                     <th> Đơn giá</th>
+                    <th> Giá nhập</th>
                     <th>Số lượng</th>
                     <th>Danh mục</th>
                     <th>NCC</th>
@@ -75,7 +92,8 @@
                     <tr>
                         <td class="text-center"><?php echo e($key->id); ?></td>
                         <td><?php echo e($key->name); ?></td>
-                        <td><?php echo e($key->price); ?></td>
+                        <td><?php echo e(number_format($key->price)); ?></td>
+                        <td><?php echo e(number_format($key->price_import)); ?></td>
                         <td><?php echo e($key->quantity); ?></td>
                         <td><?php echo e($key->category_linked->name); ?></td>
                         <td style="max-width:150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><?php echo e($key->supplier_linked->name); ?></td>

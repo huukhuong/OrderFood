@@ -14,15 +14,31 @@
             )
         </script>
     @endif
-    <div class="py-3">
-        <a href="admin/product/add">
-            <button class="btn btn-success">Thêm món mới</button>
-        </a>
+    <div class="card">
+        <div class="card-header bg-cyan">
+            Thông báo
+        </div>
+        <div class="card-body bg-gray">
+            @if(!is_null($SanPhamHetHang))
+                Sản phẩm sắp hết hàng :
+                @foreach($SanPhamHetHang as $key)
+                    {{$key -> name}}  ==> <a href="admin/import/add" class="text-cyan">Nhập hàng ngay</a>
+                @endforeach
+                @endif
+        </div>
     </div>
-
+    <div class="card">
+        <div class="card-header">
+            <a href="admin/product/add">
+                <button class="btn btn-success">Thêm món mới</button>
+            </a>
+        </div>
+    </div>
     <div class="card">
         <div class="card-header">
             <p>Tìm kiếm sản phẩm</p>
+        </div>
+        <div class="card-body">
             <form class="form-inline" action="admin/product/search" method="get">
                 @csrf
                 <div class="form-outline p-sm-1">
@@ -64,6 +80,7 @@
                     <th>Mã</th>
                     <th>Tên SP</th>
                     <th> Đơn giá</th>
+                    <th> Giá nhập</th>
                     <th>Số lượng</th>
                     <th>Danh mục</th>
                     <th>NCC</th>
@@ -77,7 +94,8 @@
                     <tr>
                         <td class="text-center">{{ $key->id }}</td>
                         <td>{{ $key->name }}</td>
-                        <td>{{ $key->price }}</td>
+                        <td>{{ number_format($key->price) }}</td>
+                        <td>{{ number_format($key->price_import) }}</td>
                         <td>{{ $key->quantity }}</td>
                         <td>{{ $key->category_linked->name }}</td>
                         <td style="max-width:150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ $key->supplier_linked->name }}</td>

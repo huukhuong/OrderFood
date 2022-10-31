@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group" readonly>
                     <label for="order">Tên NCC</label>
-                    <select class="form-control" name="supplierID">
+                    <select class="form-control" name="supplierID" id="supplierID" onchange="test()">
                         <?php $__currentLoopData = $suppliers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($key->id); ?>"> <?php echo e($key->name); ?> </option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -85,20 +85,23 @@
                         <option value="1" selected>Nhập hàng thành công</option>
                     </select>
                 </div>
-                <div class="card bg-cyan form-inline">
-                    <div class="mycopy d-inline-block" id="mycopy">
-                        <div class="form-group">
+                <div class="card bg-white form-inline p-2">
+                    <div class="row mycopy w-100 pb-3" id="mycopy">
+                        <div class="col-6 form-group">
                             <label>Sản phẩm</label>
-                            <select id="sectorSelect" class="form-control sectorSelect" name="productID[]">
+                            <select id="productSelect" class="form-control sectorSelect m-2" name="productID[]">
                                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option value="<?php echo e($key->id); ?>"> <?php echo e($key->name); ?> </option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="col-4 form-group">
                             <label for="order">Số lượng</label>
-                            <input type="number" class="form-control" id="order" name="quantity[]" placeholder=""
-                                   value="" >
+                            <input type="number" class="form-control m-2" id="order" name="quantity[]" placeholder=""
+                                   value="0"  required>
+                        </div>
+                        <div class="col-2 form-group">
+                            <button class="btn btn-danger" onclick="remove('#mycopy')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <button type="button" class="btn btn-success" onclick="addChild()">Thêm sản phẩm</button>
@@ -120,6 +123,7 @@
 
     </div>
     <script type="text/javascript">
+        var idClone = 1 ;
         const input = document.getElementById('imgInp')
         imgInp.onchange = evt => {
             const [file] = imgInp.files
@@ -127,12 +131,37 @@
                 blah.src = URL.createObjectURL(file)
             }
         }
-
+        function remove(el) {
+            var element = el;
+            element.remove();
+        }
         function addChild() {
             var elem = document.querySelector('#mycopy');
             var clone = elem.cloneNode(true);
+            clone.id = "mycopy"+idClone;
             elem.after(clone);
         }
+        function test() {
+            supplierID = document.getElementById("supplierID").value;
+            console.log("Supplier id" + supplierID)
+            $.ajax({
+                url:  "http://127.0.0.1:8000/admin/product/getProductBySupplier/" + supplierID, //we use the same url we used in our route file and we are adding the id variable which have the selected value in dropdown#1
+                dataType: "json", //we specify that we are going to use json type of data. That's where we sent our query result (from our controller)
+                success: function (data) { //*on my understanding using json datatype means that the variable "data" gets the value and that's why we use it to tell what to do since here.*
+                    //and this final part is where we use the dropdown#1 value and we set the values for the dropdown#2 just adding the variables that we got from our query (in controllert) through "data" variable.
+                    console.log(data)
+                    $("#productSelect").empty();
+                    for(var i = 0; i < data.length ; i++){
+                        console.log(data[i].name)
+                        var x = document.getElementById("productSelect");
+                        var option = document.createElement("option");
+                        option.text = data[i].name;
+                        x.add(option);
+                    }
+                }
+            });
+        }
+
     </script>
 
 <?php $__env->stopSection(); ?>

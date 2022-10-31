@@ -167,10 +167,11 @@ class AdminController extends Controller
     public function getListProduct()
     {
         $product = products::where('status', 1)->orderBy('id', 'DESC')->paginate(5);
+        $product_out_of_stock = products::where('status', 1)->where('quantity',"<=",5)->get();
         $supplier = Supplier::where('status', 1)->get();
         $categories = Categories::where('status', 1)->get();
         //   $product = products::SimplePaginate(5)::where('status', 1);
-        return view('admin.products.list', ['product' => $product, 'supplier' => $supplier, 'categories' => $categories]);
+        return view('admin.products.list', ['SanPhamHetHang' => $product_out_of_stock,'product' => $product, 'supplier' => $supplier, 'categories' => $categories]);
     }
 
     public function getAddProduct()
@@ -191,6 +192,7 @@ class AdminController extends Controller
             $product->description = $request->productDescription;
             $product->quantity = $request->productQuantity;
             $product->price = $request->productPrice;
+            $product->price_import = $request -> productPriceImport;
             $product->image = $filename;
             $product->category_id = $request->productCategoryID;
             $product->status = 1;
@@ -232,6 +234,7 @@ class AdminController extends Controller
         $product->description = $request->productDescription;
         $product->quantity = $request->productQuantity;
         $product->price = $request->productPrice;
+        $product->price_import = $request -> productPriceImport;
         $product->category_id = $request->productCategoryID;
         $product->id_supplier = $request->supplierID;
         if ($request->hasFile('productImage')) {

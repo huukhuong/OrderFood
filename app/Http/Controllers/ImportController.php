@@ -101,7 +101,7 @@ class ImportController extends Controller
         $users = User::all();
         $import_details = ImportDetails::where('import_id',$id)->get();
         $import = Import::find($id);
-        $products = Products::all();
+        $products = Products::where('id_supplier',$import->supplier_id)->get();
         return view('admin.import.edit', ['users'=>$users,'import' => $import, 'importdetails' => $import_details, 'products' => $products]);
 
     }

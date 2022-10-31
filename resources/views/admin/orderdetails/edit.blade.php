@@ -55,6 +55,7 @@
                             @endforeach
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">Số lượng</label>
                         <input type="number" class="form-control" name="amount" id="amount" value="{{ $orderDetails->amount }}" required >
