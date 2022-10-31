@@ -98,20 +98,6 @@
                         <option  @if ($order->status == 2) selected @endif value="2">Đang giao hàng</option>
                         <option  @if ($order->status == 3) selected @endif value="3">Đã giao hàng</option>
                         <option  @if ($order->status == 4) selected @endif value="4">Đã nhận được hàng</option>
-{{--                        @if ($order->status == -1)--}}
-{{--                            <option selected value="-1">Đơn hàng bị huỷ</option>--}}
-{{--                            @elseif ($order->status == 0)--}}
-{{--                                <option selected value="0">Đang đợi quán xác nhận</option>--}}
-{{--                                @elseif ($order->status == 1)--}}
-{{--                                    <option selected value="1">Đang chuẩn bị</option>--}}
-{{--                                    @elseif ($order->status == 2)--}}
-{{--                                        <option selected value="2">Đang giao hàng</option>--}}
-{{--                                        @elseif ($order->status == 3)--}}
-{{--                                            <option selected value="3">Đã giao hàng</option>--}}
-{{--                                            @elseif ($order->status == 4)--}}
-{{--                                                <option selected value="4">Đã nhận được hàng</option>--}}
-{{--                                        @endif--}}
-{{--                                        </option>--}}
                     </select>
                 </div>
                 <div class="form-group">

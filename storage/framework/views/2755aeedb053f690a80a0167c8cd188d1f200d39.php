@@ -110,7 +110,7 @@
                            value="0 ">
                 </div>
                 </div>
-            </div>
+
             <!-- /.card-body -->
             <div class="card-footer">
                 <a href="javascript:history.back()" class="btn btn-default">Quay lại</a>

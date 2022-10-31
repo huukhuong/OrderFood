@@ -118,6 +118,7 @@ class AdminController extends Controller
         );
         $cate = new categories();
         $cate->name = $request->namecategory;
+        $cate->status = 1;
         $cate->save();
         return redirect('admin/category/add')->with('themthanhcong', 'success');
     }
