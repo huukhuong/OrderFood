@@ -204,7 +204,7 @@
 
                     <th class="text-center">Tên Sản phẩm</th>
                     <th class="text-center" style="width: 100px">Số lượng</th>
-                    <th class="text-center">Giá</th>
+                    <th class="text-center">Giá Nhập</th>
                     <th class="text-center">Tổng tiền</th>
                     <th class="text-center">Thao tác</th>
                 </tr>
@@ -216,8 +216,8 @@
                         <td class="text-center"><?php echo e($key->import_id); ?></td>
                         <td><?php echo e($key->products_linked->name); ?></td>
                         <td><?php echo e($key->amount); ?></td>
-                        <td><?php echo e(number_format($key->products_linked->price, 0)); ?></td>
-                        <td><?php echo e(number_format($key->products_linked->price * $key->amount, 0)); ?></td>
+                        <td><?php echo e(number_format($key->products_linked->price_import, 0)); ?></td>
+                        <td><?php echo e(number_format($key->products_linked->price_import * $key->amount, 0)); ?></td>
                         <td class="text-center">
                             <a class="btn btn-warning"
                                href="admin/importdetails/edit/importID=<?php echo e($key->import_id); ?>&productID=<?php echo e($key->product_id); ?>">

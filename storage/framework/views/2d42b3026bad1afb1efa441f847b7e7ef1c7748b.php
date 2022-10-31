@@ -96,20 +96,6 @@
                         <option  <?php if($order->status == 2): ?> selected <?php endif; ?> value="2">Đang giao hàng</option>
                         <option  <?php if($order->status == 3): ?> selected <?php endif; ?> value="3">Đã giao hàng</option>
                         <option  <?php if($order->status == 4): ?> selected <?php endif; ?> value="4">Đã nhận được hàng</option>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </select>
                 </div>
                 <div class="form-group">

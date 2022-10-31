@@ -55,6 +55,7 @@
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">Số lượng</label>
                         <input type="number" class="form-control" name="amount" id="amount" value="<?php echo e($orderDetails->amount); ?>" required >

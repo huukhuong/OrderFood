@@ -32,7 +32,7 @@ class ImportDetailsController extends Controller
         $importDetails = ImportDetails::where('import_id', $id )->get();
         $sum = 0;
         foreach ($importDetails as $item){
-            $total = $item -> amount * $item -> products_linked -> price;
+            $total = $item -> amount * $item -> products_linked -> price_import;
             $sum += $total;
         }
         $order = Import::find($id);

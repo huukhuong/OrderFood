@@ -58,7 +58,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Giá</label>
-                        <input type="number" name="productPrice" id="productPrice" class="form-control"  value="{{ $importDetails->products_linked->price }}" readonly >
+                        <input type="number" name="productPrice" id="productPrice" class="form-control"  value="{{ $importDetails->products_linked->price_import }}" readonly >
 
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     //and this final part is where we use the dropdown#1 value and we set the values for the dropdown#2 just adding the variables that we got from our query (in controllert) through "data" variable.
                     console.log(data)
                     $('#productPrice').empty();
-                    $('#productPrice').val(data.price);
+                    $('#productPrice').val(data.price_import);
                     $('#amount2').text("");
                   //  $('#amount2').attr("placeholder", "Số lượng còn lại " + data.quantity);;
                     $('#amount2').text("Số lượng còn lại " + data.quantity)

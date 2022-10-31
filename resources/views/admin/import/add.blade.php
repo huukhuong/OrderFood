@@ -102,8 +102,8 @@
                             <input type="number" class="form-control m-2" id="order" name="quantity[]" placeholder=""
                                    value="0"  required>
                         </div>
-                        <div class="col-2 form-group">
-                            <button class="btn btn-danger" onclick="remove('#mycopy')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <div class="col-2 form-group justify-content-center align-items-center" onclick="remove(this)">
+                            <p id="remove" class="remove btn btn-danger mt-3" type=""><i class="fa fa-trash" aria-hidden="true"></i></p>
                         </div>
                     </div>
                     <button type="button" class="btn btn-success" onclick="addChild()">Thêm sản phẩm</button>
@@ -125,6 +125,13 @@
 
     </div>
     <script type="text/javascript">
+        // function registerClickHandler() {
+        //     $('#remove').click(function() {
+        //         console.log("okkk")
+        //         $(this).parent().remove();
+        //     });
+        // }
+        // registerClickHandler();
         var idClone = 1 ;
         const input = document.getElementById('imgInp')
         imgInp.onchange = evt => {
@@ -134,8 +141,9 @@
             }
         }
         function remove(el) {
+            console.log("ok")
             var element = el;
-            element.remove();
+            element.parentElement.remove();
         }
         function addChild() {
             var elem = document.querySelector('#mycopy');

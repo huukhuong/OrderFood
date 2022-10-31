@@ -206,7 +206,7 @@
 
                     <th class="text-center">Tên Sản phẩm</th>
                     <th class="text-center" style="width: 100px">Số lượng</th>
-                    <th class="text-center">Giá</th>
+                    <th class="text-center">Giá Nhập</th>
                     <th class="text-center">Tổng tiền</th>
                     <th class="text-center">Thao tác</th>
                 </tr>
@@ -218,8 +218,8 @@
                         <td class="text-center">{{ $key->import_id }}</td>
                         <td>{{ $key->products_linked->name }}</td>
                         <td>{{ $key->amount }}</td>
-                        <td>{{ number_format($key->products_linked->price, 0) }}</td>
-                        <td>{{ number_format($key->products_linked->price * $key->amount, 0) }}</td>
+                        <td>{{ number_format($key->products_linked->price_import, 0) }}</td>
+                        <td>{{ number_format($key->products_linked->price_import * $key->amount, 0) }}</td>
                         <td class="text-center">
                             <a class="btn btn-warning"
                                href="admin/importdetails/edit/importID={{$key->import_id}}&productID={{$key->product_id}}">
