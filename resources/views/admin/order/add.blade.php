@@ -1,14 +1,14 @@
 @extends('admin.main')
 
 @section('title')
-    <title>Quản lý đơn hàng | Sửa thông tin</title>
+    <title>Quản lý đơn hàng | thêm thông tin</title>
 @endsection
 
 @section('content')
 
     <div class="card">
         <div class="card-header  bg-blue">
-            <h3 class="card-title">Sửa thông đơn hàng</h3>
+            <h3 class="card-title">Thêm thông đơn hàng</h3>
         </div>
         @if (count($errors) > 0)
             <div class="alert alert-danger">
@@ -90,9 +90,9 @@
                         <option value="4">Đã nhận được hàng</option>
                     </select>
                 </div>
-                <div class="card bg-cyan form-inline">
-                    <div class="mycopy d-inline-block" id="mycopy">
-                        <div class="form-group">
+                <div class="card bg- form-inline p-2">
+                    <div class="row mycopy w-100 pb-3" id="mycopy">
+                        <div class="col-5 form-group">
                             <label>Sản phẩm</label>
                             <select id="sectorSelect" class="form-control sectorSelect" name="productID[]">
                                 @foreach ($products as $key)
@@ -100,7 +100,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="col-6 form-group">
                             <label for="order">Số lượng</label>
                             <input type="number" class="form-control" id="order" name="quantity[]" placeholder=""
                                    value="" >

@@ -3,68 +3,90 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Hoá đơn</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <div class="container p-5 align-items-center" id="print">
-    <div class="card">
-        <div class="card-header bg-danger"> Hoá Đơn</div>
-    </div>
-    <div class="p-1">
-        Mã khách hàng : {{ $order->id }}
-    </div>
-    <div class="p-1">
-        Tên : {{ $order->user_linked->name }}
-    </div>
-    <div class="p-1">
-        Số điện thoại : {{ $order->phone }}
-    </div>
-    <div class="p-1">
-        Địa chỉ : {{ $order->address }}
-    </div>
-    <div class="p-1">
-        Ghi chú : {{ $order->description }}
-    </div>
-    <div class="p-1">
-        Thời gian : {{ $order->created_at }}
-    </div>
-    <div class="p-1">
-        Tổng tiền : {{ $order->total }}
-    </div>
-    <div class="p-1">
-        Nhân Viên : {{auth()->user()->name}}
-    </div>
-    <div class="card">
-        <div class="card-header bg-gray"> Thông tin đơn hàng </div>
-        <div class="card-body table-responsive">
-            <table id="example1" class="table table-bordered table-striped table-hover">
-                <thead>
-                <tr>
-                    <th class="text-center" style="width: 50px">Mã</th>
+    <div class="row">
+        <div class="col-12 card border-0">
+            <h2 class="text-center text-uppercase">Hoá đơn</h2>
+        </div>
+        <div class="col-12 justify-content-center d-flex mb-3">
+            <span style="width: 250px; border-top: 2px solid black;border-bottom: 2px solid black; display: flex"></span>
+        </div>
+        <div class="col-6 d-flex">
+            <div style="min-width: 130px">Mã khách hàng</div>
+             <span>: {{ $order->id }}</span>
+        </div>
+        <div class="col-6 d-flex">
+            <div style="min-width: 130px">Tên</div>
+            <span>: {{ $order->user_linked->name }}</span>
 
-                    <th class="text-center">Tên Sản phẩm</th>
-                    <th class="text-center" style="width: 100px">Số lượng</th>
-                    <th class="text-center">Giá</th>
-                    <th class="text-center">Tổng tiền</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($orderdetails as $key)
+        </div>
+        <div class="col-6 d-flex">
+            <div style="min-width: 130px">Số điện thoại</div>
+            <span>: {{ $order->phone }}</span>
+
+        </div>
+        <div class="col-6 d-flex">
+            <div style="min-width: 130px">Địa chỉ</div>
+             <span>: {{ $order->address }}</span>
+
+        </div>
+        <div class="col-6 d-flex">
+            <div style="min-width: 130px">Ghi chú</div>
+             <span>: {{ $order->description }}</span>
+
+        </div>
+        <div class="col-6 d-flex">
+            <div style="min-width: 130px">Thời gian</div>
+             <span>: {{ $order->created_at }}</span>
+
+        </div>
+        <div class="col-6 d-flex">
+            <div style="min-width: 130px">Tổng tiền</div>
+             <span>: {{ $order->total }}</span>
+
+        </div>
+        <div class="col-6 d-flex">
+            <div style="min-width: 130px">Nhân viên</div>
+             <span>: {{auth()->user()->name}}</span>
+
+        </div>
+        <div class="col-12">
+            <div style="font-weight: bold"> Thông tin đơn hàng </div>
+            <div class="table-responsive">
+                <table id="example1" class="table table-hover">
+                    <thead>
                     <tr>
-                        <td class="text-center">{{ $key->order_id }}</td>
-                        <td>{{ $key->products_linked->name }}</td>
-                        <td>{{ $key->amount }}</td>
-                        <td>{{ number_format($key->price, 0) }}</td>
-                        <td>{{ number_format($key->price * $key->amount, 0) }}</td>
+                        <th class="text-center" style="width: 50px">Mã</th>
+
+                        <th class="text-center">Tên Sản phẩm</th>
+                        <th class="text-center" style="width: 100px">Số lượng</th>
+                        <th class="text-center">Giá</th>
+                        <th class="text-center">Tổng tiền</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach ($orderdetails as $key)
+                        <tr>
+                            <td class="text-center">{{ $key->order_id }}</td>
+                            <td>{{ $key->products_linked->name }}</td>
+                            <td>{{ $key->amount }}</td>
+                            <td style="text-align: right">{{ number_format($key->price, 0) }}₫</td>
+                            <td style="text-align: right">{{ number_format($key->price * $key->amount, 0) }}₫</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <h3>Tổng tiền : {{ $order->total }} vnđ</h3>
+
+
+    <h3 style="text-align: right; font-size: 20px">Tổng tiền : {{ number_format($order->total )}}₫</h3>
 </div>
 {{--<button onclick="myprint()">Print this page</button>--}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

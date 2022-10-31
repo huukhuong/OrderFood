@@ -49,7 +49,7 @@
                     <input type="hidden" name="application_url" id="application_url" value="<?php echo e(url('')); ?>"/>
                     <div class="form-group">
                         <label>Danh sách sản phẩm</label>
-                        <select class="form-control" name="productID" readonly="true" >
+                        <select class="form-control" name="productID" readonly="true"  id="productSelector">
                             <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option  <?php if($orderDetails->product_id == $key->id): ?> selected <?php endif; ?> value="<?php echo e($key->id); ?>"> <?php echo e($key->name); ?> </option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -75,8 +75,8 @@
         <!-- /.card-body -->
     </div>
     <script type="text/javascript">
-        $('#myform').on('change', 'select', function (e) { //we watch and execute the next lines when any value from the dropdown#1 is selected
-            var id = $(this).val(); //we get the selected value on dropdown#1 and store it on id variable
+        $('#myform').on('change', '#productSelector', function (e) { //we watch and execute the next lines when any value from the dropdown#1 is selected
+            var id = $("#productSelector").val(); //we get the selected value on dropdown#1 and store it on id variable
             var url = $('#application_url').val(); //we get the url from our hidden element that we used in first line of our view file, and store it on url variable
             //here comes the ajax function part
             console.log(id);

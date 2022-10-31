@@ -63,6 +63,7 @@
                 <tr>
                     <th class="text-center" style="width: 50px">Mã</th>
                     <th>Tên nhân viên nhập</th>
+                    <th>NCC</th>
                     <th>Ghi chú</th>
                     <th>Tổng tiền</th>
                     <th>Ngày tạo</th>
@@ -75,6 +76,7 @@
                     <tr>
                         <td class="text-center">{{ $key->id }}</td>
                         <td>{{ $key->user_linked->name }}</td>
+                        <td>{{ $key->supplier_linked->name }}</td>
                         <td>{{ $key->description }}</td>
                         <td>{{ number_format($key->total ,0)}} VNĐ</td>
                         <td>{{ $key->created_at }}</td>

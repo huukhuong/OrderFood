@@ -54,6 +54,15 @@
                                 <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
+                </div>
+                <div class="form-group" readonly>
+                    <label for="order">Tên NCC</label>
+                    <select class="form-control" name="supplierID">
+                        <?php $__currentLoopData = $suppliers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($key->id); ?>"> <?php echo e($key->name); ?> </option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="order">Thời gian tạo đơn</label>
                     <input type="text" class="form-control" id="order" name="importCreated" placeholder=""

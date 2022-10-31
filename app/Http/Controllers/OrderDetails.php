@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\ImportDetails;
 use App\Models\Orderdetail;
 use App\Models\Orders;
 use App\Models\Products;
@@ -21,6 +22,11 @@ class OrderDetails extends Controller
         $orderDetails = Orderdetail::where('order_id',$id1)->where('product_id',$id2)->first();
         $products = Products::all();
         return view('admin.orderdetails.edit',['orderDetails' => $orderDetails, 'products' => $products]);
+    }
+
+    public function getDelete($id1,$id2){
+        $orderDetails = Orderdetail::where('order_id',$id1)->where('product_id',$id2)->delete();
+        return redirect()->back();
     }
 
     public function postEditOrderDetails(Request $request){

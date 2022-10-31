@@ -207,6 +207,11 @@ class AdminController extends Controller
         return response()->json($product);
     }
 
+    public function getProductBySupplier($id){
+        $product = products::where('id_supplier',$id)->get();
+        return response()->json($product);
+    }
+
     public function getEditProduct($id)
     {
 

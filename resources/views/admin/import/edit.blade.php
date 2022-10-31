@@ -1,14 +1,14 @@
 @extends('admin.main')
 
 @section('title')
-    <title>Quản lý đơn hàng | Sửa thông tin</title>
+    <title>Quản lý nhập hàng | Sửa thông tin</title>
 @endsection
 
 @section('content')
 
     <div class="card">
         <div class="card-header  bg-blue">
-            <h3 class="card-title">Thêm Phiếu Nhập</h3>
+            <h3 class="card-title">Sửa Phiếu Nhập</h3>
         </div>
         @if (count($errors) > 0)
             <div class="alert alert-danger">
@@ -39,12 +39,13 @@
             </script>
         @endif
 
-        <form action="admin/import/add" method="post">
+        <form action="admin/import/edit" method="post">
             <div class="card-body">
                 @csrf
+                <input type="hidden" value="{{$import->id}}" name="importID">
                 <div class="form-group" readonly>
                     <label for="order">Tên nhân viên</label>
-                    <select class="form-control" name="userId" >
+                    <select class="form-control" name="userId">
                         @foreach ($users as $key)
                             @if(Auth::user()->role != 1 && $key->id == Auth::user()->id )
                                 <option value="{{ $key->id }}"
@@ -56,6 +57,13 @@
                             @endif
                         @endforeach
                     </select>
+                    <div class="form-group" readonly>
+                        <label for="order">Tên NCC</label>
+                        <select class="form-control" name="supplierID">
+                            <option value="{{ $import->supplier_linked->id }}"
+                                    selected> {{ $import->supplier_linked->name }} </option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="order">Thời gian tạo đơn</label>
                         <input type="text" class="form-control" id="order" name="importCreated" placeholder=""
@@ -64,7 +72,7 @@
                     <div class="form-group">
                         <label for="order">Mô tả</label>
                         <textarea class="form-control" id="order" name="importDescription" placeholder=""
-                        >Không</textarea>
+                        >{{$import -> description}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Trạng thái đơn hàng</label>
@@ -73,24 +81,24 @@
                             <option value="1" selected>Nhập hàng thành công</option>
                         </select>
                     </div>
-                    <div class="card bg-cyan form-inline">
-                        <div class="mycopy d-inline-block" id="mycopy">
-                            <div class="form-group">
-                                <label>Sản phẩm</label>
-                                <select id="sectorSelect" class="form-control sectorSelect" name="productID[]">
-                                    @foreach ($products as $key)
-                                        <option value="{{ $key->id }}"> {{ $key->name }} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="order">Số lượng</label>
-                                <input type="number" class="form-control" id="order" name="quantity[]" placeholder=""
-                                       value="" >
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-success" onclick="addChild()">Thêm sản phẩm</button>
-                    </div>
+{{--                    <div class="card bg-cyan form-inline">--}}
+{{--                        <div class="mycopy d-inline-block" id="mycopy">--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label>Sản phẩm</label>--}}
+{{--                                <select id="sectorSelect" class="form-control sectorSelect" name="productID[]">--}}
+{{--                                    @foreach ($products as $key)--}}
+{{--                                        <option value="{{ $key->id }}"> {{ $key->name }} </option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label for="order">Số lượng</label>--}}
+{{--                                <input type="number" class="form-control" id="order" name="quantity[]" placeholder=""--}}
+{{--                                       value="">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <button type="button" class="btn btn-success" onclick="addChild()">Thêm sản phẩm</button>--}}
+{{--                    </div>--}}
                     <div class="form-group">
                         <label for="order">Tổng tiền đơn hàng</label>
                         <input type="number" class="form-control" id="order" name="importTotal" placeholder="" readonly
@@ -111,12 +119,14 @@
     <div class="card">
         <div class="card-header">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" @if($import->status != 1 && $import->status != 0) disabled @endif data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    @if($import->status != 1 && $import->status != 0) disabled @endif data-target="#exampleModalCenter">
                 Thêm chi tiết đơn hàng
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -130,13 +140,15 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Mã hoá đơn</label>
-                                    <input type="text" class="form-control" name="idImport"  readonly  value="{{ $import->id }}" >
+                                    <input type="text" class="form-control" name="idImport" readonly
+                                           value="{{ $import->id }}">
 
                                 </div>
-                                <input type="hidden" name="application_url" id="application_url" value="{{  url('') }}"/>
+                                <input type="hidden" name="application_url" id="application_url"
+                                       value="{{  url('') }}"/>
                                 <div class="form-group">
                                     <label>Danh sách sản phẩm</label>
-                                    <select id="sectorSelect"class="form-control sectorSelect" name="productID">
+                                    <select id="sectorSelect" class="form-control sectorSelect" name="productID">
                                         @foreach ($products as $key)
                                             <option value="{{ $key->id }}"> {{ $key->name }} </option>
                                         @endforeach
@@ -144,12 +156,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Số lượng</label>
-                                    <input type="number" class="form-control" name="amount" value="" >
+                                    <input type="number" class="form-control" name="amount" value="">
 
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Giá</label>
-                                    <input type="number" name="productPrice" id="productPrice" class="form-control"  value="" >
+                                    <input type="number" name="productPrice" id="productPrice" class="form-control"
+                                           value="">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -180,49 +193,52 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-    </div>
-{{--    Thông tin chi tiết phiếu nhập--}}
+    {{--    Thông tin chi tiết phiếu nhập--}}
     <div class="card">
-        <div class="card-header bg-gray"> Thông tin chi tiết phiếu nhập hàng </div>
-    <div class="card-body table-responsive">
-        <table id="example1" class="table table-bordered table-striped table-hover">
-            <thead>
-            <tr>
-                <th class="text-center" style="width: 50px">Mã</th>
-
-                <th class="text-center">Tên Sản phẩm</th>
-                <th class="text-center" style="width: 100px">Số lượng</th>
-                <th class="text-center">Giá</th>
-                <th class="text-center">Tổng tiền</th>
-                <th class="text-center">Thao tác</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            @foreach ($importdetails as $key)
+        <div class="card-header bg-gray"> Thông tin chi tiết phiếu nhập hàng</div>
+        <div class="card-body table-responsive">
+            <table id="example1" class="table table-bordered table-striped table-hover">
+                <thead>
                 <tr>
-                    <td class="text-center">{{ $key->import_id }}</td>
-                    <td>{{ $key->products_linked->name }}</td>
-                    <td>{{ $key->amount }}</td>
-                    <td>{{ number_format($key->products_linked->price, 0) }}</td>
-                    <td>{{ number_format($key->products_linked->price * $key->amount, 0) }}</td>
-                    <td class="text-center">
-                        <a class="btn btn-warning" href="admin/importdetails/edit/importID={{$key->import_id}}&productID={{$key->product_id}}">
-                            <i class="fa fa-pencil fa-fw"></i>Sửa
-                        </a>
-                        <input type="button" class="btn btn-danger" value="Xoá"
-                               onclick="return xoa({{ $key->id }});">
-                    </td>
+                    <th class="text-center" style="width: 50px">Mã</th>
+
+                    <th class="text-center">Tên Sản phẩm</th>
+                    <th class="text-center" style="width: 100px">Số lượng</th>
+                    <th class="text-center">Giá</th>
+                    <th class="text-center">Tổng tiền</th>
+                    <th class="text-center">Thao tác</th>
                 </tr>
-            @endforeach
-            <tr>
-                <td colspan="6" class="text-right">Tổng tiền : {{ number_format($import->total ,0)}} </td>
-            </tr>
-            </tbody>
-        </table>
-        <a href="javascript:history.back()" class="btn btn-default mt-2">Quay lại</a>
-    </div>
+                </thead>
+                <tbody>
+
+                @foreach ($importdetails as $key)
+                    <tr>
+                        <td class="text-center">{{ $key->import_id }}</td>
+                        <td>{{ $key->products_linked->name }}</td>
+                        <td>{{ $key->amount }}</td>
+                        <td>{{ number_format($key->products_linked->price, 0) }}</td>
+                        <td>{{ number_format($key->products_linked->price * $key->amount, 0) }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-warning"
+                               href="admin/importdetails/edit/importID={{$key->import_id}}&productID={{$key->product_id}}">
+                                <i class="fa fa-pencil fa-fw"></i>Sửa
+                            </a>
+                            <a class="btn btn-danger"
+                               href="admin/importdetails/delete/importID={{$key->import_id}}&productID={{$key->product_id}}">
+                                <i class="fa fa-trash fa-fw"></i>Xoá
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+                <tr>
+                    <td colspan="6" class="text-right">Tổng tiền : {{ number_format($import->total ,0)}} </td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="javascript:history.back()" class="btn btn-default mt-2">Quay lại</a>
+        </div>
     </div>
     <script type="text/javascript">
         const input = document.getElementById('imgInp')

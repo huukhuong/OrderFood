@@ -157,7 +157,7 @@
                                 <input type="hidden" name="application_url" id="application_url" value="{{  url('') }}"/>
                                 <div class="form-group">
                                     <label>Danh sách sản phẩm</label>
-                                    <select id="sectorSelect"class="form-control sectorSelect" name="productID">
+                                    <select id="sectorSelect"class="form-control sectorSelect" name="">
                                         @foreach ($products as $key)
                                             <option value="{{ $key->id }}"> {{ $key->name }} </option>
                                         @endforeach
@@ -181,7 +181,7 @@
                         </form>
                         <script type="text/javascript">
                             $('#myform').on('change', 'select', function (e) { //we watch and execute the next lines when any value from the dropdown#1 is selected
-                                var id = $(this).val(); //we get the selected value on dropdown#1 and store it on id variable
+                                var id = $('#sectorSelect').val(); //we get the selected value on dropdown#1 and store it on id variable
                                 var url = $('#application_url').val(); //we get the url from our hidden element that we used in first line of our view file, and store it on url variable
                                 //here comes the ajax function part
                                 console.log(id);
@@ -232,8 +232,9 @@
                         <a class="btn btn-warning" href="admin/orderdetails/edit/orderID={{$key->order_id}}&productID={{$key->product_id}}">
                             <i class="fa fa-pencil fa-fw"></i>Sửa
                         </a>
-                        <input type="button" class="btn btn-danger" value="Xoá"
-                               onclick="return xoa({{ $key->id }});">
+                        <a class="btn btn-danger" href="admin/orderdetails/delete/orderID={{$key->order_id}}&productID={{$key->product_id}}">
+                            <i class="fa fa-trash fa-fw"></i>Xoá
+                        </a>
                     </td>
                 </tr>
             @endforeach

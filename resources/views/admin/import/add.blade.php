@@ -56,6 +56,15 @@
                                 @endif
                                 @endforeach
                     </select>
+                </div>
+                <div class="form-group" readonly>
+                    <label for="order">Tên NCC</label>
+                    <select class="form-control" name="supplierID">
+                        @foreach ($suppliers as $key)
+                                <option value="{{ $key->id }}"> {{ $key->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="order">Thời gian tạo đơn</label>
                     <input type="text" class="form-control" id="order" name="importCreated" placeholder=""

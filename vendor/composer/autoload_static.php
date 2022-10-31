@@ -528,6 +528,7 @@ class ComposerStaticInitea52d44a3866ed531b068b78167c4695
         'App\\Http\\Controllers\\Client\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Client/UserController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ImportController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImportController.php',
+        'App\\Http\\Controllers\\ImportDetailsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImportDetailsController.php',
         'App\\Http\\Controllers\\OrderDetails' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderDetails.php',
         'App\\Http\\Controllers\\SupplierController' => __DIR__ . '/../..' . '/app/Http/Controllers/SupplierController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',

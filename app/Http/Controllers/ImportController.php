@@ -41,7 +41,10 @@ class ImportController extends Controller
     {
         $product = Products::find($productID);
         $oldQuantity = $product -> quantity;
-        if ($type === "add") {
+        if($amount === $oldQuantity){
+            return ;
+        }
+        if ($type === "add" ) {
             $product -> quantity = $oldQuantity + $amount;
         } else if ($type === "del") {
             $product -> quantity = $oldQuantity - $amount;
@@ -57,6 +60,7 @@ class ImportController extends Controller
         $import->description = $request->importDescription;
         $import->created_at = date('Y-m-d H:i:s');
         $import->status = 1;
+        $import -> supplier_id = $request -> supplierID;
         $import->save();
         $import_id = $import->id;
         $products = $request->productID;
@@ -73,7 +77,6 @@ class ImportController extends Controller
             $import_details->amount = $amount;
             $import_details->save();
             $sum += ($amount * $price);
-
             // cập nhật thêm số lượng sản phẩm vào kho
             $this->updateQuantityProduct($productId,$amount,'add');
         }
@@ -103,9 +106,28 @@ class ImportController extends Controller
 
     }
 
-    public function postEditImport()
+    public function postEditImport(Request $request)
     {
-
+        $import = Import::find($request->importID);
+        $import->user_id = $request->userId;
+        $import->total = 0;
+        $import->description = $request->importDescription;
+        $import->updated_at = date('Y-m-d H:i:s');
+        $import->status = 1;
+        $import -> supplier_id = $request -> supplierID;
+        $import->save();
+        $import_id = $import->id;
+        $importDetails = ImportDetails::where('import_id',$import_id)->get();
+        $sum = 0;
+        foreach ($importDetails as $key){
+            $price = $this->getProductPrice($key -> product_id);
+            $amount = $key -> amount;
+            $sum+= $price * $amount;
+            $this->updateQuantityProduct($key -> product_id,$amount,'add');
+        }
+        $import->total = $sum;
+        $import->save();
+        return redirect()->back();
     }
 
     public function searchImports()

@@ -17,6 +17,9 @@ class ImportDetailsController extends Controller
     {
         $product = Products::find($productID);
         $oldQuantity = $product -> quantity;
+        if($oldQuantity == $amount){
+            return;
+        }
         if ($type === "add") {
             $product -> quantity = $oldQuantity + $amount;
         } else if ($type === "del") {
@@ -66,5 +69,10 @@ class ImportDetailsController extends Controller
 //        $importDetais-> import_id = $request -> idImport;
 //        $importDetais-> product_id = $request ->  productID;
 //        $importDetais-> amount  = $request ->  amount;
+    }
+
+    public function getDelete($id1,$id2){
+        $importDetails = ImportDetails::where('import_id',$id1)->where('product_id',$id2)->delete();
+        return redirect()->back();
     }
 }

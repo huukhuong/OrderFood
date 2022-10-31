@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/delete/{id}',  [AdminController::class, 'deleteProduct']);
         Route::get('/search',  [AdminController::class, 'searchProduct']);
         Route::get('/getDetails/{id}',[AdminController::class,'getProduct']);
+        Route::get('/getProductBySupplier/{id}',[AdminController::class,'getProductBySupplier']);
     });
 
 
@@ -84,6 +85,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/edit/importID={id1}&productID={id2}',  [ImportDetailsController::class, 'getEditDetail']);
         Route::post('/savepartner',  [ImportController::class, 'postSavePartners']);
         Route::post('/edit',  [ImportDetailsController::class, 'postEditDetails']);
+        Route::get('/delete/importID={id1}&productID={id2}',  [ImportDetailsController::class, 'getDelete']);
     });
 
     Route::prefix('/orderdetails')->group(function () {
@@ -94,6 +96,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::post('/edit',  [OrderDetails::class, 'postEditOrderDetails']);
        // Route::post('/edit/orderID={id1}&productID={id2}',  [OrderDetails::class, 'postEditOrderDetails']);
         Route::get('/edit/orderID={id1}&productID={id2}',  [OrderDetails::class, 'getEditOrderDetails']);
+        Route::get('/delete/orderID={id1}&productID={id2}',  [OrderDetails::class, 'getDelete']);
 
     });
 
