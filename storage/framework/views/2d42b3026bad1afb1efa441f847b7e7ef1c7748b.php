@@ -155,7 +155,7 @@
                                 <input type="hidden" name="application_url" id="application_url" value="<?php echo e(url('')); ?>"/>
                                 <div class="form-group">
                                     <label>Danh sách sản phẩm</label>
-                                    <select id="sectorSelect"class="form-control sectorSelect" name="">
+                                    <select id="sectorSelect"class="form-control sectorSelect" name="productID">
                                         <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e($key->id); ?>"> <?php echo e($key->name); ?> </option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

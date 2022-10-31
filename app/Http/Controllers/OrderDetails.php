@@ -25,7 +25,26 @@ class OrderDetails extends Controller
     }
 
     public function getDelete($id1,$id2){
+        $temp2 = Orderdetail::where('order_id',$id1)->where('product_id',$id2)->first();
         $orderDetails = Orderdetail::where('order_id',$id1)->where('product_id',$id2)->delete();
+        $temp = Orderdetail::where('order_id',$id1)->get();
+        // update total order
+        $sum = 0;
+        $orderDetails = Orderdetail::where('order_id', $id1)->get();
+        foreach ($temp as $item){
+            $total = $item -> amount * $item -> price;
+            $sum += $total;
+        }
+        $order = Orders::find($id1);
+        $order -> total = $sum;
+        $order -> save();
+
+        // update lại số lượng của sản phẩm
+        $product = Products::find($temp2 ->product_id);
+        $oldQuantity =  $product -> quantity;
+        $newQuantity = $oldQuantity + $temp2 -> amount;
+        $product -> quantity = $newQuantity;
+        $product -> save();
         return redirect()->back();
     }
 
@@ -45,7 +64,23 @@ class OrderDetails extends Controller
             ->where('product_id', $request ->productID)
             ->update(['amount' => $request -> amount,'price' => $request -> productPrice]);
         $this -> updateOrderTotal($id);
-        $this -> updateSoLuongKho($request ->productID,$request -> amount);
+
+        // xử lý còn cồng kềnh, chưa ổn lắm
+        if($request -> amount > $orderDetail -> amount){
+            $product = Products::find($request ->productID);
+            $oldQuantity =  $product -> quantity;
+            $newQuantity = $oldQuantity + ( $orderDetail -> amount - $request -> amount ) ;
+            $product -> quantity = $newQuantity;
+            $product -> save();
+        }
+        else{
+            $product = Products::find($request ->productID);
+            $oldQuantity =  $product -> quantity;
+            $newQuantity = $oldQuantity - ($request -> amount - $orderDetail -> amount) ;
+            $product -> quantity = $newQuantity;
+            $product -> save();
+        }
+        //$this -> updateSoLuongKho($request ->productID,$request -> amount);
         return redirect()->back()->with('success', 'Sửa thành công rồi');
     }
 

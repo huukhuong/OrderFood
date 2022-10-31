@@ -157,7 +157,7 @@
                                 <input type="hidden" name="application_url" id="application_url" value="{{  url('') }}"/>
                                 <div class="form-group">
                                     <label>Danh sách sản phẩm</label>
-                                    <select id="sectorSelect"class="form-control sectorSelect" name="">
+                                    <select id="sectorSelect"class="form-control sectorSelect" name="productID">
                                         @foreach ($products as $key)
                                             <option value="{{ $key->id }}"> {{ $key->name }} </option>
                                         @endforeach

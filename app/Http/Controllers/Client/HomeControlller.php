@@ -172,7 +172,16 @@ class HomeControlller extends Controller
     }
     public function orderCancel($id){
         $order = Orders::find($id);
-        $order->status = -1;
+        $order -> status = -1;
+        if($order -> status == -1){
+            // thực hiện thu hồi sản phẩm
+            $orderDetails = Orderdetail::where('order_id',$order->id)->get();
+            foreach ($orderDetails as $key){
+                $product = Products::find($key->product_id);
+                $product -> quantity += $key -> amount;
+                $product -> save();
+            }
+        }
         if($order->save()){
             return redirect()->back()->with('success', 'Đã huỷ đơn đặt hàng thành công');
         }
