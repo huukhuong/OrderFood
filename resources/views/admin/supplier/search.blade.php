@@ -15,56 +15,52 @@
         </script>
     @endif
     <div class="py-3">
-        <a href="admin/product/add"> <button class="btn btn-success">Thêm món mới</button></a>
+        <a href="admin/supplier/add"> <button class="btn btn-success">Thêm nhà cung cấp</button></a>
     </div>
 
-    <form action="admin/product/search" method="get">
+    <form action="admin/supplier/search" method="get">
         @csrf
-        <p>Tìm Kiếm món ăn</p>
+        <p>Tìm Kiếm NCC</p>
         <div class="form-outline mb-4">
             <input type="search" name="searchName" class="form-control" id="" placeholder="Tìm Kiếm">
         </div>
     </form>
     <div class="card">
         <div class="card-header bg-blue">
-            <h3 class="card-title">Danh sách món ăn</h3>
+            <h3 class="card-title">Danh sách NCC</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive">
             <table id="example1" class="table table-bordered table-striped table-hover">
                 <thead>
-                <tr>
-                    <th class="text-center" style="width: 50px">Mã</th>
-                    <th>Tên SP</th>
-                    <th>Đơn giá</th>
-                    <th>Số lượng</th>
-                    <th>Danh mục</th>
-                    <th>Hình ảnh</th>
-                    <th>Mô tả</th>
-                    <th>Thao tác</th>
-                </tr>
+                    <tr>
+                        <th class="text-center" style="width: 50px">Mã</th>
+                        <th>Tên NCC</th>
+                        <th>Địa chỉ</th>
+                        <th>Mô Tả</th>
+                        <th>Liên lạc</th>
+                        <th>Thời gian</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach ($product as $key)
-                    <tr>
-                        <td class="text-center">{{ $key->id }}</td>
-                        <td>{{ $key->name }}</td>
-                        <td>{{ $key->price }}</td>
-                        <td>{{ $key->quantity }}</td>
-                        <td>{{ $key->category_id }}</td>
-                        <td><img src="./img/products/{{ $key->image }}" width="120"></td>
-                        {{-- <td>{{$key ->image}}</td> --}}
-                        <td class="text-truncate" style="max-width: 200px;">{!! $key->description !!}</td>
-                        <td class="text-center">
-                            <a class="btn btn-warning" href="admin/product/edit/{{ $key->id }}">
-                                <i class="fa fa-pencil fa-fw"></i>Sửa
-                            </a>
-                            {{-- <td class="text-center"><a href="admin/category/delete/{{$key->id}}"><button class="btn btn-danger"><i class="fas fa-trash"></i>Xoá</button></a></td> --}}
-                            <input type="button" class="btn btn-danger" value="Xoá"
-                                   onclick="return xoa({{ $key->id }});">
-                        </td>
-                    </tr>
-                @endforeach
+                    @foreach ($suppliers as $key)
+                        <tr>
+                            <td class="text-center">{{ $key->id }}</td>
+                            <td>{{ $key->name }}</td>
+                            <td>{{ $key->address }}</td>
+                            <td>{{ $key->description }}</td>
+                            <td>{{ $key->contact }}</td>
+                            <td>{{ $key->updated_at }}</td>
+                            <td class="text-center">
+                                <a class="btn btn-warning" href="admin/supplier/edit/{{ $key->id }}">
+                                    <i class="fa fa-pencil fa-fw"></i>Sửa
+                                </a>
+                                {{-- <td class="text-center"><a href="admin/category/delete/{{$key->id}}"><button class="btn btn-danger"><i class="fas fa-trash"></i>Xoá</button></a></td> --}}
+                                <input type="button" class="btn btn-danger" value="Xoá"
+                                    onclick="return xoa({{ $key->id }});">
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -72,7 +68,7 @@
 
     </div>
     <div class="d-flex justify-content-center">
-        {{ $product->links() }}
+        {{ $suppliers->links('pagination::bootstrap-4') }}
     </div>
 
     <script>
@@ -88,7 +84,7 @@
                 cancelButtonText: 'Không'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = "admin/product/delete/" + id;
+                    location.href = "admin/supplier/delete/" + id;
                     return true;
                 } else {
                     return false;

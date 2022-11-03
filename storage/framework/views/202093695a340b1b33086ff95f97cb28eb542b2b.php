@@ -44,6 +44,16 @@
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
+                    <div class="form-outline pl-2 pr-2">
+                        <select class="form-control" name="orderStatus">
+                            <option value="-1">Đơn hàng bị huỷ</option>
+                            <option value="0">Đang đợi quán xác nhận</option>
+                            <option value="1" selected>Đang chuẩn bị</option>
+                            <option value="2">Đang giao hàng</option>
+                            <option value="3">Đã giao hàng</option>
+                            <option value="4">Đã nhận được hàng</option>
+                        </select>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-success">Tìm</button>
             </form>

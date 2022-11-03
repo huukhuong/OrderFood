@@ -72,7 +72,10 @@ class ImportDetailsController extends Controller
     }
 
     public function getDelete($id1,$id2){
+        $temp =  ImportDetails::where('import_id',$id1)->where('product_id',$id2) ->first();
         $importDetails = ImportDetails::where('import_id',$id1)->where('product_id',$id2)->delete();
+        $this -> updateQuantityProduct($id2 ,$temp ->  amount,'del');
+        $this -> updateImportTotal($id1);
         return redirect()->back();
     }
 }

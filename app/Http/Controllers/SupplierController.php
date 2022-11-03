@@ -60,7 +60,7 @@ class SupplierController extends Controller
         return redirect('admin/supplier/list')->with('xoathanhcong', 'success');
     }
 
-    public function searchSupplier()
+    public function searchSupplier(Request $request)
     {
 
     }

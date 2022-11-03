@@ -10,6 +10,7 @@ use App\Models\Partners;
 use App\Models\products;
 use App\Models\Supplier;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -89,7 +90,13 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.home');
+        $new_order = Orders::all()->count();
+        $order_pending = Orders::where('status', 0)->count();
+        $order_processed = Orders::where('status', 1)->count();
+        $count_total_order_today = Orders::where('created_at', Carbon::now())->sum('total');
+        return view('admin.home', ['newOrder' => $new_order, "pendingOrder" => $order_pending
+                , 'processed' => $order_processed, "count_total_order_today" => $count_total_order_today]
+        );
     }
 
     public function getListCategory()
@@ -167,11 +174,11 @@ class AdminController extends Controller
     public function getListProduct()
     {
         $product = products::where('status', 1)->orderBy('id', 'DESC')->paginate(5);
-        $product_out_of_stock = products::where('status', 1)->where('quantity',"<=",5)->get();
+        $product_out_of_stock = products::where('status', 1)->where('quantity', "<=", 5)->get();
         $supplier = Supplier::where('status', 1)->get();
         $categories = Categories::where('status', 1)->get();
         //   $product = products::SimplePaginate(5)::where('status', 1);
-        return view('admin.products.list', ['SanPhamHetHang' => $product_out_of_stock,'product' => $product, 'supplier' => $supplier, 'categories' => $categories]);
+        return view('admin.products.list', ['SanPhamHetHang' => $product_out_of_stock, 'product' => $product, 'supplier' => $supplier, 'categories' => $categories]);
     }
 
     public function getAddProduct()
@@ -192,7 +199,7 @@ class AdminController extends Controller
             $product->description = $request->productDescription;
             $product->quantity = $request->productQuantity;
             $product->price = $request->productPrice;
-            $product->price_import = $request -> productPriceImport;
+            $product->price_import = $request->productPriceImport;
             $product->image = $filename;
             $product->category_id = $request->productCategoryID;
             $product->status = 1;
@@ -234,7 +241,7 @@ class AdminController extends Controller
         $product->description = $request->productDescription;
         $product->quantity = $request->productQuantity;
         $product->price = $request->productPrice;
-        $product->price_import = $request -> productPriceImport;
+        $product->price_import = $request->productPriceImport;
         $product->category_id = $request->productCategoryID;
         $product->id_supplier = $request->supplierID;
         if ($request->hasFile('productImage')) {
@@ -444,6 +451,9 @@ class AdminController extends Controller
         if (!is_null($request->searchId) && is_numeric($request->searchId)) {
             $order->find($request->searchId);
         }
+        if (!is_null($request->orderStatus) && is_numeric($request->orderStatus)) {
+            $order->where('status', $request->orderStatus);
+        }
         if (!is_null($request->searchId) && !is_numeric($request->searchId)) {
             $user = User::where('name', $request->searchId)->first();
             $order->where('user_id', $user->id);
@@ -557,5 +567,11 @@ class AdminController extends Controller
             ->whereBetween('orders.created_at', [$request->ngaybatdau, $request->ngayketthuc])
             ->get();
         return view('admin.statistical.khoangthoigian', ['thongke' => $thongke]);
+    }
+
+
+    public function thongkedondathang()
+    {
+        return 0;
     }
 }

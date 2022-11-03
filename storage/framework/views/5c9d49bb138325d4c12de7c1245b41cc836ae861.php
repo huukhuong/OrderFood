@@ -38,9 +38,9 @@
                         <ul class="nav nav-treeview">
 
                             <li class="nav-item">
-                                <a href="admin/statistical/khoangthoigian" class="nav-link">
+                                <a href="admin/statistical/dondathang" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Thống kê khoảng thời gian</p>
+                                    <p>Thống kê đơn đặt hàng</p>
                                 </a>
                             </li>
                             <li class="nav-item">

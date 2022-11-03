@@ -6,11 +6,11 @@
 
 @section('content')
 
-    <div class="card card-primary card-outline">
+    <div class="card card-primary card-back">
         <div class="card-body">
             <h5 class="text-center">Trang chủ</h5>
             <p class="card-text text-center">
-                Admin - Trang chủ
+                Thống kê đơn đặt hàng
             </p>
         </div>
         <div class="row">
@@ -18,14 +18,14 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{$newOrder}}</h3>
 
-                        <p>Đơn đặt hàng mớis</p>
+                        <p>Đơn đặt hàng</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="admin/order/list" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -33,14 +33,14 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                        <h3>+ {{$pendingOrder}}<sup style="font-size: 20px"</sup></h3>
 
-                        <p>Tỉ lệ</p>
+                        <p>Đơn đặt hàng mới</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="admin/order/search?searchId=&startDay=&endDay=&orderStatus=0" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -48,14 +48,14 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>+ {{$processed}}</h3>
 
-                        <p>Người dùng mới</p>
+                        <p>Đơn đặt hàng đang xử lý</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="http://127.0.0.1:8000/admin/order/search?searchId=&startDay=&endDay=&orderStatus=1" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -63,9 +63,8 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
-
-                        <p>Doanh Thu</p>
+                        <h3>{{number_format($count_total_order_today)}}</h3>
+                        <p>Doanh thu hôm nay</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>

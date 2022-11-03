@@ -125,6 +125,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/doanhthutheoloai',  [AdminController::class, 'doanhthutheoloai']);
         Route::get('/topsanpham',  [AdminController::class, 'topsanpham']);
         Route::post('/thongke1',  [AdminController::class, 'thongke1']);
+        Route::get("/dondathang",[AdminController::class,'thongkedondathang']);
     });
 });
 
