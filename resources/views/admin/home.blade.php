@@ -33,7 +33,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>+ {{$pendingOrder}}<sup style="font-size: 20px"</sup></h3>
+                        <h3>+ {{$pendingOrder}}<sup style="font-size: 20px"></sup></h3>
 
                         <p>Đơn đặt hàng mới</p>
                     </div>

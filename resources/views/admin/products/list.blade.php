@@ -24,7 +24,7 @@
                 @foreach($SanPhamHetHang as $key)
                     {{$key -> name}}  ==> <a href="admin/import/add" class="text-cyan">Nhập hàng ngay</a>
                 @endforeach
-                @endif
+            @endif
         </div>
     </div>
     <div class="card">
@@ -86,6 +86,7 @@
                     <th>NCC</th>
                     <th>Hình ảnh</th>
                     <th>Mô tả</th>
+                    <th>Hiển thị</th>
                     <th>Thao tác</th>
                 </tr>
                 </thead>
@@ -102,13 +103,19 @@
                         <td><img src="./img/products/{{ $key->image }}" width="120"></td>
                         {{-- <td>{{$key ->image}}</td> --}}
                         <td class="text-truncate" style="max-width: 200px;">{!! $key->description !!}</td>
+                        <td>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch{{$key->id}}"
+                                       @if($key->status == 1) value="{{$key->id}}" checked
+                                       @endif onclick="changeStatus({{$key->id}})">
+                                <label class="custom-control-label" for="customSwitch{{$key->id}}"></label>
+                            </div>
+                        </td>
                         <td class="text-center">
                             <a class="btn btn-warning" href="admin/product/edit/{{ $key->id }}">
                                 <i class="fa fa-pencil fa-fw"></i>Sửa
                             </a>
                             {{-- <td class="text-center"><a href="admin/category/delete/{{$key->id}}"><button class="btn btn-danger"><i class="fas fa-trash"></i>Xoá</button></a></td> --}}
-                            <input type="button" class="btn btn-danger" value="Xoá"
-                                   onclick="return xoa({{ $key->id }});">
                         </td>
                     </tr>
                 @endforeach
@@ -141,6 +148,23 @@
                 }
             })
 
+        }
+
+        function changeStatus(id) {
+            var status = 0;
+            if (document.getElementById('customSwitch' + id).checked) {
+                status = 1;
+            }
+            $.ajax({
+                url: 'admin/product/changeStatus/productID=' + id + '&status=' + status,
+                type: 'GET',
+                success: function (data) {
+                   console.log(data);
+                },
+                error: function (e) {
+                    console.log(e.message);
+                }
+            });
         }
     </script>
 

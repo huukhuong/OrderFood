@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
         Route::get('/search',  [AdminController::class, 'searchProduct']);
         Route::get('/getDetails/{id}',[AdminController::class,'getProduct']);
         Route::get('/getProductBySupplier/{id}',[AdminController::class,'getProductBySupplier']);
+        Route::get("/changeStatus/productID={id}&status={id2}",[AdminController::class,'changeStatus']);
     });
 
 

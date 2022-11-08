@@ -173,7 +173,7 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
     public function getListProduct()
     {
-        $product = products::where('status', 1)->orderBy('id', 'DESC')->paginate(5);
+        $product = products::orderBy('id', 'DESC')->paginate(5);
         $product_out_of_stock = products::where('status', 1)->where('quantity', "<=", 5)->get();
         $supplier = Supplier::where('status', 1)->get();
         $categories = Categories::where('status', 1)->get();
@@ -283,6 +283,14 @@ class AdminController extends Controller
         return view('admin.products.search', ['product' => $products, 'supplier' => $supplier, 'categories' => $categories]);
 //        ->orderBy('id','DESC')->SimplePaginate(10)
 
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $product = Products::find($id);
+        $product->status = $status;
+        $product->save();
+        return response()->json(["status" => $status]);
     }
 
 

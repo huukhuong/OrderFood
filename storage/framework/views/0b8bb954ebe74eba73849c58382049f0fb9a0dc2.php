@@ -22,7 +22,7 @@
                 <?php $__currentLoopData = $SanPhamHetHang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php echo e($key -> name); ?>  ==> <a href="admin/import/add" class="text-cyan">Nhập hàng ngay</a>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <?php endif; ?>
+            <?php endif; ?>
         </div>
     </div>
     <div class="card">
@@ -84,6 +84,7 @@
                     <th>NCC</th>
                     <th>Hình ảnh</th>
                     <th>Mô tả</th>
+                    <th>Hiển thị</th>
                     <th>Thao tác</th>
                 </tr>
                 </thead>
@@ -100,13 +101,19 @@
                         <td><img src="./img/products/<?php echo e($key->image); ?>" width="120"></td>
                         
                         <td class="text-truncate" style="max-width: 200px;"><?php echo $key->description; ?></td>
+                        <td>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch<?php echo e($key->id); ?>"
+                                       <?php if($key->status == 1): ?> value="<?php echo e($key->id); ?>" checked
+                                       <?php endif; ?> onclick="changeStatus(<?php echo e($key->id); ?>)">
+                                <label class="custom-control-label" for="customSwitch<?php echo e($key->id); ?>"></label>
+                            </div>
+                        </td>
                         <td class="text-center">
                             <a class="btn btn-warning" href="admin/product/edit/<?php echo e($key->id); ?>">
                                 <i class="fa fa-pencil fa-fw"></i>Sửa
                             </a>
                             
-                            <input type="button" class="btn btn-danger" value="Xoá"
-                                   onclick="return xoa(<?php echo e($key->id); ?>);">
                         </td>
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -140,6 +147,23 @@
                 }
             })
 
+        }
+
+        function changeStatus(id) {
+            var status = 0;
+            if (document.getElementById('customSwitch' + id).checked) {
+                status = 1;
+            }
+            $.ajax({
+                url: 'admin/product/changeStatus/productID=' + id + '&status=' + status,
+                type: 'GET',
+                success: function (data) {
+                   console.log(data);
+                },
+                error: function (e) {
+                    console.log(e.message);
+                }
+            });
         }
     </script>
 

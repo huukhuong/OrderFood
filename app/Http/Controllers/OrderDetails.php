@@ -128,4 +128,5 @@ class OrderDetails extends Controller
         $this -> updateSoLuongKho($request ->productID,$orderDetail -> amount);
         return redirect()->back()->with('success', 'Thêm thành công rồi');
     }
+    
 }

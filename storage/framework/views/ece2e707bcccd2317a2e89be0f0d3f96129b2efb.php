@@ -31,7 +31,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>+ <?php echo e($pendingOrder); ?><sup style="font-size: 20px"</sup></h3>
+                        <h3>+ <?php echo e($pendingOrder); ?><sup style="font-size: 20px"></sup></h3>
 
                         <p>Đơn đặt hàng mới</p>
                     </div>
