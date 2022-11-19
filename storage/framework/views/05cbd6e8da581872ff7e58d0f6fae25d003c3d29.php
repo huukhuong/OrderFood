@@ -52,8 +52,8 @@
                         <td class="text-center"><?php echo e($key->order_id); ?></td>
                         <td><?php echo e($key->products_linked->name); ?></td>
                         <td><?php echo e($key->amount); ?></td>
-                        <td><?php echo e(number_format($key->products_linked->price, 0)); ?></td>
-                        <td><?php echo e(number_format($key->products_linked->price * $key->amount, 0)); ?></td>
+                        <td><?php echo e(number_format($key->products_linked->price_import, 0)); ?></td>
+                        <td><?php echo e(number_format($key->products_linked->price_import * $key->amount, 0)); ?></td>
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

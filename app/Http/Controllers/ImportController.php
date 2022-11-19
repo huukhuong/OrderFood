@@ -34,7 +34,7 @@ class ImportController extends Controller
     public function getProductPrice($id)
     {
         $products = Products::find($id);
-        return $products->price;
+        return $products->price_import;
     }
 
     public function updateQuantityProduct($productID, $amount ,$type)

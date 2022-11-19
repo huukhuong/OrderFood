@@ -47,8 +47,8 @@
                         <td class="text-center">{{ $key->order_id }}</td>
                         <td>{{ $key->products_linked->name }}</td>
                         <td>{{ $key->amount }}</td>
-                        <td>{{ number_format($key->products_linked->price, 0) }}</td>
-                        <td>{{ number_format($key->products_linked->price * $key->amount, 0) }}</td>
+                        <td>{{ number_format($key->products_linked->price_import, 0) }}</td>
+                        <td>{{ number_format($key->products_linked->price_import * $key->amount, 0) }}</td>
                     </tr>
                 @endforeach
                 </tbody>
