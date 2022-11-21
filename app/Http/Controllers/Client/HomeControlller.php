@@ -108,7 +108,7 @@ class HomeControlller extends Controller
             $name = $request -> keyword;
             $products -> where('name', 'like', '%' . $name . '%')->paginate(10);
         }
-        $productss =  $products->paginate(10);
+        $productss =  $products->where('status',1)->paginate(10);
 
 //        $name = $request->keyword;
 //        $category = Categories::all();
