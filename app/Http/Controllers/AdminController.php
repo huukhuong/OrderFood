@@ -8,7 +8,9 @@ use App\Models\Orderdetail;
 use App\Models\Orders;
 use App\Models\Partners;
 use App\Models\products;
+use App\Models\Supplier;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +26,7 @@ class AdminController extends Controller
         $this->middleware(function ($request, $next) {
             $user = Auth::user();
             if ($user != null) {
-                if ($user->role != 1) {
+                if ($user->role == 0) {
                     $this->logout();
                     return redirect('admin');
                 }
@@ -60,11 +62,24 @@ class AdminController extends Controller
             'role' => 1
         ];
 
-        if (Auth::attempt($data, $remember)) {
+        $data2 = [
+            'email' => $email,
+            'password' => $password,
+            'role' => 2
+        ];
+
+        $data3 = [
+            'email' => $email,
+            'password' => $password,
+            'role' => 3
+        ];
+
+        if (Auth::attempt($data, $remember) || Auth::attempt($data2, $remember) || Auth::attempt($data3, $remember)) {
             return redirect('admin');
         } else {
             return Redirect::back()->withErrors(['msg' => 'Sai thông tin đăng nhập']);
         }
+
     }
 
     public function logout()
@@ -75,7 +90,13 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.home');
+        $new_order = Orders::all()->count();
+        $order_pending = Orders::where('status', 0)->count();
+        $order_processed = Orders::where('status', 1)->count();
+        $count_total_order_today = Orders::where('created_at', Carbon::now())->sum('total');
+        return view('admin.home', ['newOrder' => $new_order, "pendingOrder" => $order_pending
+                , 'processed' => $order_processed, "count_total_order_today" => $count_total_order_today]
+        );
     }
 
     public function getListCategory()
@@ -104,6 +125,7 @@ class AdminController extends Controller
         );
         $cate = new categories();
         $cate->name = $request->namecategory;
+        $cate->status = 1;
         $cate->save();
         return redirect('admin/category/add')->with('themthanhcong', 'success');
     }
@@ -151,14 +173,19 @@ class AdminController extends Controller
     /////////////////////////////////////////////////////////////////////////////
     public function getListProduct()
     {
-        $product = products::where('status', 1)->orderBy('id','DESC')->SimplePaginate(20);
+        $product = products::orderBy('id', 'DESC')->paginate(5);
+        $product_out_of_stock = products::where('status', 1)->where('quantity', "<=", 5)->get();
+        $supplier = Supplier::where('status', 1)->get();
+        $categories = Categories::where('status', 1)->get();
         //   $product = products::SimplePaginate(5)::where('status', 1);
-        return view('admin.products.list', ['product' => $product]);
+        return view('admin.products.list', ['SanPhamHetHang' => $product_out_of_stock, 'product' => $product, 'supplier' => $supplier, 'categories' => $categories]);
     }
+
     public function getAddProduct()
     {
+        $supplier = Supplier::all();
         $category = categories::all();
-        return view('admin.products.add', ['category' => $category]);
+        return view('admin.products.add', ['category' => $category, 'suppliers' => $supplier]);
     }
 
     public function postAddProduct(Request $request)
@@ -169,24 +196,40 @@ class AdminController extends Controller
             $file->move('img/products', $filename);
             $product = new products();
             $product->name = $request->productName;
-            $product->description     = $request->productDescription;
+            $product->description = $request->productDescription;
             $product->quantity = $request->productQuantity;
             $product->price = $request->productPrice;
+            $product->price_import = $request->productPriceImport;
             $product->image = $filename;
             $product->category_id = $request->productCategoryID;
             $product->status = 1;
+            $product->id_supplier = $request->supplierID;
             $product->save();
-            return  redirect('admin/product/add')->with('themthanhcong', 'success');
+            return redirect('admin/product/add')->with('themthanhcong', 'success');
         } else {
-            return  redirect('admin/product/list')->with('chuacofile', 'success');
+            return redirect('admin/product/list')->with('chuacofile', 'success');
         }
+    }
+
+    public function getProduct($id)
+    {
+        $product = products::find($id);
+        return response()->json($product);
+    }
+
+    public function getProductBySupplier($id)
+    {
+        $product = products::where('id_supplier', $id)->get();
+        return response()->json($product);
     }
 
     public function getEditProduct($id)
     {
+
         $product = products::find($id);
         $category = categories::all();
-        return view('admin.products.edit', ['product' => $product, 'category' => $category]);
+        $supplier = Supplier::all();
+        return view('admin.products.edit', ['product' => $product, 'category' => $category, 'suppliers' => $supplier]);
     }
 
     public function postEditProduct(Request $request)
@@ -195,10 +238,12 @@ class AdminController extends Controller
         $product = products::find($id);
         var_dump($product);
         $product->name = $request->productName;
-        $product->description     = $request->productDescription;
+        $product->description = $request->productDescription;
         $product->quantity = $request->productQuantity;
         $product->price = $request->productPrice;
+        $product->price_import = $request->productPriceImport;
         $product->category_id = $request->productCategoryID;
+        $product->id_supplier = $request->supplierID;
         if ($request->hasFile('productImage')) {
             $file = $request->file('productImage');
             $filename = $file->getClientOriginalName('productImage');
@@ -208,7 +253,7 @@ class AdminController extends Controller
             $product->image = $request->productImage2;
         }
         $product->save();
-        return  redirect('admin/product/edit/' . $id)->with('suathanhcong', 'success');
+        return redirect('admin/product/edit/' . $id)->with('suathanhcong', 'success');
     }
 
     public function deleteProduct($id)
@@ -217,6 +262,35 @@ class AdminController extends Controller
         $product->status = 0;
         $product->save();
         return redirect('admin/product/list')->with('xoathanhcong', 'success');
+    }
+
+    public function searchProduct(Request $request)
+    {
+        $product = Products::query();
+        if ($request->has('searchName') && !is_null($request->searchName)) {
+            $product->where('name', 'LIKE', '%' . $request->searchName . '%');
+        }
+        if ($request->has('category') && !is_null($request->category)) {
+            $product->where('category_id', $request->category);
+        }
+        if ($request->has('supplier') && !is_null($request->supplier)) {
+            $product->where('id_supplier', $request->supplier);
+        }
+        $products = $product->where('status', 1)->paginate(5);
+        $supplier = Supplier::where('status', 1)->get();
+        $categories = Categories::where('status', 1)->get();
+
+        return view('admin.products.search', ['product' => $products, 'supplier' => $supplier, 'categories' => $categories]);
+//        ->orderBy('id','DESC')->SimplePaginate(10)
+
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $product = Products::find($id);
+        $product->status = $status;
+        $product->save();
+        return response()->json(["status" => $status]);
     }
 
 
@@ -231,6 +305,27 @@ class AdminController extends Controller
         $user = User::all();
         return view('admin.user.list', ['user' => $user]);
     }
+
+    public function getAddUser()
+    {
+        return view('admin.user.add');
+    }
+
+    public function postAddUser(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->userName;
+        $user->email = $request->userEmail;
+        $user->password = bcrypt("123456");
+        $user->phone = $request->userPhone;
+        $user->address = $request->userAddress;
+        $user->status = $request->userStatus;
+        $user->role = $request->userRole;
+        $user->img = 'default.png';
+        $user->save();
+        return redirect('admin/user/list')->with('themthanhcong', 'success');
+    }
+
     public function blockUser($id)
     {
         $user = User::find($id);
@@ -244,6 +339,7 @@ class AdminController extends Controller
             return redirect('admin/user/list')->with('mokhoathanhcong', 'success');
         }
     }
+
     public function resetPass($id)
     {
         $user = User::find($id);
@@ -251,10 +347,25 @@ class AdminController extends Controller
         $user->save();
         return redirect('admin/user/list')->with('resetthanhcong', 'success');
     }
+
     public function getEditUser($id)
     {
         $user = User::find($id);
         return view('admin.user.edit', ['user' => $user]);
+    }
+
+    public function postEditUser(Request $request)
+    {
+        $userId = $request->userId;
+        $user = User::find($userId);
+        $user->name = $request->userName;
+        $user->email = $request->userEmail;
+        $user->phone = $request->userPhone;
+        $user->address = $request->userAddress;
+        $user->status = $request->userStatus;
+        $user->role = $request->userRole;
+        $user->save();
+        return redirect()->back();
     }
     /////////////////////////////////////////////////////////////////////////////
     ///                                                                       ///
@@ -265,33 +376,143 @@ class AdminController extends Controller
     public function getListOrder()
     {
         $partners = Partners::all();
-        $order = Orders::orderBy('id','DESC')->get();
+        $order = Orders::orderBy('id', 'DESC')->paginate(5);
         return view('admin.order.list', ['order' => $order, 'partners' => $partners]);
     }
 
-    public function getDetailOrder($id)
+    public function getAddOrder()
+    {
+        $partners = Partners::all();
+        $users = User::all();
+        $products = Products::all();
+        return view('admin.order.add', ['partners' => $partners, 'users' => $users, 'products' => $products]);
+    }
+
+    public function getProductPrice($id)
+    {
+        $products = Products::find($id);
+        return $products->price;
+    }
+
+    public function postAddOrder(Request $request)
+    {
+        $order = new Orders();
+        $order->user_id = $request->userId;
+        $order->address = $request->orderAddress;
+        $order->total = 0;
+        $order->phone = $request->orderPhone;
+        $order->description = $request->orderDescription;
+        $order->id_partner = $request->partnerId;
+        $order->created_at = date('Y-m-d H:i:s');
+        $order->status = 1;
+        $order->save();
+
+        $order_id = $order->id;
+
+        $products = $request->productID;
+        $quantities = $request->quantity;
+        $size = sizeof($products);
+        $sum = 0;
+        for ($i = 0; $i < $size; $i++) {
+            $productId = $products[$i];
+            $price = $this->getProductPrice($productId);
+            $amount = $quantities[$i];
+            $order_details = new Orderdetail();
+            $order_details->order_id = $order_id;
+            $order_details->product_id = $productId;
+            $order_details->amount = $amount;
+            $order_details->price = $price;
+            $order_details->save();
+            $sum += ($amount * $price);
+            $product = Products::find($productId);
+            $product->quantity -= $amount;
+            $product->save();
+        }
+        $order->total = $sum;
+        $order->save();
+        return redirect()->back();
+
+    }
+
+    public
+    function getDetailOrder($id)
     {
         $orderdetails = Orderdetail::where('order_id', $id)->get();
         $order = Orders::find($id);
         return view('admin.order.orderdetails', ['order' => $order, 'orderdetails' => $orderdetails]);
     }
-    public function getEditOrder($id)
+
+    public
+    function getEditOrder($id)
     {
         $order = Orders::find($id);
-        return view('admin.order.edit', ['order' => $order]);
+        $orderdetails = Orderdetail::where('order_id', $id)->get();
+        $partners = Partners::all();
+        $products = Products::all();
+        return view('admin.order.edit', ['order' => $order, 'partners' => $partners, 'orderdetails' => $orderdetails, 'products' => $products]);
     }
-    public function postEditOrder(Request $request)
+
+    public
+    function searchOrders(Request $request)
     {
-        $id = $request->idOrder;
-        $status = $request->status;
-        echo $id;
+        $order = Orders::query();
+        if (!is_null($request->searchId) && is_numeric($request->searchId)) {
+            $order->find($request->searchId);
+        }
+        if (!is_null($request->orderStatus) && is_numeric($request->orderStatus)) {
+            $order->where('status', $request->orderStatus);
+        }
+        if (!is_null($request->searchId) && !is_numeric($request->searchId)) {
+            $user = User::where('name', $request->searchId)->first();
+            $order->where('user_id', $user->id);
+        }
+        if (!is_null($request->startDay) && !is_null($request->endDay)) {
+            $order->whereBetween('created_at', [$request->startDay, $request->endDay]);
+        }
+        $orders = $order->orderByDesc('id')->paginate(5);
+        $partners = Partners::all();
+        //   $order = Orders::orderBy('id', 'DESC')->paginate(5);
+        return view('admin.order.search', ['order' => $orders, 'partners' => $partners]);
+    }
+
+    public
+    function getPrint($id)
+    {
         $order = Orders::find($id);
-        $order->status = $status;
+        $orderdetails = Orderdetail::where('order_id', $id)->get();
+        $partners = Partners::all();
+        $products = Products::all();
+        return view('admin.order.print', ['order' => $order, 'partners' => $partners, 'orderdetails' => $orderdetails, 'products' => $products]);
+
+    }
+
+    public
+    function postEditOrder(Request $request)
+    {
+        $id = $request->orderId;
+        $order = Orders::find($id);
+        $order->user_id = $request->orderIDCustommer;
+        $order->user_id = 1;
+        $order->address = $request->orderAddress;
+        $order->phone = $request->orderPhone;
+        $order->description = $request->orderDescription;
+        $order->id_partner = $request->partnerId;
+        $order->status = $request->orderStatus;
+        if ($order->status == -1) {
+            // thực hiện thu hồi sản phẩm
+            $orderDetails = Orderdetail::where('order_id', $order->id)->get();
+            foreach ($orderDetails as $key) {
+                $product = Products::find($key->product_id);
+                $product->quantity += $key->amount;
+                $product->save();
+            }
+        }
         $order->save();
         return redirect('admin/order/list')->with('capnhatdonhangthanhcong', 'success');
     }
 
-    public function postSavePartners(Request $request)
+    public
+    function postSavePartners(Request $request)
     {
         $partners = $request->idpartner;
         $order = Orders::find($request->idorder);
@@ -301,21 +522,26 @@ class AdminController extends Controller
         return redirect('admin/order/list')->with('capnhatgiaohang', 'success');
     }
 
-    /////////////////////////////////////////////////////////////////////////////
-    ///                                                                       ///
-    ///                               PARTNERS                                ///
-    ///                                                                       ///
-    /////////////////////////////////////////////////////////////////////////////
-    public function getListPartners()
+/////////////////////////////////////////////////////////////////////////////
+///                                                                       ///
+///                               PARTNERS                                ///
+///                                                                       ///
+/////////////////////////////////////////////////////////////////////////////
+    public
+    function getListPartners()
     {
-        $partners = Partners::all();
+        $partners = Partners::paginate(5);
         return view('admin.partners.list', ['partners' => $partners]);
     }
-    public function getAddPartners()
+
+    public
+    function getAddPartners()
     {
         return view('admin.partners.add');
     }
-    public function postAddPartners(Request $request)
+
+    public
+    function postAddPartners(Request $request)
     {
         $partners = new Partners();
         $partners->name = $request->name;
@@ -325,18 +551,22 @@ class AdminController extends Controller
         $partners->save();
         return redirect('admin/partners/list')->with('themthanhcong', 'success');
     }
-    /////////////////////////////////////////////////////////////////////////////
-    ///                                                                       ///
-    ///                               THỐNG KÊ                                ///
-    ///                                                                       ///
-    /////////////////////////////////////////////////////////////////////////////
 
-    public function khoangthoigian()
+/////////////////////////////////////////////////////////////////////////////
+///                                                                       ///
+///                               THỐNG KÊ                                ///
+///                                                                       ///
+/////////////////////////////////////////////////////////////////////////////
+
+    public
+    function khoangthoigian()
     {
         $thongke = array();
         return view('admin.statistical.khoangthoigian', ['thongke' => $thongke]);
     }
-    public function thongke1(Request $request)
+
+    public
+    function thongke1(Request $request)
     { // khoảng thời gian
         $thongke = DB::table('orders')
             ->select('products.name', 'products.price', 'order_detail.amount', 'orders.created_at')
@@ -345,5 +575,11 @@ class AdminController extends Controller
             ->whereBetween('orders.created_at', [$request->ngaybatdau, $request->ngayketthuc])
             ->get();
         return view('admin.statistical.khoangthoigian', ['thongke' => $thongke]);
+    }
+
+
+    public function thongkedondathang()
+    {
+        return 0;
     }
 }

@@ -66,7 +66,9 @@
         </div>
         <!-- /.card-body -->
     </div>
-
+    <div class="d-flex justify-content-center">
+        {{ $partners->links('pagination::bootstrap-4') }}
+    </div>
     <script>
         function xoa(id) {
             Swal.fire({

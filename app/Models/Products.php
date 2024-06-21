@@ -14,4 +14,8 @@ class Products extends Model
         return $this ->belongsTo('App\Models\Categories','category_id', 'id') ;
     }
 
+    public function supplier_linked(){
+        return $this->belongsTo(Supplier::class,'id_supplier', 'id');
+    }
+
 }

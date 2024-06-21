@@ -1763,8 +1763,11 @@ header .cart span {
 }
 
 .cart-page .cart-quantity {
-    width: 20%;
-    max-width: 50%;
+    display: inline-block;
+    height: 45px;
+    width: auto;
+    /*width: 20%;*/
+    /*max-width: 50%;*/
 }
 
 .cart-page .cart-total {
@@ -2925,6 +2928,21 @@ header .cart span {
 
 
 /* ----------------xx------------------------ */
-
+.history-order{
+    width: 100%;
+    overflow-x: auto;
+}
+.history-order_table{
+    width: 100%;
+}
+.history-order_row:nth-child(odd){
+    background: #daffea;
+}
+.history-order_cell{
+    white-space: nowrap;
+    text-align: center;
+    justify-content: center;
+    padding: 5px 0px 5px 0px;
+}
 
 /* ----------------xx------------------------ */

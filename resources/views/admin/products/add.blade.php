@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header  bg-blue">
             <h3 class="card-title">Thêm món ăn</h3>
         </div>
         @if (count($errors) > 0)
@@ -47,9 +47,14 @@
                         placeholder="Nhập tên món ăn">
                 </div>
                 <div class="form-group">
-                    <label for="productPrice">Giá tiền</label>
+                    <label for="productPrice">Giá bán</label>
                     <input type="number" class="form-control" id="productPrice" name="productPrice"
                         placeholder="Nhập giá tiền">
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Giá nhập</label>
+                    <input type="number" class="form-control" id="productPrice" name="productPriceImport"
+                           placeholder="Nhập giá tiền">
                 </div>
                 <div class="form-group">
                     <label for="productQuantity">Số lượng</label>
@@ -64,7 +69,14 @@
                         @endforeach
                     </select>
                 </div>
-
+                <div class="form-group">
+                    <label>Danh sách NCC</label>
+                    <select class="form-control" name="supplierID">
+                        @foreach ($suppliers as $key)
+                                <option value="{{ $key->id }}"> {{ $key->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Mô tả</label>
                     <textarea class="form-control" name="productDescription" rows="3" placeholder="Enter ..."></textarea>

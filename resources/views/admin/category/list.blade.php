@@ -16,7 +16,7 @@
     @endif
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header  bg-blue">
             <h3 class="card-title">Danh sách danh mục món ăn</h3>
         </div>
         <div class="text-center py-3">

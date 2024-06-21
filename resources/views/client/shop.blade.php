@@ -13,7 +13,7 @@
             <p>Đảm bảo chất lượng tốt nhất đến mọi khách hàng</p>
         </div>
         <div class="search-box">
-            <form action="search" method="post">
+            <form action="search" method="get">
                 @csrf
                 <input type="text" name="keyword" placeholder="Tìm kiếm trong cửa hàng">
                 <button><i class="fas fa-search"></i></button>
@@ -32,27 +32,28 @@
                 <i class="fas fa-times"></i>
             </span>
             <h3>Lọc</h3>
+            <form action="search" method="get">
             <div class="filter-option ">
                 <div class="filter-option-heading active">
                     <h3>Sắp xếp</h3>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="filter-option-content">
-                    <form action="">
+
                         <div class="form-group">
-                            <input type="radio" name="" id="">
-                            <label for="">Theo tên A <i class="fas fa-long-arrow-alt-right"></i> Z</label>
+                            <input type="radio" name="rdSort" id="rdSort1" value="A-Z">
+                            <label for="rdSort1">Theo tên A <i class="fas fa-long-arrow-alt-right"></i> Z</label>
                         </div>
                         <div class="form-group">
-                            <input type="radio" name="" id="">
-                            <label for="">Giá thừ thấp đến cao</label>
+                            <input type="radio" name="rdSort" id="rdSort2" value="giathapdencao">
+                            <label for="rdSort2">Giá thừ thấp đến cao</label>
                         </div>
                         <div class="form-group">
-                            <input type="radio" name="" id="">
-                            <label for="">Giá từ cao đến thấp</label>
+                            <input type="radio" name="rdSort" id="rdSort3" value="giacaotoithap">
+                            <label for="rdSort3">Giá từ cao đến thấp</label>
                         </div>
                         <button class="btn">Thực hiện</button>
-                    </form>
+
                 </div>
             </div>
             <div class="filter-option">
@@ -61,20 +62,16 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="filter-option-content">
-                    <form action="">
-                        @csrf
                         @foreach ($category as $key)
                             <div class="form-group">
-                                <input type="checkbox" name="danhmuc" id="danhmuc{{ $key->id }}">
-                                <input type="hidden" value="{{ $key->id }}">
+                                <input type="checkbox" name="category[]" id="danhmuc{{ $key->id }}" value="{{ $key->id }}">
                                 <label for="danhmuc{{ $key->id }}">{{ $key->name }}</label>
                             </div>
                         @endforeach
                         <button class="btn">Thực hiện</button>
-                    </form>
                 </div>
             </div>
-
+            </form>
         </div>
         <div class="shoppage-product">
 
@@ -88,12 +85,21 @@
             {{-- <div id="product" class="alert">
                 {{ session('success') }}
             </div> --}}
-            @if (session('success'))
+            @if (session('themgiohangthanhcong'))
                 <script>
                     Swal.fire(
                         'Đã thêm!',
                         'Bạn đã thêm thành công vào giỏ hàng',
                         'success'
+                    )
+                </script>
+            @endif
+            @if (Session::get('fail') != null)
+                <script>
+                    Swal.fire(
+                        'Cảnh báo!',
+                        'Sản phẩm vừa chọn không đủ số lượng',
+                        'Thất bại'
                     )
                 </script>
             @endif
@@ -113,6 +119,7 @@
                             <div class="card-content">
                                 <h4>{{ $key->name }}</h4>
                                 <p class="price">Giá: {{ number_format($key->price, 0) }}</p>
+                                <h4>Còn lại : {{ $key->quantity }}</h4>
                                 <div class="card-btn">
                                     <a class="btn btn-secondary" href="/addtocart/{{ $key->id }}"
                                         style="text-decoration: none; color: white">
@@ -127,7 +134,7 @@
                 </div>
 
                 <div class="pagination">
-                    {{ $products->links('client.components.paginate') }}
+                         {{ $products->links('client.components.paginate') }}
                 </div>
             </div>
         </div>

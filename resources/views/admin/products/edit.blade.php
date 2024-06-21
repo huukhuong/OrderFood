@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header  bg-blue">
             <h3 class="card-title">Sửa thông tin món</h3>
         </div>
         @if (count($errors) > 0)
@@ -34,7 +34,7 @@
                     title: '',
                     text: 'Sửa sản phẩm thành công',
                 }).then(function() {
-                    window.location = "admin/product/list";
+                    // window.location = "admin/product/list";
                 });
             </script>
         @endif
@@ -51,7 +51,12 @@
                 <div class="form-group">
                     <label for="productPrice">Giá tiền</label>
                     <input type="number" class="form-control" id="productPrice" name="productPrice"
-                        placeholder="Nhập giá tiền" value="{{ $product->price }}">
+                        placeholder="Nhập giá tiền" value="{{ $product->price }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Giá nhập</label>
+                    <input type="number" class="form-control" id="productPrice" name="productPriceImport"
+                           placeholder="Nhập giá tiền" value="{{$product->price_import}}" required>
                 </div>
                 <div class="form-group">
                     <label for="productQuantity">Số lượng</label>
@@ -70,7 +75,18 @@
                         @endforeach
                     </select>
                 </div>
-
+                <div class="form-group">
+                    <label>Danh sách NCC</label>
+                    <select class="form-control" name="supplierID">
+                        @foreach ($suppliers as $key)
+                            @if ($product->id_supplier == $key->id)
+                                <option selected value="{{ $product->id_supplier }}"> {{ $key->name }} </option>
+                            @else
+                                <option value="{{ $key->id }}"> {{ $key->name }} </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Mô tả</label>
                     <textarea class="form-control" name="productDescription" rows="3" placeholder="Enter ..."
